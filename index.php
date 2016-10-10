@@ -16,6 +16,25 @@
 
 	<!-- JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/typeahead.js/bloodhound.min.js"></script>
+	<script src="js/typeahead.js/typeahead.bundle.min.js"></script>
+	<script src="js/typeahead.js/typeahead.jquery.min.js"></script>
+	<script src="js/script.js"></script>
+	<script>
+	$(document).ready(function(){
+		var schoolName = ['anglican high school','ang mo kio secondary school', 'admiralty secondary school', 'ahmad ibrahim secondary school', 'anderson secondary school', 'alexandra primary school'];
+
+		$('.typeahead_schoolName').typeahead({
+			hint: true,
+			highlight: true,
+			minLength: 1
+		},{
+			name: 'secondary',
+			source: substringMatcher(schoolName)
+		});
+
+	});
+	</script>
 </head>
 <body>
 	<!-- Fixed navbar -->
@@ -32,8 +51,8 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">School <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header">Category</li>
-							<li><a href="pages/primary.php">Primary School</a></li>
-							<li><a href="pages/secondary.php">Secondary School</a></li>
+							<li><a href="pages/primaryschool.php">Primary School</a></li>
+							<li><a href="pages/secondaryschool.php">Secondary School</a></li>
 							<li><a href="pages/poly.php">Polytechnic</a></li>
 							<li><a href="pages/uni.php">University</a></li>
 						</ul>
@@ -50,16 +69,12 @@
 						echo '<li><a href="login.php">Login</a></li>';
 					}
 					?>
-					<div class="col-sm-5 pull-right">
-						<form class="navbar-form" role="search">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-								<div class="input-group-btn">
-									<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-								</div>
-							</div>
-						</form>
-					</div>
+					<form class="navbar-form navbar-right" action="pages/schoollist.php" method="get">
+						<div class="form-group">
+							<input type="text" name="school_name" class="form-control typeahead_schoolName" placeholder="Search">
+						</div>
+						<button type="submit" class="btn btn-default">Search</button>
+					</form>
 				</ul>
 			</div>
 		</div>

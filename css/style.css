@@ -9,6 +9,25 @@ body {
     margin-bottom: 60px;
 }
 
+.container{
+	width: 1300px;
+}
+
+
+.secondaryTable tr th
+{
+	text-align: center;
+}
+
+.tt-menu{
+	background: #FFFFFF;
+	border: solid 1px #3F3F3F;
+	padding: 2px 7px;
+}
+.lowercase {
+    text-transform: lowercase;
+}
+
 #map {
     height: 500px;
 }
