@@ -31,6 +31,9 @@
 			<tr align="center">
 				<td colspan=10><input type="submit" value="Submit" class="btn btn-default" \></td>
 			</tr>
+			<tr align="center">
+				<td colspan=10><input type="advance search" value="advance search" class="btn btn-default" \></td>
+			</tr>
 		</table>
 	</form>
 	<?php
@@ -50,7 +53,7 @@
 	{
 		$results = searchPrimarySchool($location, $cca, $subjects);
 		?>
-		<table class="table table-striped table-bordered secondaryTable" >
+		<table id="sortabletable" class="table table-striped table-bordered secondaryTable sortable" width="100%" >
 			<tr>
 				<th width="10%">Name</th>
 				<th width="10%">Type</th>
@@ -62,16 +65,16 @@
 				<th width="20%">List</th>
 			</tr>
 			<?php foreach ($results as $result){ ?>
-				<tr>
-					<td><?php echo $result['school_name'] ?></td>
-					<td><?php echo $result['school_type'] ?></td>
-					<td><?php echo $result['school_location'] ?></td>
-					<td><?php echo $result['school_telephone'] ?></td>
-					<td><?php echo $result['school_email'] ?></td>
-					<td><?php echo $result['school_subject'] ?></td>
-					<td><?php ?></td>
-					<td><button name="compare" class="btn btn-primary">Compare</button>&nbsp;&nbsp;<button name="favorite" class="btn btn-success">Favorite</button></td>
-				</tr>
+			<tr>
+				<td><?php echo $result['school_name'] ?></td>
+				<td><?php echo $result['school_type'] ?></td>
+				<td><?php echo $result['school_location'] ?></td>
+				<td><?php echo $result['school_telephone'] ?></td>
+				<td><?php echo $result['school_email'] ?></td>
+				<td><?php echo $result['school_subject'] ?></td>
+				<td><?php ?></td>
+				<td><button name="compare" class="btn btn-primary">Compare</button>&nbsp;&nbsp;<button name="favorite" class="btn btn-success">Favorite</button></td>
+			</tr>
 			<?php } ?>
 		</table>
 	<?php } ?>
@@ -99,7 +102,7 @@ $(document).ready(function(){
 		name: 'cca',
 		source: substringMatcher(cca)
 	});
-	
+
 	$('.typeahead_subjects').typeahead({
 		hint: true,
 		highlight: true,

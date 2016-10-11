@@ -1,5 +1,4 @@
 <?php
-//header('Location: ' . $_SERVER['HTTP_REFERER']);
 include('dbManager.php');
 session_start();
 
@@ -17,13 +16,15 @@ if ($result->num_rows > 0)
 	while($obj=mysqli_fetch_object($result))
 	{
 		if ($username == $obj->Username)
+		{
 			echo "<script>window.location.replace('../register.php?error=1')</script>";
+			exit();
+		}
 	}
-
-	$sql =  "INSERT INTO `User_Main` (`Username`, `Password`, `Email`) VALUES ('$username', '$password', '$email')";
-	$result = $conn->query($sql);
-	dbDisconnect($conn);
-	echo '<script>registersuccess();function registersuccess(){alert("Success");}</script>';
-	echo "<script>window.location.replace('../index.php')</script>";
 }
+
+$sql =  "INSERT INTO `User_Main` (`Username`, `Password`, `Email`) VALUES ('$username', '$password', '$email')";
+$conn->query($sql);
+dbDisconnect($conn);
+echo "<script>window.location.replace('../login.php')</script>";
 ?>

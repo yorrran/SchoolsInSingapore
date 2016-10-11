@@ -11,15 +11,14 @@
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../css/style.css" rel="stylesheet">
 
-	<!-- jQuery -->
-	<script src="../js/jquery.min.js"></script>
-
 	<!-- JavaScript -->
+	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/script.js"></script>
+	<script src="../js/sortable.js"></script>
 	<script src="../js/typeahead.js/bloodhound.min.js"></script>
 	<script src="../js/typeahead.js/typeahead.bundle.min.js"></script>
 	<script src="../js/typeahead.js/typeahead.jquery.min.js"></script>
-	<script src="../js/script.js"></script>
 	<script>
 	$(document).ready(function(){
 		var schoolName = ['anglican high school','ang mo kio secondary school', 'admiralty secondary school', 'ahmad ibrahim secondary school', 'anderson secondary school', 'alexandra primary school'];
