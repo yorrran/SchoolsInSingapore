@@ -6,7 +6,6 @@ $password = $_POST['password'];
 $password = md5($password);
 $conn = dbConnect();
 
-echo $password;
 $sql =  "SELECT * FROM `User_Main` WHERE `Username`='$username' and `Password`='$password'";
 $result = $conn->query($sql);
 dbDisconnect($conn);

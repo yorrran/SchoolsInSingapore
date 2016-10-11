@@ -20,6 +20,21 @@
 	<script src="../js/typeahead.js/typeahead.bundle.min.js"></script>
 	<script src="../js/typeahead.js/typeahead.jquery.min.js"></script>
 	<script src="../js/script.js"></script>
+	<script>
+	$(document).ready(function(){
+		var schoolName = ['anglican high school','ang mo kio secondary school', 'admiralty secondary school', 'ahmad ibrahim secondary school', 'anderson secondary school', 'alexandra primary school'];
+
+		$('.typeahead_schoolName').typeahead({
+			hint: true,
+			highlight: true,
+			minLength: 1
+		},{
+			name: 'secondary',
+			source: substringMatcher(schoolName)
+		});
+
+	});
+	</script>
 </head>
 <body class="index" id="page-top" data-spy="scroll" data-target=".navbar" data-offset="150">
 	<!-- Fixed navbar -->
@@ -35,7 +50,6 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">School <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li class="dropdown-header">Category</li>
 							<li><a href="primaryschool.php">Primary School</a></li>
 							<li><a href="secondaryschool.php">Secondary School</a></li>
 							<li><a href="poly.php">Polytechnic</a></li>
@@ -64,18 +78,3 @@
 			</div>
 		</div>
 	</nav>
-	<script>
-	$(document).ready(function(){
-		var schoolName = ['anglican high school','ang mo kio secondary school', 'admiralty secondary school', 'ahmad ibrahim secondary school', 'anderson secondary school', 'alexandra primary school'];
-
-		$('.typeahead_schoolName').typeahead({
-			hint: true,
-			highlight: true,
-			minLength: 1
-		},{
-			name: 'secondary',
-			source: substringMatcher(schoolName)
-		});
-
-	});
-	</script>
