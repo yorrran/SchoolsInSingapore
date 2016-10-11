@@ -1,16 +1,18 @@
 <?php include('header.php');?>
 <?php echo '<script src="../js/GoogleDirectionAPI.js"></script>'; ?>
 <?php include('../backend/searchManager.php') ?>
-<?php 
-    $name = $_POST["name"]; 
-    $results = searchSchool($name);
-?>
 
 <script type="text/javascript">
 function submitform(){
     document.forms["form1"].submit();
 }
 </script>
+
+<?php 
+$_SESSION["school_name"] = $_GET["school_name"];
+$name = $_SESSION["school_name"];
+$results = searchSchool($name);
+?>
 
 <div class="container">
 <table style="100%" border="1px">
