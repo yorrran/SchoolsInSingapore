@@ -1,5 +1,11 @@
 <?php include('../backend/searchManager.php') ?>
 <?php include('header.php') ?>
+<script type="text/javascript">
+function submitform(){
+    document.forms["form1"].submit();
+}
+</script>
+
 <!-- Begin page content -->
 <div class="container">
 	<form form name="searchForm" action="primarySchool.php" method="get">
