@@ -1,42 +1,88 @@
 <?php include('../backend/searchManager.php') ?>
 <?php include('header.php') ?>
 
+<script>
+function toggleTable(){
+	if(document.getElementById("advanced").style.visibility == "hidden"){ //show 
+		document.getElementById("advanced").style.visibility = "visible";
+		document.getElementById("advanced_submit").style.visibility = "visible";
+		document.getElementById("simple_submit").style.visibility = "hidden";
+		document.getElementById("ShowBtn").style.visibility = "hidden";
+		document.getElementById("HideBtn").style.visibility = "visible";
+	}else{ //hide
+		document.getElementById("advanced").style.visibility = "hidden";
+		document.getElementById("advanced_submit").style.visibility = "hidden";
+		document.getElementById("simple_submit").style.visibility = "visible";
+		document.getElementById("ShowBtn").style.visibility = "Visible";
+		document.getElementById("HideBtn").style.visibility = "Hidden";
 
+	}
+}
+</script>
 <!-- Begin page content -->
 <div class="container">
 	<form form name="searchForm" action="primarySchool.php" method="get">
-		<table class="table table-striped" width="100%">
+		<table class="table table-striped" width="100%" border="0">
 			<tr align="center" >
 				<td colspan=10><h1>Primary School Search Page</h1></td>
 			</tr>
 			<tr>
-				<td align="right" >
-					location
+				<td align="right" colspan=1>School Name: </td>
+				<td align="left" colspan=9><input type="textfield" /></td>
+			</tr>
+			<tr>
+				<td align="right" colspan=1>
+					Location
 				</td>
-				<td align="left" >
-					<input name="location" type="text" class="typeahead_location" \>
+				<td align="left" colspan=2>
+					<input name="location" type="text" class="typeahead_location" />
 					<div name=""></div>
 				</td>
-				<td align="right" >
-					cca
+				<td align="right" colspan=1>
+					CCA
 				</td>
-				<td align="left">
-					<input type="text" name="cca" class="typeahead_cca" \>
+				<td align="left" colspan=2>
+					<input type="text" name="cca" class="typeahead_cca" />
 				</td>
-				<td align="right" >
-					subjects
+				<td align="right" colspan=1>
+					Subjects
 				</td>
-				<td align="left">
-					<input type="text" name="subjects" class="typeahead_subjects" \>
+				<td align="left" colspan=3	>
+					<input type="text" name="subjects" class="typeahead_subjects" />
 				</td>
-			</tr>
-			<tr align="center">
-				<td colspan=10><input type="submit" value="Submit" class="btn btn-default" \></td>
-			</tr>
-			<tr align="center">
-				<td colspan=10><input type="advance search" value="advance search" class="btn btn-default" \></td>
+				<tr>
+				<td colspan=10 align="center">
+				<input type="submit" id="simple_submit" value="Submit" class="btn btn-default" />
+				<input type="button" id="ShowBtn" onclick="toggleTable();" value="Show Advanced Settings" class="btn btn-default" />
+				</td>
+				</tr>
 			</tr>
 		</table>
+		<table class="table table-striped" border="0" width="100%" id="advanced" style="visibility: hidden;">
+			<tr align="left">
+				<td colspan=10><h3>Advanced Search</h3></td>
+			</tr>
+			<tr>
+				<td align="right" colspan=1>Achievements: </td>
+				<td align="left" colspan=9><input type="textfield" class="btn btn-default" size="140" /></td>
+			</tr>
+			<tr>
+				<td align="right">Code: </td>
+				<td align="left" colspan=2><input type="textfield" class="btn btn-default" size="10" /></td>
+				<td align="right">MRT: </td>
+				<td align="left" colspan=2><input type="textfield" class="btn btn-default" size="10" /></td>
+				<td align="right">Bus: </td>
+				<td align="left" colspan=2><input type="textfield" class="btn btn-default" size="10" /></td>
+				<td align="center" co>Availability of Shuttle Bus <input type="checkbox" id="Shuttle_Bus"></td>
+			</tr>
+			<tr>
+			<td colspan=10 align="center">
+			<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
+			<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
+			</td>
+			</tr>
+		</table>
+
 	</form>
 	<?php
 	$location=" ";
