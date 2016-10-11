@@ -52,6 +52,7 @@
                     <button class="btn btn-primary" type="submit">Add to comparison list</button>
                 </div>
             </div>
+			<input type="hidden" id="name" value="<?php echo $_POST["name"]; ?>" />
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAX0TqO4Me09jXw9XGltmQzntSXZKVJ3UE&libraries=places&callback=initMap"
             async defer></script>
         </div>
