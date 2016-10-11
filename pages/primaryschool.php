@@ -1,10 +1,6 @@
 <?php include('../backend/searchManager.php') ?>
 <?php include('header.php') ?>
-<script type="text/javascript">
-function submitform(){
-    document.forms["form1"].submit();
-}
-</script>
+
 
 <!-- Begin page content -->
 <div class="container">
@@ -72,7 +68,7 @@ function submitform(){
 			</tr>
 			<?php foreach ($results as $result){ ?>
 			<tr>
-				<td><form id="form1" action="IndividualSchool.php" method="POST"><a href="javascript: submitform();"><input type="hidden" name="name" value="<?php echo $result['school_name'] ?>" /><?php echo $result['school_name'] ?></a></form></td>
+				<td><a href="IndividualSchool.php?school_name=<?php echo $result['school_name']?>" ><?php echo $result['school_name'] ?></a></td>
 				<td><?php echo $result['school_type'] ?></td>
 				<td><?php echo $result['school_location'] ?></td>
 				<td><?php echo $result['school_telephone'] ?></td>
