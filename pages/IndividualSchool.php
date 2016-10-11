@@ -21,7 +21,7 @@ $results = searchSchool($name);
 			<img src="../img/school_icon/<?php echo $name?>.png" alt="image of the school"/>
 		</td>
 		<td>
-		    Name: <?php foreach ($results as $result){echo $result['school_name'];}?> <form id="form1" action="route.php" method="POST"><input type="hidden" name="name" value="<?php echo $name ?>" ?><a href="javascript: submitform()">View School</a></form>
+		    Name: <?php foreach ($results as $result){echo $result['school_name'];}?> <form id="form1" action="route.php" method="POST"><input type="hidden" name="name" value="<?php echo $name ?>" ?><a href="javascript: submitform()">How to get there ?</a></form>
 		</td>
 	</tr>
 	<tr><td>Code: <?php foreach ($results as $result){echo $result['school_code'];}?></td></tr>
