@@ -66,7 +66,7 @@
 			</tr>
 			<?php foreach ($results as $result){ ?>
 			<tr>
-				<td><?php echo $result['school_name'] ?></td>
+				<td><form id="form1" action="IndividualSchool.php" method="POST"><a href="javascript: submitform();"><input type="hidden" name="name" value="<?php echo $result['school_name'] ?>" /><?php echo $result['school_name'] ?></a></form></td>
 				<td><?php echo $result['school_type'] ?></td>
 				<td><?php echo $result['school_location'] ?></td>
 				<td><?php echo $result['school_telephone'] ?></td>
@@ -84,7 +84,6 @@ $(document).ready(function(){
 	var location = ['woodlands','yishun', 'ang mo kio', 'tampinese'];
 	var cca = ['brownies', 'scoutsclubs', 'societieschess club', 'chinese cultural club', 'drama club', 'english literary club', 'green club', 'infocomm club', 'photography club', 'science and innovation club', 'visual arts club', 'aestheticschinese dance', 'choir', 'guitar ensemble', 'indian dance', 'malay', 'skipping', 'soccer', 'track field','wushu'];
 	var subjects = ['art Chinese', 'civics \& moral education', 'co-curricular activities', 'english language foundation', 'mathematics', 'health education', 'higher chinese', 'higher malay', 'higher tamilmalay', 'music', 'physical education', 'science', 'social studies'];
-
 	$('.typeahead_location').typeahead({
 		hint: true,
 		highlight: true,
@@ -93,7 +92,6 @@ $(document).ready(function(){
 		name: 'secondary',
 		source: substringMatcher(location)
 	});
-
 	$('.typeahead_cca').typeahead({
 		hint: true,
 		highlight: true,
@@ -102,7 +100,6 @@ $(document).ready(function(){
 		name: 'cca',
 		source: substringMatcher(cca)
 	});
-
 	$('.typeahead_subjects').typeahead({
 		hint: true,
 		highlight: true,
