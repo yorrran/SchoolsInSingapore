@@ -12,19 +12,29 @@
 		$i = 0;
 		if ($result->num_rows > 0) { // if the number of result is greater than 0
 		    while($row = $result->fetch_assoc()) { // get each result and put them into the array
-		    	$school_name = $row["school_name"];
-		    	$school_type = $row["type"];
-		    	$school_location = $row["location"];
-		    	$school_telephone = $row["Telephone"];
-		    	$school_email = $row["Email"];
-		    	$school_subject = $row["subjects"];
+            $school_name = $row["school_name"];
+            $school_code = $row["school_code"];
+            $school_type = $row["type"];
+            $school_location = $row["location"];
+            $school_telephone = $row["Telephone"];
+            $school_email = $row["Email"];
+            $school_website = $row["website"];
+            $MRT = $row["MRT"];
+            $Bus = $row["Bus number"];
+            $CCA = $row["CCA"];
+            $school_subject = $row["subjects"];
 
-		    	$search_result_school[$i] = ['school_name'=>$school_name,
-		    								'school_type'=>$school_type,
-		    								'school_location'=>$school_location,
-		    								'school_telephone'=>$school_telephone,
-		    								'school_email'=>$school_email,
-		    								'school_subject'=>$school_subject];
+            $search_result_school[$i] = ['school_name' => $school_name,
+                'school_code' => $school_code,
+                'school_type' => $school_type,
+                'school_location' => $school_location,
+                'school_telephone' => $school_telephone,
+                'school_email' => $school_email,
+                'school_website' => $school_website, 
+                'MRT' => $MRT, 
+                'Bus' => $Bus,
+                'CCA' => $CCA,
+                'school_subject' => $school_subject];
 
 		    	$i++;
 		    }
