@@ -114,7 +114,7 @@ function toggleTable(){
 			</tr>
 			<?php foreach ($results as $result){ ?>
 			<tr>
-				<td><?php echo $result['school_name'] ?></td>
+				<td><a href="IndividualSchool.php?school_name=<?php echo $result['school_name']?>" ><?php echo $result['school_name'] ?></a></td>
 				<td><?php echo $result['school_type'] ?></td>
 				<td><?php echo $result['school_location'] ?></td>
 				<td><?php echo $result['school_telephone'] ?></td>
