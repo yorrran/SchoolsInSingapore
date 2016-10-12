@@ -6,8 +6,7 @@ function initMap() {
         center: {lat: -33.8688, lng: 151.2195},
         zoom: 13
     });
-    var input = /** @type {!HTMLInputElement} */(
-            document.getElementById('pac-input'));
+    var input = document.getElementById('pac-input');
 
     var types = document.getElementById('type-selector');
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -17,9 +16,37 @@ function initMap() {
     autocomplete.bindTo('bounds', map);
 
     var infowindow = new google.maps.InfoWindow();
+
     var marker = new google.maps.Marker({
         map: map,
         anchorPoint: new google.maps.Point(0, -29)
+    });
+	
+    var service = new google.maps.places.PlacesService(map);
+	var currlatlng = new google.maps.LatLng(1.348235, 103.682963); //ntu 
+	var destlatlng = new google.maps.LatLng(1.443087, 103.799912); //primary school 
+	
+    //default create route 
+	calculateAndDisplayRoute(directionsService, directionsDisplay, currlatlng, destlatlng, 'DRIVING');
+    directionsDisplay.setMap(map);
+
+    //create the eventlistener
+    document.getElementById("DRIVING_TAB").addEventListener("click", function () {
+        calculateAndDisplayRoute(directionsService, directionsDisplay, currlatlng, destlatlng, 'DRIVING');
+        directionsDisplay.setMap(map);
+
+    });
+
+    document.getElementById("TRANSIT_TAB").addEventListener("click", function () {
+        calculateAndDisplayRoute(directionsService, directionsDisplay, currlatlng, destlatlng, 'TRANSIT');
+        directionsDisplay.setMap(map);
+
+    });
+
+    document.getElementById("WALKING_TAB").addEventListener("click", function () {
+        calculateAndDisplayRoute(directionsService, directionsDisplay, currlatlng, destlatlng, 'WALKING');
+        directionsDisplay.setMap(map);
+
     });
 
     autocomplete.addListener('place_changed', function () {
@@ -45,7 +72,7 @@ function initMap() {
             anchor: new google.maps.Point(17, 34),
             scaledSize: new google.maps.Size(35, 35)
         }));
-        marker.setPosition(place.geometry.location);
+        marker.setPosition(destlatlng);
         marker.setVisible(true);
 
         var address = '';
@@ -59,38 +86,15 @@ function initMap() {
 
         infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
         infowindow.open(map, marker);
-				
-        //call the calculateAndDisplayRoute method	
-		document.getElementById("DRIVING_TAB").addEventListener("click", function(){
-			calculateAndDisplayRoute(directionsService, directionsDisplay, latlng, place.geometry.location, 'DRIVING');
-			directionsDisplay.setMap(map);
 
-		});
-		
-		document.getElementById("TRANSIT_TAB").addEventListener("click", function(){
-			calculateAndDisplayRoute(directionsService, directionsDisplay, latlng, place.geometry.location, 'TRANSIT');
-			directionsDisplay.setMap(map);
+        destlatlng = place.geometry.location;
 
-		});
-		
-		document.getElementById("WALKING_TAB").addEventListener("click", function(){
-			calculateAndDisplayRoute(directionsService, directionsDisplay, latlng, place.geometry.location, 'WALKING');
-			directionsDisplay.setMap(map);
-
-		});
-		
-		calculateAndDisplayRoute(directionsService, directionsDisplay, latlng, place.geometry.location, 'DRIVING');
-		directionsDisplay.setMap(map);
-
+        //display the default route 
+        calculateAndDisplayRoute(directionsService, directionsDisplay, currlatlng, destlatlng, 'DRIVING');
+        directionsDisplay.setMap(map);
     });
 
-    //setting the destination marker
-    var startMarker = new google.maps.Marker({
-        map: map
-    });
-    var latlng = new google.maps.LatLng(1.3483, 103.6831);
-    startMarker.setPosition(latlng);
-	
+
     // Sets a listener on a radio button to change the filter type on Places
     // Autocomplete.
     function setupClickListener(id, types) {
@@ -99,38 +103,6 @@ function initMap() {
             autocomplete.setTypes(types);
         });
     }
-	/*
-	var pyrmont = {lat: 1.3483, lng: 103.6831};
-	
-	var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch({
-          location: place.geometry.location,
-          radius: 500,
-          type: ['library']
-        }, callback);
-		
-	      function callback(results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          for (var i = 0; i < results.length; i++) {
-            createMarker(results[i]);
-          }
-        }
-    }
-
-  function createMarker(place) {
-	var placeLoc = place.geometry.location;
-	var marker = new google.maps.Marker({
-	  map: map,
-	  position: place.geometry.location
-	});
-
-	google.maps.event.addListener(marker, 'click', function() {
-	  infowindow.setContent(place.name);
-	  infowindow.open(map, this);
-	});
-  }	
-  */
-      
 
     setupClickListener('changetype-all', []);
     setupClickListener('changetype-address', ['address']);
@@ -154,9 +126,11 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, start, e
             window.alert('Directions request failed due to ' + status);
         }
     });
-	var e = type+'_INSTR';
-	directionsDisplay.setPanel(document.getElementById(e));
+    var e = type + '_INSTR';
+    directionsDisplay.setPanel(document.getElementById(e));
 
 }
+
+
 
 
