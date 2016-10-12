@@ -102,7 +102,6 @@ function toggleTable(){
 		$results = searchPrimarySchool($location, $cca, $subjects);
 		?>
 		<table id="sortabletable" class="table table-striped table-bordered secondaryTable sortable" width="100%" >
-			<tr><td colspan=8 align="left"><h1>Results</h1></td></tr>
 			<tr>
 				<th width="10%">Name</th>
 				<th width="10%">Type</th>
@@ -115,7 +114,7 @@ function toggleTable(){
 			</tr>
 			<?php foreach ($results as $result){ ?>
 			<tr>
-				<td><a href="IndividualSchool.php?school_name=<?php echo $result['school_name']?>" ><?php echo $result['school_name'] ?></a></td>
+				<td><?php echo $result['school_name'] ?></td>
 				<td><?php echo $result['school_type'] ?></td>
 				<td><?php echo $result['school_location'] ?></td>
 				<td><?php echo $result['school_telephone'] ?></td>
