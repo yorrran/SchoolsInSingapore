@@ -55,7 +55,8 @@
                         <li><a href="pages/uni.php">University</a></li>
                     </ul>
                 </li>
-                <li><a href="/pages/forum.php">Forum</a></li>
+		<li><a href="pages/comparisonlist.php">Comparison List</a></li>
+                <li><a href="pages/forum.php">Forum</a></li>
                 <?php
                 session_start();
                 if (isset($_COOKIE['signed_in_id']))

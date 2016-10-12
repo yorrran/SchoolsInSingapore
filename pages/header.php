@@ -55,6 +55,7 @@
 							<li><a href="uni.php">University</a></li>
 						</ul>
 					</li>
+					<li><a href="comparisonlist.php">Comparison List</a></li>
 					<li><a href="forum.php">Forum</a></li>
 					<?php
 					session_start();
