@@ -17,6 +17,7 @@ $Configuration['EnabledApplications']['Vanilla'] = 'vanilla';
 $Configuration['EnabledPlugins']['GettingStarted'] = 'GettingStarted';
 $Configuration['EnabledPlugins']['HtmLawed'] = 'HtmLawed';
 $Configuration['EnabledPlugins']['jsconnect'] = true;
+$Configuration['EnabledPlugins']['ExpandableCategories'] = true;
 
 // Garden
 $Configuration['Garden']['Title'] = 'JustDoItForum';
@@ -42,11 +43,18 @@ $Configuration['Garden']['SignIn']['Popup'] = false;
 // Plugins
 $Configuration['Plugins']['GettingStarted']['Dashboard'] = '1';
 $Configuration['Plugins']['GettingStarted']['Plugins'] = '1';
+$Configuration['Plugins']['GettingStarted']['Categories'] = '1';
+$Configuration['Plugins']['GettingStarted']['Discussion'] = '1';
 
 // Routes
-$Configuration['Routes']['DefaultController'] = 'discussions';
+$Configuration['Routes']['DefaultController'] = array('discussions', 'Internal');
 
 // Vanilla
 $Configuration['Vanilla']['Version'] = '2.2.1';
+$Configuration['Vanilla']['Categories']['MaxDisplayDepth'] = '3';
+$Configuration['Vanilla']['Categories']['DoHeadings'] = false;
+$Configuration['Vanilla']['Categories']['HideModule'] = false;
+$Configuration['Vanilla']['Categories']['Layout'] = 'modern';
+$Configuration['Vanilla']['Discussions']['Layout'] = 'modern';
 
-// Last edited by Admin (127.0.0.1)2016-10-07 11:28:31
+// Last edited by Admin (127.0.0.1)2016-10-13 13:36:27

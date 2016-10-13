@@ -31,13 +31,13 @@
             <div class="Column ContentColumn" id="Content">{asset name="Content"}</div>
         </div>
     </div>
-    <div id="Foot">
+    <!-- <div id="Foot">
         <div class="Row">
             <a href="{vanillaurl}" class="PoweredByVanilla" title="Community Software by Vanilla Forums">Forum Software
                 Powered by Vanilla</a>
             {asset name="Foot"}
         </div>
-    </div>
+    </div> -->
 </div>
 {event name="AfterBody"}
 </body>

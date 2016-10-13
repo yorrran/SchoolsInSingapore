@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.25, created on 2016-10-07 09:03:07
+<?php /* Smarty version 2.6.25, created on 2016-10-13 13:17:40
          compiled from C:%5Cxampp%5Chtdocs%5Cpages%5Cforum/themes/EmbedFriendly/views/default.master.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'asset', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 4, false),array('function', 'link', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 12, false),array('function', 'logo', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 12, false),array('function', 'dashboard_link', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 14, false),array('function', 'discussions_link', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 15, false),array('function', 'activity_link', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 16, false),array('function', 'inbox_link', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 17, false),array('function', 'custom_menu', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 18, false),array('function', 'profile_link', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 19, false),array('function', 'signinout_link', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 20, false),array('function', 'breadcrumbs', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 26, false),array('function', 'module', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 28, false),array('function', 'searchbox', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 30, false),array('function', 'vanillaurl', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 37, false),array('function', 'event', 'C:\\xampp\\htdocs\\pages\\forum/themes/EmbedFriendly/views/default.master.tpl', 42, false),)), $this); ?>
@@ -53,14 +53,14 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'asset', 'C:
 </div>
         </div>
     </div>
-    <div id="Foot">
+    <!-- <div id="Foot">
         <div class="Row">
             <a href="<?php echo smarty_function_vanillaurl(array(), $this);?>
 " class="PoweredByVanilla">Powered by Vanilla</a>
             <?php echo smarty_function_asset(array('name' => 'Foot'), $this);?>
 
         </div>
-    </div>
+    </div> -->
 </div>
 <?php echo smarty_function_event(array('name' => 'AfterBody'), $this);?>
 

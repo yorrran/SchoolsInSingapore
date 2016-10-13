@@ -181,6 +181,6 @@
     }
 }
 
-.P, .SignInOutWrap, .SignOutWrap, .link-signout, .SiteMenu {
-  visibility: hidden;
+.BreadcrumbsWrapper, .SignInOutWrap, .SignOutWrap, .link-signout, .SiteMenu {
+    visibility: hidden;
 }
