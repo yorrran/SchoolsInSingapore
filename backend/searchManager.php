@@ -46,7 +46,7 @@
 	}
 
 
-	function searchPrimarySchool($location, $cca, $subjects) {
+	function searchPrimarySchool($location, $cca, $MRT, $Bus, $ShuttleBus) {
 		$conn = dbConnect();
 
 		$whereClause = " where 1=1 ";
@@ -61,6 +61,16 @@
 
 		if(!empty($subjects)){
 			$whereClause .= " and school.subjects like '%$subjects%'";
+		}
+
+		if(!empty($MRT)){
+			$whereClause .= " and school.subjects like '%$MRT%'";
+		}
+		if(!empty($Bus)){
+			$whereClause .= " and school.subjects like '%$Bus%'";
+		}
+		if(!empty($ShuttleBus)){
+			$whereClause .= " and school.subjects like '%$ShuttleBus%'";
 		}
 
 		$sql = "select * from school".$whereClause;

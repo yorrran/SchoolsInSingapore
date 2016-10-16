@@ -1,5 +1,6 @@
 <?php include('../backend/searchManager.php') ?>
 <?php include('header.php') ?>
+<?php include('listGenerator.php') ?>
 
 <script>
 function toggleTable(){
@@ -88,6 +89,9 @@ function toggleTable(){
 	$location=" ";
 	$cca=" ";
 	$subjects=" ";
+	$MRT=" ";
+	$Bus=" ";
+	$ShuttleBus=" ";
 	if(isset($_GET['location'])){
 		$location = $_GET['location'];
 	}
@@ -97,9 +101,18 @@ function toggleTable(){
 	if( isset($_GET['subjects'])){
 		$subject = $_GET['subjects'];
 	}
-	if(isset($_GET['location'])||isset($_GET['cca'])||isset($_GET['subjects']))
+	if( isset($_GET['MRT'])){
+		$subject = $_GET['MRT'];
+	}
+	if( isset($_GET['Bus'])){
+		$subject = $_GET['Bus'];
+	}
+	if( isset($_GET['ShuttleBus'])){
+		$subject = $_GET['ShuttleBus'];
+	}
+	if(isset($_GET['location'])||isset($_GET['cca'])||isset($_GET['subjects'])|| isset($_GET['MRT'])||isset($_GET['Bus'])|| isset($_GET['ShuttleBus']))
 	{
-		$results = searchPrimarySchool($location, $cca, $subjects);
+		$results = searchPrimarySchool($location, $cca, $MRT, $Bus, $ShuttleBus);
 		?>
 		<table id="sortabletable" class="table table-striped table-bordered secondaryTable sortable" width="100%" >
 			<tr>
@@ -127,11 +140,12 @@ function toggleTable(){
 		</table>
 	<?php } ?>
 </div>
+
 <script>
 $(document).ready(function(){
 	var location = ['woodlands','yishun', 'ang mo kio', 'tampinese'];
-	var cca = ['brownies', 'scoutsclubs', 'societieschess club', 'chinese cultural club', 'drama club', 'english literary club', 'green club', 'infocomm club', 'photography club', 'science and innovation club', 'visual arts club', 'aestheticschinese dance', 'choir', 'guitar ensemble', 'indian dance', 'malay', 'skipping', 'soccer', 'track field','wushu'];
-	var subjects = ['art Chinese', 'civics \& moral education', 'co-curricular activities', 'english language foundation', 'mathematics', 'health education', 'higher chinese', 'higher malay', 'higher tamilmalay', 'music', 'physical education', 'science', 'social studies'];
+	var cca = [<?php echo $cca_options ?>];
+	var subject = [<?php echo $subject ?>];
 	$('.typeahead_location').typeahead({
 		hint: true,
 		highlight: true,
@@ -140,6 +154,16 @@ $(document).ready(function(){
 		name: 'secondary',
 		source: substringMatcher(location)
 	});
+
+	$('.typeahead_subjects').typeahead({
+		hint: true,
+		highlight: true,
+		minLength: 1
+	},{
+		name: 'secondary',
+		source: substringMatcher(subject)
+	}); 
+
 	$('.typeahead_cca').typeahead({
 		hint: true,
 		highlight: true,
@@ -148,14 +172,7 @@ $(document).ready(function(){
 		name: 'cca',
 		source: substringMatcher(cca)
 	});
-	$('.typeahead_subjects').typeahead({
-		hint: true,
-		highlight: true,
-		minLength: 1
-	},{
-		name: 'secondary',
-		source: substringMatcher(subjects)
-	});
+	
 });
 </script>
 <?php include('footer.php') ?>
