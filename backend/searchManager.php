@@ -41,12 +41,13 @@
 		} else {
 			$search_result_school = $search_result_school;
 		}
+	
 		//print_r($search_result_school);
 		return $search_result_school;
 	}
 
 
-	function searchPrimarySchool($location, $cca, $MRT, $Bus, $ShuttleBus) {
+	function searchPrimarySchool($location, $cca, $subjects) {
 		$conn = dbConnect();
 
 		$whereClause = " where 1=1 ";
@@ -61,16 +62,6 @@
 
 		if(!empty($subjects)){
 			$whereClause .= " and school.subjects like '%$subjects%'";
-		}
-
-		if(!empty($MRT)){
-			$whereClause .= " and school.subjects like '%$MRT%'";
-		}
-		if(!empty($Bus)){
-			$whereClause .= " and school.subjects like '%$Bus%'";
-		}
-		if(!empty($ShuttleBus)){
-			$whereClause .= " and school.subjects like '%$ShuttleBus%'";
 		}
 
 		$sql = "select * from school".$whereClause;
@@ -247,4 +238,19 @@
 	}*/
 
 // Return values to front end
+	//added for favourite list 
+	function get_fav_list($username){
+			$conn = dbConnect();
+			return $conn->query("SELECT * FROM fav_list WHERE username like '%$username';");
+	}
+		
+	function add_to_fav_list($username, $school_name){
+		$conn = dbConnect();
+		return $conn->query("INSERT into fav_list value('$username','$school_name');");
+	}
+
+	function remove_from_fav_list($username, $school_name){
+		$conn = dbConnect();
+		return $conn->query("DELETE FROM fav_list where username like '$username' AND schoolname like '$school_name';");
+	}
 ?>
