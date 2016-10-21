@@ -184,3 +184,7 @@
 .BreadcrumbsWrapper, .SignInOutWrap, .SignOutWrap, .link-signout, .SiteMenu {
     visibility: hidden;
 }
+
+.GuestBox .Button {
+	visibility: hidden;
+}
