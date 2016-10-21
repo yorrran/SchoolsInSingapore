@@ -144,7 +144,7 @@ function toggleTable(){
 $(document).ready(function(){
 	var location = ['woodlands','yishun', 'ang mo kio', 'tampinese'];
 	var cca = [<?php echo $cca_options ?>];
-	var subject = [<?php echo $subject ?>];
+	var subject = [<?php if (strpos($subject, "'") !== FALSE) echo $subject; else echo "'".$subject."'"; ?>];
 
 	$('.typeahead_location').typeahead({
 		hint: true,
