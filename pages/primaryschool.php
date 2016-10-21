@@ -111,7 +111,7 @@ function toggleTable(){
 	}
 	if(isset($_GET['location'])||isset($_GET['cca'])||isset($_GET['subjects'])|| isset($_GET['MRT'])||isset($_GET['Bus'])|| isset($_GET['ShuttleBus']))
 	{
-		$results = searchPrimarySchool($location, $cca, $MRT, $Bus, $ShuttleBus);
+		$results = searchPrimarySchool($location, $cca, $subject, $MRT, $Bus, $ShuttleBus);
 		?>
 		<table id="sortabletable" class="table table-striped table-bordered secondaryTable sortable" width="100%" >
 			<tr>
@@ -172,7 +172,6 @@ $(document).ready(function(){
 		name: 'cca',
 		source: substringMatcher(cca)
 	});
-
 });
 </script>
 <?php include_once('footer.php') ?>

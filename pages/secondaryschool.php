@@ -90,7 +90,7 @@
 	}
 	if( isset($_GET['type'])|| isset($_GET['category'])|| isset($_GET['score'])|| isset($_GET['location'])|| isset($_GET['cca'])||isset($_GET['subjects']))
 	{
-		$results = searchSecondarySchool($type,$category,$score,$location,$cca);
+		$results = searchSecondarySchool($type,$category,$score,$location,$cca, $subject);
 		?>
 
 		<table class="table table-striped table-bordered secondaryTable" >

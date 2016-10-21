@@ -30,5 +30,5 @@
 		}
 		$j++;
 	}
-
+	dbDisconnect($conn)
 ?>
