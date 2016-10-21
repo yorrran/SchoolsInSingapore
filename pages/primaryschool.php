@@ -1,10 +1,9 @@
-<?php include('../backend/searchManager.php') ?>
-<?php include('header.php') ?>
-<?php include('listGenerator.php') ?>
-
+<?php include_once('../backend/searchManager.php') ?>
+<?php include_once('header.php') ?>
+<?php include_once('../backend/listGenerator.php') ?>
 <script>
 function toggleTable(){
-	if(document.getElementById("advanced").style.visibility == "hidden"){ //show 
+	if(document.getElementById("advanced").style.visibility == "hidden"){ //show
 		document.getElementById("advanced").style.visibility = "visible";
 		document.getElementById("advanced_submit").style.visibility = "visible";
 		document.getElementById("simple_submit").style.visibility = "hidden";
@@ -146,6 +145,7 @@ $(document).ready(function(){
 	var location = ['woodlands','yishun', 'ang mo kio', 'tampinese'];
 	var cca = [<?php echo $cca_options ?>];
 	var subject = [<?php echo $subject ?>];
+
 	$('.typeahead_location').typeahead({
 		hint: true,
 		highlight: true,
@@ -162,7 +162,7 @@ $(document).ready(function(){
 	},{
 		name: 'secondary',
 		source: substringMatcher(subject)
-	}); 
+	});
 
 	$('.typeahead_cca').typeahead({
 		hint: true,
@@ -172,7 +172,7 @@ $(document).ready(function(){
 		name: 'cca',
 		source: substringMatcher(cca)
 	});
-	
+
 });
 </script>
-<?php include('footer.php') ?>
+<?php include_once('footer.php') ?>

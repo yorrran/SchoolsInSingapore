@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include_once 'header.php'; ?>
 <!-- Begin page content -->
 <div class="container">
     <h1>About this Project</h1>
@@ -17,7 +17,7 @@
 		<li>Yaran</li>
 
 	</ul>
-	
+
 	<h2>Affiliation</h2>
 	<table width="100%">
 	<tr>
@@ -26,6 +26,6 @@
 	</tr>
 	</table>
 
-	
+
 </div>
-<?php include 'footer.php'; ?>
+<?php include_once 'footer.php'; ?>

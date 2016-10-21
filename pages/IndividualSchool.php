@@ -1,6 +1,6 @@
-<?php include('header.php');?>
+<?php include_once('header.php');?>
 <?php echo '<script src="../js/GoogleDirectionAPI.js"></script>'; ?>
-<?php include('../backend/searchManager.php') ?>
+<?php include_once('../backend/searchManager.php') ?>
 
 <script type="text/javascript">
 function submitform(){
@@ -8,7 +8,7 @@ function submitform(){
 }
 </script>
 
-<?php 
+<?php
 $_SESSION["school_name"] = $_GET["school_name"];
 $name = $_SESSION["school_name"];
 $results = searchSchool($name);
@@ -36,13 +36,13 @@ $pic = str_replace(" ", "-",$name);
 	<tr><td>Website: <?php foreach ($results as $result){echo $result['school_website'];}?></td></tr>
 	<tr><td>Nearest MRT: <?php foreach ($results as $result){echo $result['MRT'];}?></td></tr>
 	<tr><td>Nearest Bus: <?php foreach ($results as $result){echo $result['Bus'];}?></td></tr>
-	<tr><td colspan="3">CCA: 
+	<tr><td colspan="3">CCA:
 		<ul>
 		<? php echo $result['CCA']; ?>
 		<?php foreach ($results as $result){$str = explode(",",$result['CCA']); foreach ($str as $item) echo "<li>".$item."</li>";} ?>
 		</ul>
 	</td></tr>
-	<tr><td colspan="3">Subjects offered: 
+	<tr><td colspan="3">Subjects offered:
 			<ul>
 		<? php echo $result['CCA']; ?>
 		<?php foreach ($results as $result){$str = explode(",",$result['school_subject']); foreach ($str as $item) echo "<li>".$item."</li>";} ?>

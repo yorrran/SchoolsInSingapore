@@ -1,6 +1,5 @@
-<?php include('../backend/searchManager.php') ?>
-<?php 
-	
+<?php
+	include_once('dbManager.php');
 	$conn = dbConnect();
 
 	$sql = "select * from cca_list";
@@ -21,14 +20,14 @@
 	$result_subjects=$conn->query($sql_subjects);
 
 	$subject= "'";
+
 	$j = 0;
 	while($row_subjects = $result_subjects->fetch_assoc()) {
-		if(($j+1)==$result_subjects->num_rows){
-			$subject .= "'".$row_subjects["subjects"]."' ,".;
+		if(($j+1) == $result_subjects->num_rows){
+			$subject .= $row_subjects["subjects"]."'";
 		} else {
-			$subject .= ".".$row_subjects["subjects"]."' ,";
+				$subject .= $row_subjects["subjects"]."','";
 		}
-
 		$j++;
 	}
 

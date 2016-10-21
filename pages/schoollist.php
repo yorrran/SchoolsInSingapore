@@ -1,5 +1,5 @@
-<?php include('../backend/searchManager.php') ?>
-<?php include('header.php') ?>
+<?php include_once('../backend/searchManager.php') ?>
+<?php include_once('header.php') ?>
 <?php
 	 $school_name=" ";
 	if(isset($_GET['school_name'])){
