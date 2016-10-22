@@ -1,6 +1,5 @@
-<?php //include('../backend/dbManager.php');?>
+<?php include('header.php') ?>
 <?php include('../backend/searchManager.php') ?>
-
 <!DOCTYPE html>
 <?php
 /*
@@ -59,6 +58,19 @@
             position:absolute;
 			
         }
+		
+		button.remove {
+			background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+            left:85%;
+            display: inline-block;
+            position:absolute;
+			
+        }
      
         button.compare{
             background-color: #eee;
@@ -113,7 +125,6 @@
 	if(isset($_POST['unfav'])){
 		$school_name = $_POST['unfav'];
 		remove_from_fav_list('user1',$school_name);
-		//echo 'location.reload();';
 		echo $school_name.' has been successfully removed from the favourite list';
 		header('Location: favlist.php');
 	}
@@ -122,7 +133,7 @@
 		echo '<form name="myForm" action="" method="POST">';
 		echo '<button name="unfav" value="'.$row['schoolname'].'" class="fav" onclick="document.getElementById("myForm").submit();"><i style="font-size:30px; color: #FFD700; " class="fa">&#xf005;</i></button>';
 		echo '</form>';
-		echo '<button class="compare">Add to Compare</button>'; //need to add the comparison method
+		echo '<form action="addToFav.php" method="POST" ><button name="unfavorite" class="remove" value="'.$row['schoolname'].'" >Remove</button></form>';
 		echo '<button class="accordion" >';echo $row['schoolname'];echo'</button>';
 		echo '<div class="panel">';
 		$results = searchSchool($row['schoolname']);
@@ -149,7 +160,7 @@
         }
         
     </script>
-
+<?php include('footer.php') ?>
 
 </BODY>
 </html>

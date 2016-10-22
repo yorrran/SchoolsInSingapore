@@ -1,9 +1,10 @@
-<?php include_once('../backend/searchManager.php') ?>
-<?php include_once('header.php') ?>
-<?php include_once('../backend/listGenerator.php') ?>
+<?php include('../backend/searchManager.php') ?>
+<?php include('header.php') ?>
+<?php include('listGenerator.php') ?>
+
 <script>
 function toggleTable(){
-	if(document.getElementById("advanced").style.visibility == "hidden"){ //show
+	if(document.getElementById("advanced").style.visibility == "hidden"){ //show 
 		document.getElementById("advanced").style.visibility = "visible";
 		document.getElementById("advanced_submit").style.visibility = "visible";
 		document.getElementById("simple_submit").style.visibility = "hidden";
@@ -111,7 +112,7 @@ function toggleTable(){
 	}
 	if(isset($_GET['location'])||isset($_GET['cca'])||isset($_GET['subjects'])|| isset($_GET['MRT'])||isset($_GET['Bus'])|| isset($_GET['ShuttleBus']))
 	{
-		$results = searchPrimarySchool($location, $cca, $subject, $MRT, $Bus, $ShuttleBus);
+		$results = searchPrimarySchool($location, $cca, $MRT, $Bus, $ShuttleBus);
 		?>
 		<table id="sortabletable" class="table table-striped table-bordered secondaryTable sortable" width="100%" >
 			<tr>
@@ -133,7 +134,8 @@ function toggleTable(){
 				<td><?php echo $result['school_email'] ?></td>
 				<td><?php echo $result['school_subject'] ?></td>
 				<td><?php ?></td>
-				<td><button name="compare" class="btn btn-primary">Compare</button>&nbsp;&nbsp;<button name="favorite" class="btn btn-success">Favorite</button></td>
+				<td><form method="POST" action="addToCompare.php" ><button name="compare" value="<?php echo $result['school_name'] ?>" class="btn btn-primary">Compare</button></form>&nbsp;&nbsp;
+				<form method="POST" action="addToFav.php" ><button name="favorite" value="<?php echo $result['school_name'] ?>" class="btn btn-success">Favorite</button></form></td>
 			</tr>
 			<?php } ?>
 		</table>
@@ -144,8 +146,7 @@ function toggleTable(){
 $(document).ready(function(){
 	var location = ['woodlands','yishun', 'ang mo kio', 'tampinese'];
 	var cca = [<?php echo $cca_options ?>];
-	var subject = [<?php if (strpos($subject, "'") !== FALSE) echo $subject; else echo "'".$subject."'"; ?>];
-
+	var subject = [<?php echo $subject ?>];
 	$('.typeahead_location').typeahead({
 		hint: true,
 		highlight: true,
@@ -162,7 +163,7 @@ $(document).ready(function(){
 	},{
 		name: 'secondary',
 		source: substringMatcher(subject)
-	});
+	}); 
 
 	$('.typeahead_cca').typeahead({
 		hint: true,
@@ -172,6 +173,7 @@ $(document).ready(function(){
 		name: 'cca',
 		source: substringMatcher(cca)
 	});
+	
 });
 </script>
-<?php include_once('footer.php') ?>
+<?php include('footer.php') ?>

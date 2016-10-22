@@ -1,4 +1,4 @@
-<?php include_once 'header.php'; ?>
+<?php include 'header.php'; ?>
 <?php echo '<script src="../js/GoogleDirectionAPI.js"></script>'; ?>
 <?php echo '<script src="../js/tab.js"></script>'; ?>
 <!-- Begin page content -->
@@ -58,4 +58,4 @@
         </div>
     </div>
 </div>
-<?php include_once 'footer.php'; ?>
+<?php include 'footer.php'; ?>
