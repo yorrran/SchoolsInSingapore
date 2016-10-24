@@ -6,16 +6,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>phpmysqlcode</title>
 <link href="../css/style2.css" rel="stylesheet" type="text/css" />
-<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="../css/fancybox/jquery.fancybox.js?v=2.1.5"></script>
 <link rel="stylesheet" type="text/css" href="../css/fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />
 
 <script type="text/javascript">
-$(document).ready(function(){             
-	$(".detail").click(function(){ 
+$(document).ready(function(){
+	$(".detail").click(function(){
 	var p_id = $(this).attr('id');
 		if(p_id!='')
-		{ 
+		{
 		 $.ajax({
 				type:"post",
 				url:"compare.php",
@@ -30,8 +30,8 @@ $(document).ready(function(){
 					closeClick: false,
 					openEffect: 'none',
 					closeEffect: 'refresh'
-				});	
-					
+				});
+
 				}
 		   });
 		}
@@ -111,10 +111,10 @@ function compare()
 		<td width="20%">Details</td>
 		<td width="10%"></td>
 	</tr>
-	<?php 
+	<?php
 		$num_rec_per_page=10;
-		if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
-		$start_from = ($page-1) * $num_rec_per_page; 
+		if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
+		$start_from = ($page-1) * $num_rec_per_page;
 		//$sql =mysql_query("Select * FROM gdn_schools LIMIT $start_from, $num_rec_per_page");
 		//$sql = get_compare_list("user1",$start_from,$num_rec_per_page);
 		$array = $_SESSION['clist'];
@@ -136,24 +136,24 @@ function compare()
 			}
 		}
 		?>
-		
+
 </table>
 <!-- used for the page number -->
-<?php 
-//$sql = "SELECT * FROM gdn_schools"; 
+<?php
+//$sql = "SELECT * FROM gdn_schools";
 $rs_result = get_all_compare_list('user1'); //run the query
 //$total_records = mysqli_num_rows($rs_result);  //count number of records
-//$total_pages = ceil($total_records / $num_rec_per_page); 
+//$total_pages = ceil($total_records / $num_rec_per_page);
 $total_records = count($_SESSION['clist']);  //count number of records
-$total_pages = ceil($total_records / $num_rec_per_page); 
+$total_pages = ceil($total_records / $num_rec_per_page);
 
 
-echo "<a href='comparisonlist.php?page=1'>".'|<'."</a> "; // Goto 1st page  
+echo "<a href='comparisonlist.php?page=1'>".'|<'."</a> "; // Goto 1st page
 
-for ($i=1; $i<=$total_pages; $i++) { 
-            echo "<a href='comparisonlist.php?page=".$i."'>".$i."</a> "; 
-  
-}; 
+for ($i=1; $i<=$total_pages; $i++) {
+            echo "<a href='comparisonlist.php?page=".$i."'>".$i."</a> ";
+
+};
 echo "<a href='comparisonlist.php?page=$total_pages'>".'>|'."</a> "; // Goto last page
 ?>
 </div>

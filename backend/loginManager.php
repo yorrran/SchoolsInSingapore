@@ -17,6 +17,7 @@ if ($result->num_rows > 0)
 		setcookie('signed_in_id', $obj->Username, time() + (60*60*24*100), "/");
 		setcookie('email', $obj->Email, time() + (60*60*24*100), "/");
 	}
+	
 	echo "<script>window.location.replace('../index.php')</script>";
 }
 else

@@ -42,7 +42,7 @@
             font-size: 15px;
             transition: 0.4s;
 			border: 2px solid black;
-           
+
         }
 
 
@@ -56,9 +56,9 @@
             left:80%;
             display: inline-block;
             position:absolute;
-			
+
         }
-		
+
 		button.remove {
 			background-color: #eee;
             color: #444;
@@ -69,9 +69,9 @@
             left:85%;
             display: inline-block;
             position:absolute;
-			
+
         }
-     
+
         button.compare{
             background-color: #eee;
             color: #444;
@@ -87,7 +87,7 @@
         }
 
         button.accordion.active, button.accordion:hover {
-            background-color: #eee; 
+            background-color: #eee;
         }
 
         div.panel {
@@ -103,7 +103,7 @@
                 opacity: 1;
                 max-height: 500px;
             }
-			
+
 			article header ul .gk-comment:before {
     content: '\f086';
     font-family: FontAwesome;
@@ -113,7 +113,7 @@
 </head>
 <BODY>
     <h2>Favorite List</h2>
-	
+
 <?php
 
 
@@ -121,14 +121,14 @@
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
 	}
-	
+
 	if(isset($_POST['unfav'])){
 		$school_name = $_POST['unfav'];
 		remove_from_fav_list('user1',$school_name);
 		echo $school_name.' has been successfully removed from the favourite list';
 		header('Location: favlist.php');
 	}
-	
+
 	while($row = $result->fetch_assoc()){
 		echo '<form name="myForm" action="" method="POST">';
 		echo '<button name="unfav" value="'.$row['schoolname'].'" class="fav" onclick="document.getElementById("myForm").submit();"><i style="font-size:30px; color: #FFD700; " class="fa">&#xf005;</i></button>';
@@ -141,7 +141,7 @@
 			echo '<br />';
 			echo 'Address: '.$school['school_location'].'<br />'.'<br />';
 			echo 'Email: '.$school['school_email'].'<br />'.'<br />';
-			echo 'School Code: '.$school['school_code'].'<br />'.'<br />'; //replace with description if have 
+			echo 'School Code: '.$school['school_code'].'<br />'.'<br />'; //replace with description if have
 		}
 		echo '</div>'; //description
 	}
@@ -158,9 +158,9 @@
                 accordion();
             }
         }
-        
+
     </script>
-<?php include('footer.php') ?>
+<?php include_once('../footer.php') ?>
 
 </BODY>
 </html>

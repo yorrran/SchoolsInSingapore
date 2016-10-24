@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include_once('header.php') ?>
 <?php echo '<script src="js/checkRegistrationForm.js"></script>'; ?>
 <!-- Begin page content -->
 <div class="container">
@@ -49,4 +49,4 @@
 		</form>
 	</div>
 </div>
-<?php include 'footer.php'; ?>
+<?php include_once('footer.php') ?>

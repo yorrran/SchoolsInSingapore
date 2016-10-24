@@ -1,5 +1,6 @@
-<?php include('../backend/searchManager.php') ?>
-<?php include('header.php') ?>
+<?php include_once('header.php') ?>
+<?php include_once('../backend/searchManager.php') ?>
+<?php include_once('../backend/listGenerator.php') ?>
 <!-- Begin page content -->
 <div class="container">
 	<form form name="searchForm" action="secondarySchool.php" method="get">
@@ -48,6 +49,12 @@
 				<td align="left">
 					<input type="text" name="cca" class="typeahead_cca"\>
 				</td>
+				<td align="right" colspan=1>
+					Subjects
+				</td>
+				<td align="left" colspan=3	>
+					<input type="text" name="subjects" class="typeahead_subjects" />
+				</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 			</tr>
@@ -61,6 +68,7 @@
 	$category=" ";
 	$location=" ";
 	$cca=" ";
+	$subjects=" ";
 	if(isset($_GET['type'])){
 		$type = $_GET['type'];
 	}
@@ -77,9 +85,12 @@
 	if( isset($_GET['cca'])){
 		$cca = $_GET['cca'];
 	}
-	if( isset($_GET['type'])|| isset($_GET['category'])|| isset($_GET['score'])|| isset($_GET['location'])|| isset($_GET['cca']))
+	if( isset($_GET['subjects'])){
+		$subject = $_GET['subjects'];
+	}
+	if( isset($_GET['type'])|| isset($_GET['category'])|| isset($_GET['score'])|| isset($_GET['location'])|| isset($_GET['cca'])||isset($_GET['subjects']))
 	{
-		$results = searchSecondarySchool($type,$category,$score,$location,$cca);
+		$results = searchSecondarySchool($type,$category,$score,$location,$cca, $subject);
 		?>
 
 		<table class="table table-striped table-bordered secondaryTable" >
@@ -95,14 +106,23 @@
 			</tr>
 			<?php foreach ($results as $result){ ?>
 			<tr>
-				<td><?php echo $result['school_name'] ?></td>
+				<td>
+					<a href="IndividualSchool.php?school_name=<?php echo $result['school_name']?>" ><?php echo $result['school_name'] ?></a>
+				</td>
 				<td><?php echo $result['school_type'] ?></td>
 				<td><?php echo $result['school_location'] ?></td>
 				<td><?php echo $result['school_telephone'] ?></td>
 				<td><?php echo $result['school_email'] ?></td>
 				<td><?php echo $result['school_subject'] ?></td>
 				<td><?php echo $result['PSLE_score'] ?></td>
-				<td><button name="compare" class="btn btn-primary">Compare</button>&nbsp;&nbsp;<button name="favorite" class="btn btn-success">Favorite</button></td>
+				<td>
+					<form method="POST" action="addToCompare.php">
+						<button name="compare" value="<?php echo $result['school_name'] ?>" class="btn btn-primary">Compare</button>
+					</form>
+					<form method="POST" action="addToFav.php">
+						<button name="favorite" value="<?php echo $result['school_name'] ?>" class="btn btn-success">Favorite</button>
+					</form>
+				</td>
 			</tr>
 			<?php } ?>
 		</table>
@@ -111,7 +131,9 @@
 <script>
 $(document).ready(function(){
 	var location = ['woodlands','yishun', 'ang mo kio', 'tampinese'];
-	var cca = ['brownies', 'scoutsclubs', 'societieschess club', 'chinese cultural club', 'drama club', 'english literary club', 'green club', 'infocomm club', 'photography club', 'science and innovation club', 'visual arts club', 'aestheticschinese dance', 'choir', 'guitar ensemble', 'indian dance', 'malay', 'skipping', 'soccer', 'track field','wushu'];
+	var cca = [<?php echo $cca_options ?>];
+	var subject = [<?php if (strpos($subject, "'") !== FALSE) echo $subject; else echo "'".$subject."'"; ?>];
+
 	$('.typeahead_location').typeahead({
 		hint: true,
 		highlight: true,
@@ -120,6 +142,16 @@ $(document).ready(function(){
 		name: 'secondary',
 		source: substringMatcher(location)
 	});
+
+	$('.typeahead_subjects').typeahead({
+		hint: true,
+		highlight: true,
+		minLength: 1
+	},{
+		name: 'secondary',
+		source: substringMatcher(subject)
+	});
+
 	$('.typeahead_cca').typeahead({
 		hint: true,
 		highlight: true,
@@ -130,4 +162,4 @@ $(document).ready(function(){
 	});
 });
 </script>
-<?php include('footer.php') ?>
+<?php include_once('../footer.php') ?>
