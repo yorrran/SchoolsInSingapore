@@ -121,19 +121,19 @@
 	if (!$result) {
 		die('Invalid query: ' . mysql_error());
 	}
-
+/*
 	if(isset($_POST['unfav'])){
 		$school_name = $_POST['unfav'];
 		remove_from_fav_list('user1',$school_name);
 		echo $school_name.' has been successfully removed from the favourite list';
-		header('Location: favlist.php');
+		//header('Location: favlist.php');
 	}
-
+*/
 	while($row = $result->fetch_assoc()){
-		echo '<form name="myForm" action="" method="POST">';
-		echo '<button name="unfav" value="'.$row['schoolname'].'" class="fav" onclick="document.getElementById("myForm").submit();"><i style="font-size:30px; color: #FFD700; " class="fa">&#xf005;</i></button>';
-		echo '</form>';
-		echo '<form action="addToFav.php" method="POST" ><button name="unfavorite" class="remove" value="'.$row['schoolname'].'" >Remove</button></form>';
+
+		echo '<form action="addToFav.php" method="POST" ><button name="unfavorite" class="fav" value="'.$row['schoolname'].'" ><i style="font-size:30px; color: #FFD700; " class="fa">&#xf005;</i></button></form>';
+
+		echo '<form action="addToCompare.php" method="POST" ><button name="compare" class="compare" value="'.$row['schoolname'].'" >add to Comparison</button></form>';
 		echo '<button class="accordion" >';echo $row['schoolname'];echo'</button>';
 		echo '<div class="panel">';
 		$results = searchSchool($row['schoolname']);
