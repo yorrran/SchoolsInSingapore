@@ -20,16 +20,16 @@ while($row = $result->fetch_assoc())
 $sql_subjects = "select * from subjects";
 $result_subjects=$conn->query($sql_subjects);
 
-$subject= "'";
+$subject_name= "'";
 
 $j = 0;
 
 while($row_subjects = $result_subjects->fetch_assoc())
 {
 	if(($j+1) == $result_subjects->num_rows)
-		$subject .= $row_subjects["subjects"]."'";
+		$subject_name.= $row_subjects["subjects"]."'";
 	else
-		$subject .= $row_subjects["subjects"]."','";
+		$subject_name.= $row_subjects["subjects"]."','";
 
 	$j++;
 }

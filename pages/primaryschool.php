@@ -3,25 +3,25 @@
 <?php include_once('../backend/listGenerator.php') ?>
 <script>
 function toggleTable(){
-	if(document.getElementById("advanced").style.visibility == "hidden"){ //show
-		document.getElementById("advanced").style.visibility = "visible";
-		document.getElementById("advanced_submit").style.visibility = "visible";
-		document.getElementById("simple_submit").style.visibility = "hidden";
-		document.getElementById("ShowBtn").style.visibility = "hidden";
-		document.getElementById("HideBtn").style.visibility = "visible";
+	if(document.getElementById("advanced").style.display == "none"){ //show
+		document.getElementById("advanced").style.display = "block";
+		document.getElementById("advanced_submit").style.display = "inline";
+		document.getElementById("simple_submit").style.display = "none";
+		document.getElementById("ShowBtn").style.display = "none";
+		document.getElementById("HideBtn").style.display = "inline";
 	}else{ //hide
-		document.getElementById("advanced").style.visibility = "hidden";
-		document.getElementById("advanced_submit").style.visibility = "hidden";
-		document.getElementById("simple_submit").style.visibility = "visible";
-		document.getElementById("ShowBtn").style.visibility = "Visible";
-		document.getElementById("HideBtn").style.visibility = "Hidden";
+		document.getElementById("advanced").style.display = "none";
+		document.getElementById("advanced_submit").style.display = "none";
+		document.getElementById("simple_submit").style.display = "inline";
+		document.getElementById("ShowBtn").style.display = "inline";
+		document.getElementById("HideBtn").style.display = "none";
 
 	}
 }
 </script>
 <!-- Begin page content -->
 <div class="container">
-	<form form name="searchForm" action="primarySchool.php" method="get">
+	<form name="searchForm" action="primarySchool.php" method="get">
 		<table class="table table-striped" width="100%" border="0">
 			<tr align="center" >
 				<td colspan=10><h1>Primary School Search Page</h1></td>
@@ -32,23 +32,35 @@ function toggleTable(){
 			</tr>
 			<tr>
 				<td align="right" colspan=1>
-					Location
+					area
 				</td>
 				<td align="left" colspan=2>
-					<input name="location" type="text" class="typeahead_location" />
+					<?php if(isset($_GET['area'])) { ?>
+					<input name="area" type="text" class="typeahead_area" value="<?php echo $_GET['area'];?>" />
+					<?php } else {?>
+					<input name="area" type="text" class="typeahead_area" value="" />
+					<?php } ?>
 					<div name=""></div>
 				</td>
 				<td align="right" colspan=1>
 					CCA
 				</td>
 				<td align="left" colspan=2>
-					<input type="text" name="cca" class="typeahead_cca" />
+					<?php if(isset($_GET['cca'])) { ?>
+					<input name="cca" type="text" class="typeahead_cca" value="<?php echo $_GET['cca']; ?>" />
+					<?php } else {?>
+					<input name="cca" type="text" class="typeahead_cca" value="" />
+					<?php } ?>
 				</td>
 				<td align="right" colspan=1>
 					Subjects
 				</td>
-				<td align="left" colspan=3	>
-					<input type="text" name="subjects" class="typeahead_subjects" />
+				<td align="left" colspan=3>
+					<?php if(isset($_GET['subjects'])) { ?>
+					<input name="subjects" type="text" class="=typeahead_subject" value="<?php echo $_GET['subjects'];?>" />
+					<?php } else {?>
+					<input name="subjects" type="text" class="typeahead_subject" value="" />
+					<?php } ?>
 				</td>
 				<tr>
 				<td colspan=10 align="center">
@@ -58,7 +70,7 @@ function toggleTable(){
 				</tr>
 			</tr>
 		</table>
-		<table class="table table-striped" border="0" width="100%" id="advanced" style="visibility: hidden;">
+		<table class="table table-striped" border="0" width="100%" id="advanced" style="display: none;">
 			<tr align="left">
 				<td colspan=10><h3>Advanced Search</h3></td>
 			</tr>
@@ -84,14 +96,14 @@ function toggleTable(){
 		</table>
 	</form>
 	<?php
-	$location=" ";
+	$area=" ";
 	$cca=" ";
 	$subjects=" ";
 	$MRT=" ";
 	$Bus=" ";
 	$ShuttleBus=" ";
-	if(isset($_GET['location'])){
-		$location = $_GET['location'];
+	if(isset($_GET['area'])){
+		$area = $_GET['area'];
 	}
 	if(isset($_GET['cca'])){
 		$cca = $_GET['cca'];
@@ -108,18 +120,24 @@ function toggleTable(){
 	if( isset($_GET['ShuttleBus'])){
 		$subject = $_GET['ShuttleBus'];
 	}
-	if(isset($_GET['location'])||isset($_GET['cca'])||isset($_GET['subjects'])|| isset($_GET['MRT'])||isset($_GET['Bus'])|| isset($_GET['ShuttleBus']))
+	if(isset($_GET['area'])||isset($_GET['cca'])||isset($_GET['subjects'])|| isset($_GET['MRT'])||isset($_GET['Bus'])|| isset($_GET['ShuttleBus']))
 	{
-		$results = searchPrimarySchool($location, $cca, $subject, $MRT, $Bus, $ShuttleBus);
+		if(empty($_GET['area'])&&empty($_GET['cca'])&&empty($_GET['subjects'])&& empty($_GET['MRT'])&&empty($_GET['Bus'])&& empty($_GET['ShuttleBus'])){
+
+		//TODO: Display no search input 
+
+		} else {
+		$results = searchPrimarySchool($area, $cca, $subject, $MRT, $Bus, $ShuttleBus);
 		?>
 		<table id="sortabletable" class="table table-striped table-bordered secondaryTable sortable" width="100%" >
 			<tr>
 				<th width="10%">Name</th>
 				<th width="10%">Type</th>
-				<th width="15%">Location</th>
+				<th width="15%">area</th>
+				<th width="15%">location</th>
 				<th width="10%">Telephone</th>
 				<th width="10%">Email</th>
-				<th width="15%">Subject</th>
+				
 				<th width="10%">PLSE Score</th>
 				<th width="20%">List</th>
 			</tr>
@@ -129,47 +147,48 @@ function toggleTable(){
 					<a href="IndividualSchool.php?school_name=<?php echo $result['school_name']?>" ><?php echo $result['school_name'] ?></a>
 				</td>
 				<td><?php echo $result['school_type'] ?></td>
+				<td><?php echo $result['school_area'] ?></td>
 				<td><?php echo $result['school_location'] ?></td>
 				<td><?php echo $result['school_telephone'] ?></td>
 				<td><?php echo $result['school_email'] ?></td>
-				<td><?php echo $result['school_subject'] ?></td>
+				
 				<td><?php ?></td>
-				<td>
-					<form method="POST" action="addToCompare.php">
+				<td style="text-align:center">
+					<form method="POST" action="addToCompare.php" style="display:inline">
 						<button name="compare" value="<?php echo $result['school_name'] ?>" class="btn btn-primary">Compare</button>
 					</form>
-					<form method="POST" action="addToFav.php">
+					<form method="POST" action="addToFav.php" style="display:inline">
 						<button name="favorite" value="<?php echo $result['school_name'] ?>" class="btn btn-success">Favorite</button>
 					</form>
 				</td>
 			</tr>
 			<?php } ?>
 		</table>
-	<?php } ?>
+	<?php }} ?>
 </div>
 
 <script>
 $(document).ready(function()
 {
-	var location = ['woodlands','yishun', 'ang mo kio', 'tampinese'];
-	var cca = [<?php echo $cca_options ?>];
-	var subject = [<?php if (strpos($subject, "'") !== FALSE) echo $subject; else echo "'".$subject."'"; ?>];
+	var area = [<?php if (strpos($area, "'") !== FALSE) echo $area; else echo "'".$area."'"; ?>];
+	var cca = [<?php if (strpos($cca_options, "'") !== FALSE) echo $cca_options; else echo "'".$cca_options."'"; ?>];
+	var subject = [<?php if (strpos($subject_name , "'") !== FALSE) echo $subject_name ; else echo "'".$subject_name ."'"; ?>];
 
-	$('.typeahead_location').typeahead({
+	$('.typeahead_area').typeahead({
 		hint: true,
 		highlight: true,
 		minLength: 1
 	},{
 		name: 'secondary',
-		source: substringMatcher(location)
+		source: substringMatcher(area)
 	});
 
-	$('.typeahead_subjects').typeahead({
+	$('.typeahead_subject').typeahead({
 		hint: true,
 		highlight: true,
 		minLength: 1
 	},{
-		name: 'secondary',
+		name: 'subject',
 		source: substringMatcher(subject)
 	});
 

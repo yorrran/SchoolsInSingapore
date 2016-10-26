@@ -51,7 +51,8 @@
 						<ul class="dropdown-menu">
 							<li><a href="primaryschool.php">Primary School</a></li>
 							<li><a href="secondaryschool.php">Secondary School</a></li>
-							<li><a href="poly.php">Polytechnic</a></li>
+							<li><a href="JuniorCollege.php">JuniorCollege</a></li>
+							<li><a href="polySchool.php">Polytechnic</a></li>
 							<li><a href="uni.php">University</a></li>
 						</ul>
 					</li>

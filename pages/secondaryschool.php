@@ -38,10 +38,10 @@
 			</tr>
 			<tr>
 				<td align="right" >
-					location
+					area
 				</td>
 				<td align="left">
-					<input type="text" name="location" class="typeahead_location" \>
+					<input type="text" name="area" class="typeahead_area" \>
 				</td>
 				<td align="right" >
 					cca
@@ -66,7 +66,7 @@
 	<?php
 	$type=" ";
 	$category=" ";
-	$location=" ";
+	$area=" ";
 	$cca=" ";
 	$subjects=" ";
 	if(isset($_GET['type'])){
@@ -79,8 +79,8 @@
 	if( isset($_GET['score'])){
 		$score = $_GET['score'];
 	}
-	if( isset($_GET['location'])){
-		$location = $_GET['location'];
+	if( isset($_GET['area'])){
+		$area = $_GET['area'];
 	}
 	if( isset($_GET['cca'])){
 		$cca = $_GET['cca'];
@@ -88,16 +88,16 @@
 	if( isset($_GET['subjects'])){
 		$subject = $_GET['subjects'];
 	}
-	if( isset($_GET['type'])|| isset($_GET['category'])|| isset($_GET['score'])|| isset($_GET['location'])|| isset($_GET['cca'])||isset($_GET['subjects']))
+	if( isset($_GET['type'])|| isset($_GET['category'])|| isset($_GET['score'])|| isset($_GET['area'])|| isset($_GET['cca'])||isset($_GET['subjects']))
 	{
-		$results = searchSecondarySchool($type,$category,$score,$location,$cca, $subject);
+		$results = searchSecondarySchool($type,$category,$score,$area,$cca, $subject);
 		?>
 
 		<table class="table table-striped table-bordered secondaryTable" >
 			<tr>
 				<th width="10%">Name</th>
 				<th width="10%">Type</th>
-				<th width="15%">Location</th>
+				<th width="15%">area</th>
 				<th width="10%">Telephone</th>
 				<th width="10%">Email</th>
 				<th width="15%">Subject</th>
@@ -110,7 +110,7 @@
 					<a href="IndividualSchool.php?school_name=<?php echo $result['school_name']?>" ><?php echo $result['school_name'] ?></a>
 				</td>
 				<td><?php echo $result['school_type'] ?></td>
-				<td><?php echo $result['school_location'] ?></td>
+				<td><?php echo $result['school_area'] ?></td>
 				<td><?php echo $result['school_telephone'] ?></td>
 				<td><?php echo $result['school_email'] ?></td>
 				<td><?php echo $result['school_subject'] ?></td>
@@ -129,18 +129,20 @@
 	<?php } ?>
 </div>
 <script>
-$(document).ready(function(){
-	var location = ['woodlands','yishun', 'ang mo kio', 'tampinese'];
-	var cca = [<?php echo $cca_options ?>];
+$(document).ready(function()
+{
+	var area = ['woodlands','yishun', 'ang mo kio', 'tampinese'];
+	var cca = [<?php if (strpos($cca_options, "'") !== FALSE) echo $cca_options; else echo "'".$cca_options."'"; ?>];
 	var subject = [<?php if (strpos($subject, "'") !== FALSE) echo $subject; else echo "'".$subject."'"; ?>];
 
-	$('.typeahead_location').typeahead({
+
+	$('.typeahead_area').typeahead({
 		hint: true,
 		highlight: true,
 		minLength: 1
 	},{
 		name: 'secondary',
-		source: substringMatcher(location)
+		source: substringMatcher(area)
 	});
 
 	$('.typeahead_subjects').typeahead({
