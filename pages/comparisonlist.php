@@ -115,24 +115,26 @@ function compare()
 		$num_rec_per_page=10;
 		if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
 		$start_from = ($page-1) * $num_rec_per_page;
-		//$sql =mysql_query("Select * FROM gdn_schools LIMIT $start_from, $num_rec_per_page");
-		//$sql = get_compare_list("user1",$start_from,$num_rec_per_page);
-		$array = $_SESSION['clist'];
-		foreach ($array as $item) {
-			//echo $item;
-			$school = searchSchool($item);
-			foreach ($school as $data){
-			//var_dump($data);
-			echo '<tr><td><input type="checkbox" name="products[]" class="products" id="'.$data['school_code'].'"></td>';
-			echo '<td><img src="../img/School_Logo/'.str_replace(" ", "-",$data['school_name']).'.jpg" width="80" height="80px;"></td>';
-			echo '<td>'.$data['school_name'].'</td>';
-			echo '<td>'.$data['school_code'].'</td>';
-			echo '<td><a href="javascript:void(0);" class="detail" id="detail-'.$data['school_code'].'">Details</a></td>';
-			echo '<td>
-			<form method="POST" action="addToFav.php" ><button name="favorite" value="'.$data['school_name'].'" class="btn btn-success">Favorite</button></form>
-			<form action="addToCompare.php" method="POST" ><button name="remove" value="'.$data['school_name'].'" >Remove</button></form>
-			</td>
-			</tr>';
+
+		if (isset($_SESSION['clist']))
+		{
+			$array = $_SESSION['clist'];
+			foreach ($array as $item) {
+				//echo $item;
+				$school = searchSchool($item);
+				foreach ($school as $data){
+				//var_dump($data);
+				echo '<tr><td><input type="checkbox" name="products[]" class="products" id="'.$data['school_code'].'"></td>';
+				echo '<td><img src="../img/School_Logo/'.str_replace(" ", "-",$data['school_name']).'.jpg" width="80" height="80px;"></td>';
+				echo '<td>'.$data['school_name'].'</td>';
+				echo '<td>'.$data['school_code'].'</td>';
+				echo '<td><a href="javascript:void(0);" class="detail" id="detail-'.$data['school_code'].'">Details</a></td>';
+				echo '<td>
+				<form method="POST" action="addToFav.php" ><button name="favorite" value="'.$data['school_name'].'" class="btn btn-success">Favorite</button></form>
+				<form action="addToCompare.php" method="POST" ><button name="remove" value="'.$data['school_name'].'" >Remove</button></form>
+				</td>
+				</tr>';
+				}
 			}
 		}
 		?>
@@ -144,17 +146,21 @@ function compare()
 $rs_result = get_all_compare_list('user1'); //run the query
 //$total_records = mysqli_num_rows($rs_result);  //count number of records
 //$total_pages = ceil($total_records / $num_rec_per_page);
-$total_records = count($_SESSION['clist']);  //count number of records
-$total_pages = ceil($total_records / $num_rec_per_page);
-
-
-echo "<a href='comparisonlist.php?page=1'>".'|<'."</a> "; // Goto 1st page
+if (isset($_SESSION['clist']))
+{
+	$total_records = count($_SESSION['clist']);  //count number of records
+	$total_pages = ceil($total_records / $num_rec_per_page);
+	
+	echo "<a href='comparisonlist.php?page=1'>".'|<'."</a> "; // Goto 1st page
 
 for ($i=1; $i<=$total_pages; $i++) {
             echo "<a href='comparisonlist.php?page=".$i."'>".$i."</a> ";
 
-};
+}
 echo "<a href='comparisonlist.php?page=$total_pages'>".'>|'."</a> "; // Goto last page
+}
+
+
 ?>
 </div>
 </div></div>
