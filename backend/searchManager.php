@@ -391,6 +391,72 @@ function searchPoly($courseCluster, $courseTitle, $score)
 
 	return $search_result_school;
 }
+function searchITE($English, $Mathematics, $certification, $option, $score)
+{
+	$conn = dbConnect();
+
+	$whereClause = " where 1=1 ";
+
+	if(!empty($English))
+		$whereClause .= " and ITE.English<=$English ";
+
+	if(!empty($Mathematics))
+		$whereClause .= " and ITE.Mathematics<=$Mathematics";
+	
+	if($certification=="Nlevel")
+	{
+		if($option=="oneSubject")
+		$sql = "select * from school".$whereClause. " and ITE.Certification like '%$Nlevel%' and ITE.OneSubject<=$score";
+		else
+		$sql = "select * from school".$whereClause. " and ITE.Certification like '%$Nlevel%' and ITE.TwoSubjects<=$score";
+	
+	}
+    else
+	{
+		if($option=="oneSubject")
+		$sql = "select * from school".$whereClause. " and ITE.Certification like '%$Olevel%' and ITE.OneSubject<=$score";
+		else
+		$sql = "select * from school".$whereClause. " and ITE.Certification like '%$Olevel%' and ITE.TwoSubjects<=$score";
+		
+	}
+
+    $result = $conn->query($sql);
+
+	// Create an empty array to store each row of school information
+	$search_result_school = array();
+	$i = 0;
+
+	if ($result->num_rows > 0)	// if the number of result is greater than 0
+	{
+		while($row = $result->fetch_assoc())	// get each result and put them into the array
+		{
+			$school_name = $row["school_name"];
+			$school_type = $row["type"];
+			$school_location = $row["location"];
+			$school_telephone = $row["Telephone"];
+			$school_email = $row["Email"];
+			$school_subject = $row["subjects"];
+
+			$search_result_school[$i] = ['school_name'=>($school_name),
+			'school_type'=>$school_type,
+			'school_location'=>$school_location,
+			'school_telephone'=>$school_telephone,
+			'school_email'=>$school_email,
+			'school_subject'=>$school_subject;
+			$i++;
+		}
+	}
+	else
+	{
+		$search_result_school = $search_result_school;
+	}
+
+	dbDisconnect($conn);
+
+	echo "<pre>";
+
+	return $search_result_school;
+}
 
 
 // Get values from front end
