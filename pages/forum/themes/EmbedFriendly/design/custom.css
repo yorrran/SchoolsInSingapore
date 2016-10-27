@@ -188,3 +188,7 @@
 .GuestBox .Button {
 	visibility: hidden;
 }
+
+.Foot.Closed {
+    visibility: hidden;
+}

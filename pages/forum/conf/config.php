@@ -52,9 +52,9 @@ $Configuration['Routes']['DefaultController'] = array('discussions', 'Internal')
 // Vanilla
 $Configuration['Vanilla']['Version'] = '2.2.1';
 $Configuration['Vanilla']['Categories']['MaxDisplayDepth'] = '3';
-$Configuration['Vanilla']['Categories']['DoHeadings'] = false;
+$Configuration['Vanilla']['Categories']['DoHeadings'] = '1';
 $Configuration['Vanilla']['Categories']['HideModule'] = false;
 $Configuration['Vanilla']['Categories']['Layout'] = 'modern';
 $Configuration['Vanilla']['Discussions']['Layout'] = 'modern';
 
-// Last edited by Admin (127.0.0.1)2016-10-13 13:36:27
+// Last edited by Admin (127.0.0.1)2016-10-27 05:08:04
