@@ -24,8 +24,6 @@ function searchSchool($school_name)
 			$school_website = $row["website"];
 			$MRT = $row["Nearest MRT"];
 			$Bus = $row["Bus number"];
-			
-			
 
 			$search_result_school[$i] = [
 				'school_name' => $school_name,
@@ -98,8 +96,6 @@ function searchPrimarySchool($area, $cca, $subject, $MRT, $Bus, $ShuttleBus)
 			$school_website = $row["website"];
 			$MRT = $row["Nearest MRT"];
 			$Bus = $row["Bus number"];
-			
-			
 
 			$search_result_school[$i] = [
 				'school_name' => $school_name,
@@ -123,7 +119,7 @@ function searchPrimarySchool($area, $cca, $subject, $MRT, $Bus, $ShuttleBus)
 
 	dbDisconnect($conn);
 
-	
+
 
 	return $search_result_school;
 }
@@ -223,14 +219,14 @@ function searchSecondarySchool($type, $category, $score, $area, $cca, $subject)
 			$school_website = $row["website"];
 			$MRT = $row["Nearest MRT"];
 			$Bus = $row["Bus number"];
-			
+
 
 			if(empty($row['highest']))
 				$psle_score = $row["lowest"];
 			else
 				$psle_score = $row['lowest']."-".$row['highest'];
 
-			
+
 			$search_result_school[$i] = [
 				'school_name' => $school_name,
 				'school_code' => $school_code,
@@ -242,7 +238,7 @@ function searchSecondarySchool($type, $category, $score, $area, $cca, $subject)
 				'school_website' => $school_website,
 				'Nearest MRT' => $MRT,
 				'Busnumber' => $Bus];
-				
+
 			$i++;
 		}
 	}
@@ -269,7 +265,7 @@ function searchJC($area, $subject, $type, $score)
 
 	if(!empty($subject))
 		$whereClause .= " and school.subjects like '%$subject%'";
-	
+
 	if($type=="Art")
 	{
 		  $sql = "select * from school".$whereClause." and jc_art<=$score";
@@ -300,8 +296,8 @@ function searchJC($area, $subject, $type, $score)
 			$school_website = $row["website"];
 			$MRT = $row["Nearest MRT"];
 			$Bus = $row["Bus number"];
-			
-			
+
+
 
 			$search_result_school[$i] = [
 				'school_name' => $school_name,
@@ -340,7 +336,7 @@ function searchPoly($courseCluster, $courseTitle, $score)
 
 	if(!empty($courseTitle))
 		$whereClause .= " and school.subjects like '%$courseTitle%'";
-	
+
 	$sql = "select * from school".$whereClause." and poly_cop<=$score";
 
     $result = $conn->query($sql);
@@ -363,8 +359,8 @@ function searchPoly($courseCluster, $courseTitle, $score)
 			$school_website = $row["website"];
 			$MRT = $row["Nearest MRT"];
 			$Bus = $row["Bus number"];
-			
-			
+
+
 
 			$search_result_school[$i] = [
 				'school_name' => $school_name,
@@ -391,6 +387,7 @@ function searchPoly($courseCluster, $courseTitle, $score)
 
 	return $search_result_school;
 }
+
 function searchITE($English, $Mathematics, $certification, $option, $score)
 {
 	$conn = dbConnect();
@@ -402,14 +399,14 @@ function searchITE($English, $Mathematics, $certification, $option, $score)
 
 	if(!empty($Mathematics))
 		$whereClause .= " and ITE.Mathematics<=$Mathematics";
-	
+
 	if($certification=="Nlevel")
 	{
 		if($option=="oneSubject")
 		$sql = "select * from school".$whereClause. " and ITE.Certification like '%$Nlevel%' and ITE.OneSubject<=$score";
 		else
 		$sql = "select * from school".$whereClause. " and ITE.Certification like '%$Nlevel%' and ITE.TwoSubjects<=$score";
-	
+
 	}
     else
 	{
@@ -417,7 +414,7 @@ function searchITE($English, $Mathematics, $certification, $option, $score)
 		$sql = "select * from school".$whereClause. " and ITE.Certification like '%$Olevel%' and ITE.OneSubject<=$score";
 		else
 		$sql = "select * from school".$whereClause. " and ITE.Certification like '%$Olevel%' and ITE.TwoSubjects<=$score";
-		
+
 	}
 
     $result = $conn->query($sql);
@@ -442,7 +439,7 @@ function searchITE($English, $Mathematics, $certification, $option, $score)
 			'school_location'=>$school_location,
 			'school_telephone'=>$school_telephone,
 			'school_email'=>$school_email,
-			'school_subject'=>$school_subject;
+			'school_subject'=>$school_subject];
 			$i++;
 		}
 	}
