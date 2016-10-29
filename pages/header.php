@@ -53,7 +53,7 @@
 							<li><a href="secondaryschool.php">Secondary School</a></li>
 							<li><a href="JuniorCollege.php">JuniorCollege</a></li>
 							<li><a href="polySchool.php">Polytechnic</a></li>
-							<li><a href="uni.php">University</a></li>
+							<li><a href="university.php">University</a></li>
 						</ul>
 					</li>
 					<li><a href="comparisonlist.php">Comparison List</a></li>
