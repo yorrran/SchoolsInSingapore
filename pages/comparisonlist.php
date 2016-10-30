@@ -112,6 +112,11 @@ function compare()
 		<td width="10%"></td>
 	</tr>
 	<?php
+		$fav_list = get_fav_list('user1');//return an array 
+		if (!$fav_list) {
+			die('Invalid query: ' . mysql_error());
+		}
+		
 		$num_rec_per_page=10;
 		if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
 		$start_from = ($page-1) * $num_rec_per_page;
@@ -122,18 +127,28 @@ function compare()
 			foreach ($array as $item) {
 				//echo $item;
 				$school = searchSchool($item);
+
 				foreach ($school as $data){
-				//var_dump($data);
-				echo '<tr><td><input type="checkbox" name="products[]" class="products" id="'.$data['school_code'].'"></td>';
-				echo '<td><img src="../img/School_Logo/'.str_replace(" ", "-",$data['school_name']).'.jpg" width="80" height="80px;"></td>';
-				echo '<td>'.$data['school_name'].'</td>';
-				echo '<td>'.$data['school_code'].'</td>';
-				echo '<td><a href="javascript:void(0);" class="detail" id="detail-'.$data['school_code'].'">Details</a></td>';
-				echo '<td>
-				<form method="POST" action="addToFav.php" ><button name="favorite" value="'.$data['school_name'].'" class="btn btn-success">Favorite</button></form>
-				<form action="addToCompare.php" method="POST" ><button name="remove" value="'.$data['school_name'].'" >Remove</button></form>
-				</td>
-				</tr>';
+					//var_dump($data);
+					echo '<tr><td><input type="checkbox" name="products[]" class="products" id="'.$data['school_code'].'"></td>';
+					echo '<td><img src="../img/School_Logo/'.str_replace(" ", "-",$data['school_name']).'.jpg" width="80" height="80px;"></td>';
+					echo '<td>'.$data['school_name'].'</td>';
+					echo '<td>'.$data['school_code'].'</td>';
+					echo '<td><a href="javascript:void(0);" class="detail" id="detail-'.$data['school_code'].'">Details</a></td>';
+					echo '<td>';
+		
+					if(in_array($data['school_name'],$fav_list)){ //display unfavourite button if in favourite list
+			
+						echo '<form method="POST" action="addToFav.php" ><button name="unfavorite" value="'.$data['school_name'].'" class="btn btn-success">Unfavorite</button></form>';
+
+					}else { //display add to favourite button if not in favourite list 
+						echo '<form method="POST" action="addToFav.php" ><button name="favorite" value="'.$data['school_name'].'" class="btn btn-success">Favorite</button></form>';
+
+					}
+					
+					echo '<form action="addToCompare.php" method="POST" ><button name="remove" value="'.$data['school_name'].'" >Remove</button></form>
+						</td></tr>';
+					
 				}
 			}
 		}
