@@ -102,23 +102,24 @@ function compare()
 <br>
 <span align="center"><img id="wait" style="display:none;margin-left:300px;" src="image/loading.gif"></span>
 <?php
-		echo '
-		<table width="100%">
-		<tr>
-			<td width="10%"><a href="javascript:void(0)" onclick="compare();" style="color:blue;font-size:15px;"><b>Compare</b></a></td>
-			<td width="20%">School Logo</td>
-			<td width="20%">School Name</td>
-			<td width="20%">School Code</td>
-			<td width="20%">Details</td>
-			<td width="10%"></td>
-		</tr>';
 
-		$num_rec_per_page=10;
-		if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
-		$start_from = ($page-1) * $num_rec_per_page;
-
-		if (isset($_SESSION['clist']))
+		if (!empty($_SESSION['clist']))
 		{
+				echo '
+				<table width="100%">
+				<tr>
+					<td width="10%"><a href="javascript:void(0)" onclick="compare();" style="color:blue;font-size:15px;"><b>Compare</b></a></td>
+					<td width="20%">School Logo</td>
+					<td width="20%">School Name</td>
+					<td width="20%">School Code</td>
+					<td width="20%">Details</td>
+					<td width="10%"></td>
+				</tr>';
+
+				$num_rec_per_page=10;
+				if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
+				$start_from = ($page-1) * $num_rec_per_page;
+				
 			$array = $_SESSION['clist'];
 			foreach ($array as $item) {
 				//echo $item;
