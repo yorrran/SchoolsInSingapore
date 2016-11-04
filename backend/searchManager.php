@@ -523,7 +523,7 @@ function searchITE($English, $Mathematics, $certification, $option, $mrt, $bus,$
 
 	}
         $result = $conn->query($sql);
-        echo $sql; die;
+		
 	// Create an empty array to store each row of school information
 	$search_result_school = array();
 	$i = 0;

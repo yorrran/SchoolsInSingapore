@@ -14,7 +14,6 @@ if(isset($_POST['compare']))
 	}else {
 		echo 'duplicate exist';
 	}
-	//var_dump($_SESSION['clist']);
 }
 else if(isset($_POST['remove']))
 {

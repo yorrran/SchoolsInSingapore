@@ -1,7 +1,7 @@
-<?php session_start();
-include_once('../backend/searchManager.php'); ?>
 <?php
-if(!isset($_SESSION["clist"])){$_SESSION["clist"] = array();}
+session_start();
+include_once('../backend/searchManager.php');
+if(!isset($_SESSION["clist"])){$_SESSION["clist"] = "";}
 if(!isset($fav_list))  $fav_list= array();
 ?>
 <!DOCTYPE html>
@@ -21,7 +21,6 @@ if(!isset($fav_list))  $fav_list= array();
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/script.js"></script>
-	<script src="../js/sortable.js"></script>
 	<script src="../js/inputValidation.js"></script>
 	<script src="../js/typeahead.js/bloodhound.min.js"></script>
 	<script src="../js/typeahead.js/typeahead.bundle.min.js"></script>
@@ -65,10 +64,10 @@ if(!isset($fav_list))  $fav_list= array();
 			name: 'schoolName',
 			source: substringMatcher(schoolName)
 		});
-		
-		
+
+
 	});
-	
+
 	function isEmpty(){
 		var school_name = document.getElementById("school_name");
 		if(school_name.value == ""){

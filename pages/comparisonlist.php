@@ -101,8 +101,7 @@ function compare()
 <h1 align="center">School Compare</h1>
 <br>
 <span align="center"><img id="wait" style="display:none;margin-left:300px;" src="image/loading.gif"></span>
-<?php 
-	if(isset($_COOKIE['signed_in_id'])){
+<?php
 		echo '
 		<table width="100%">
 		<tr>
@@ -113,12 +112,7 @@ function compare()
 			<td width="20%">Details</td>
 			<td width="10%"></td>
 		</tr>';
-	
-		$fav_list = get_fav_list($_COOKIE['signed_in_id']);//return an array 
-		if (!$fav_list) {
-			die('Invalid query: ' . mysql_error());
-		}
-		
+
 		$num_rec_per_page=10;
 		if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
 		$start_from = ($page-1) * $num_rec_per_page;
@@ -138,54 +132,43 @@ function compare()
 					echo '<td>'.$data['school_code'].'</td>';
 					echo '<td><a href="javascript:void(0);" class="detail" id="detail-'.$data['school_code'].'">Details</a></td>';
 					echo '<td>';
-		
+
 					if(in_array($data['school_name'],$fav_list)){ //display unfavourite button if in favourite list
-			
+
 						echo '<form method="POST" action="addToFav.php" ><button name="unfavorite" value="'.$data['school_name'].'" class="btn btn-success">Unfavorite</button></form>';
 
-					}else { //display add to favourite button if not in favourite list 
+					}else { //display add to favourite button if not in favourite list
 						echo '<form method="POST" action="addToFav.php" ><button name="favorite" value="'.$data['school_name'].'" class="btn btn-success">Favorite</button></form>';
 
 					}
-					
+
 					echo '<form action="addToCompare.php" method="POST" ><button name="remove" value="'.$data['school_name'].'" >Remove</button></form>
 						</td></tr>';
-					
+
 				}
 			}
-		}
 		}
 		?>
 
 </table>
 <!-- used for the page number -->
 <?php
-//$sql = "SELECT * FROM gdn_schools";
-if(isset($_COOKIE['signed_in_id'])){
-	$rs_result = get_all_compare_list($_COOKIE['signed_in_id']); //run the query
-
-//$total_records = mysqli_num_rows($rs_result);  //count number of records
-//$total_pages = ceil($total_records / $num_rec_per_page);
-if (isset($_SESSION['clist']))
+if (!empty($_SESSION['clist']))
 {
 	$total_records = count($_SESSION['clist']);  //count number of records
 	$total_pages = ceil($total_records / $num_rec_per_page);
-	
+
 	echo "<a href='comparisonlist.php?page=1'>".'|<'."</a> "; // Goto 1st page
 
 for ($i=1; $i<=$total_pages; $i++) {
             echo "<a href='comparisonlist.php?page=".$i."'>".$i."</a> ";
-
 }
 echo "<a href='comparisonlist.php?page=$total_pages'>".'>|'."</a> "; // Goto last page
 }
+else {
+	echo '<div class="text-center"><br><br>~~~ List is empty ~~~</div>';
 }
-echo "<div align=\"center\">~~ The list is empty ~~</div>";
-
 ?>
 </div>
 </div></div>
 </div>
-
-</body>
-</html>

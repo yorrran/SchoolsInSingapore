@@ -130,7 +130,7 @@ function toggleTable(){
 <!-- end of advanced search -->
 </div>
 <div align="center">
-		<table id="sortabletable" class="table table-striped table-bordered secondaryTable sortable" width="100%">
+		<table class="table table-striped table-bordered secondaryTable" width="100%">
 			<tr>
 				<th>Name</th>
 				<th>Location</th>
