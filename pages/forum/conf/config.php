@@ -36,9 +36,10 @@ $Configuration['Garden']['Theme'] = 'EmbedFriendly';
 $Configuration['Garden']['Embed']['Allow'] = true;
 $Configuration['Garden']['Embed']['RemoteUrl'] = 'http://127.0.0.1/pages/forum.php';
 $Configuration['Garden']['Embed']['ForceDashboard'] = false;
-$Configuration['Garden']['Embed']['ForceForum'] = false;
+$Configuration['Garden']['Embed']['ForceForum'] = '1';
 $Configuration['Garden']['TrustedDomains'] = '';
 $Configuration['Garden']['SignIn']['Popup'] = false;
+$Configuration['Garden']['EditContentTimeout'] = '-1';
 
 // Plugins
 $Configuration['Plugins']['GettingStarted']['Dashboard'] = '1';
@@ -56,5 +57,14 @@ $Configuration['Vanilla']['Categories']['DoHeadings'] = '1';
 $Configuration['Vanilla']['Categories']['HideModule'] = false;
 $Configuration['Vanilla']['Categories']['Layout'] = 'modern';
 $Configuration['Vanilla']['Discussions']['Layout'] = 'modern';
+$Configuration['Vanilla']['Discussions']['PerPage'] = '30';
+$Configuration['Vanilla']['Discussions']['SortField'] = 'd.DateLastComment';
+$Configuration['Vanilla']['Comments']['AutoRefresh'] = NULL;
+$Configuration['Vanilla']['Comments']['PerPage'] = '30';
+$Configuration['Vanilla']['Archive']['Date'] = '';
+$Configuration['Vanilla']['Archive']['Exclude'] = false;
+$Configuration['Vanilla']['Comment']['MaxLength'] = '8000';
+$Configuration['Vanilla']['Comment']['MinLength'] = '';
+$Configuration['Vanilla']['AdminCheckboxes']['Use'] = false;
 
-// Last edited by Admin (127.0.0.1)2016-10-27 05:08:04
+// Last edited by Admin (127.0.0.1)2016-11-04 04:46:56
