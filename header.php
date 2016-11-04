@@ -37,6 +37,16 @@ include_once('backend/listGenerator.php') ?>
         });
 
     });
+	
+	function isEmpty(){
+		var school_name = document.getElementById("school_name");
+		if(school_name.value == ""){
+			alert("Your search field is empty. Please try again.");
+			return false;
+		} else {
+			return true;
+		}
+	}
     </script>
 </head>
 <body><!-- Fixed navbar -->
@@ -73,9 +83,9 @@ include_once('backend/listGenerator.php') ?>
                     echo '<li><a href="login.php">Login</a></li>';
                 }
                 ?>
-                <form class="navbar-form navbar-right" action="pages/individualSchool.php" method="get">
+                <form class="navbar-form navbar-right" action="pages/individualSchool.php" method="get" onSubmit="return isEmpty()">
                     <div class="form-group">
-                        <input type="text" name="school_name" class="form-control typeahead_schoolName" placeholder="Search">
+                        <input type="text" name="school_name" id="school_name" class="form-control typeahead_schoolName" placeholder="Search">
                     </div>
                     <button type="submit" class="btn btn-default">Search</button>
                 </form>

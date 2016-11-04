@@ -17,12 +17,14 @@ if ($result->num_rows > 0)	// if the number of result is greater than 0
 {
 	while($row = $result->fetch_assoc())	// get each result and put them into the array
 	{
+		$row_item = str_replace("'", "&#39;", $row['CCA']);
+
 		if($i == $result->num_rows){
-			$cca_typeahead['cca_options'] .= $row['CCA']."'";
+			$cca_typeahead['cca_options'] .= $row_item."'";
 		}
 		else
 		{
-			$cca_typeahead['cca_options'] .= $row['CCA']."', '";
+			$cca_typeahead['cca_options'] .= $row_item."', '";
 		}
 
 		$i++;
@@ -43,12 +45,14 @@ if ($result->num_rows > 0)	// if the number of result is greater than 0
 {
 	while($row = $result->fetch_assoc())	// get each result and put them into the array
 	{
+		$row_item = str_replace("'", "&#39;", $row['subjects']);
+
 		if($i == $result->num_rows){
-			$subject_typeahead['subjects'] .= $row['subjects']."'";
+			$subject_typeahead['subjects'] .= $row_item."'";
 		}
 		else
 		{
-			$subject_typeahead['subjects'] .= $row['subjects']."', '";
+			$subject_typeahead['subjects'] .= $row_item."', '";
 		}
 
 		$i++;
