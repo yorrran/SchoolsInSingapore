@@ -1,7 +1,6 @@
 <?php
 header('Location: ' . $_SERVER['HTTP_REFERER']);
 include_once('header.php');
-include('../backend/searchManager.php');
 
 if(isset($_POST['compare']))
 {

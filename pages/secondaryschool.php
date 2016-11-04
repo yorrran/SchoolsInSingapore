@@ -175,18 +175,54 @@ function toggleTable(){
 				<td><?php echo $result['Nearest_MRT'] ?></td>
 				<td><?php echo $result['Bus_number'] ?></td>
 				<th><?php echo $result['PSLE_score'] ?></th>
-				<td>
-					<form method="POST" action="addToCompare.php">
-						<button name="compare" value="<?php echo $result['school_name'] ?>" class="btn btn-primary">Compare</button>
-					</form>
-					<form method="POST" action="addToFav.php">
-						<button name="favorite" value="<?php echo $result['school_name'] ?>" class="btn btn-success">Favorite</button>
-					</form>
+					<td style="text-align:center">
+
+          <?php
+
+            if(isset($_COOKIE['signed_in_id'])){
+
+              $fav_list = get_fav_list($_COOKIE['signed_in_id']);//return an array
+
+              if (!$fav_list) {
+
+                die('Invalid query: ' . mysql_error());
+
+              }
+
+            }
+
+
+
+            if(!in_array($result['school_name'] ,$_SESSION['clist'])){
+
+
+
+              echo '<form action="addToCompare.php" method="POST" style="display:inline">
+
+                <button name="compare" class="btn btn-primary" value="'.$result['school_name'].'">add to Comparison</button>
+
+              </form>';
+
+            }else if(in_array($result['school_name'],$_SESSION['clist'])){
+
+              echo '<form action="addToCompare.php" method="POST" style="display:inline">
+
+                <button name="remove" class="compare" value="'.$result['school_name'].'">remove from Comparison</button>
+
+              </form>';
+            }
+
+            if(in_array($result['school_name'],$fav_list)){ //display unfavourite button if in favourite list
+              echo '<form method="POST" action="addToFav.php" ><button name="unfavorite" value="'.$result['school_name'].'" class="btn btn-success">Unfavorite</button></form>';
+            }else { //display add to favourite button if not in favourite list
+              echo '<form method="POST" action="addToFav.php" ><button name="favorite" value="'.$result['school_name'].'" class="btn btn-success">Favorite</button></form>';
+            }
+          ?>
 				</td>
 			</tr>
 			<?php } ?>
 		</table>
-	<?php }?>
+	<?php } ?>
 </div>
 
 <script>

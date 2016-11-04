@@ -163,12 +163,31 @@ function toggleTable(){
 				<td><?php echo $result['Nearest_MRT'] ?></td>
 				<td><?php echo $result['Bus_number'] ?></td>
 				<td>
-					<form method="POST" action="addToCompare.php">
-						<button name="compare" value="<?php echo $result['University_name'] ?>" class="btn btn-primary">Compare</button>
-					</form>
-					<form method="POST" action="addToFav.php">
-						<button name="favorite" value="<?php echo $result['University_name'] ?>" class="btn btn-success">Favorite</button>
-					</form>
+					<?php 
+            $fav_list = get_fav_list($_COOKIE['signed_in_id']);//return an array
+            if (!$fav_list) {
+              die('Invalid query: ' . mysql_error());
+            }
+
+            if(!in_array($result['University_name'] ,$_SESSION['clist'])){
+
+              echo '<form action="addToCompare.php" method="POST" style="display:inline">
+                <button name="compare" class="btn btn-primary" value="'.$result['University_name'].'">Add to Comparison</button>
+              </form>';
+            }else if(in_array($result['University_name'],$_SESSION['clist'])){
+              echo '<form action="addToCompare.php" method="POST" style="display:inline">
+                <button name="remove" class="compare" value="'.$result['University_name'].'">Remove from Comparison</button>
+              </form>';
+            }
+
+            if(in_array($result['University_name'],$fav_list)){ //display unfavourite button if in favourite list
+              echo '<form method="POST" action="addToFav.php" ><button name="unfavorite" value="'.$result['University_name'].'" class="btn btn-success">Unfavorite</button></form>';
+
+            }else { //display add to favourite button if not in favourite list
+              echo '<form method="POST" action="addToFav.php" ><button name="favorite" value="'.$result['University_name'].'" class="btn btn-success">Favorite</button></form>';
+
+            }
+          ?>
 				</td>
 			</tr>
 			<?php } ?>

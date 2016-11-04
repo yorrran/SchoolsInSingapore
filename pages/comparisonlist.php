@@ -98,21 +98,23 @@ function compare()
 <div class="body1">
 <div class="body2">
 <div class="main_table">
-<table width="100%">
 <h1 align="center">School Compare</h1>
 <br>
 <span align="center"><img id="wait" style="display:none;margin-left:300px;" src="image/loading.gif"></span>
-
-	<tr>
-		<td width="10%"><a href="javascript:void(0)" onclick="compare();" style="color:blue;font-size:15px;"><b>Compare</b></a></td>
-		<td width="20%">School Logo</td>
-		<td width="20%">School Name</td>
-		<td width="20%">School Code</td>
-		<td width="20%">Details</td>
-		<td width="10%"></td>
-	</tr>
-	<?php
-		$fav_list = get_fav_list('user1');//return an array 
+<?php 
+	if(isset($_COOKIE['signed_in_id'])){
+		echo '
+		<table width="100%">
+		<tr>
+			<td width="10%"><a href="javascript:void(0)" onclick="compare();" style="color:blue;font-size:15px;"><b>Compare</b></a></td>
+			<td width="20%">School Logo</td>
+			<td width="20%">School Name</td>
+			<td width="20%">School Code</td>
+			<td width="20%">Details</td>
+			<td width="10%"></td>
+		</tr>';
+	
+		$fav_list = get_fav_list($_COOKIE['signed_in_id']);//return an array 
 		if (!$fav_list) {
 			die('Invalid query: ' . mysql_error());
 		}
@@ -152,13 +154,16 @@ function compare()
 				}
 			}
 		}
+		}
 		?>
 
 </table>
 <!-- used for the page number -->
 <?php
 //$sql = "SELECT * FROM gdn_schools";
-$rs_result = get_all_compare_list('user1'); //run the query
+if(isset($_COOKIE['signed_in_id'])){
+	$rs_result = get_all_compare_list($_COOKIE['signed_in_id']); //run the query
+
 //$total_records = mysqli_num_rows($rs_result);  //count number of records
 //$total_pages = ceil($total_records / $num_rec_per_page);
 if (isset($_SESSION['clist']))
@@ -174,7 +179,8 @@ for ($i=1; $i<=$total_pages; $i++) {
 }
 echo "<a href='comparisonlist.php?page=$total_pages'>".'>|'."</a> "; // Goto last page
 }
-
+}
+echo "<div align=\"center\">~~ The list is empty ~~</div>";
 
 ?>
 </div>

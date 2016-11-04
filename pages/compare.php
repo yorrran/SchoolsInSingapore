@@ -1,4 +1,4 @@
-<?php include('../backend/searchManager.php'); ?>
+<?php include_once('../backend/searchManager.php'); ?>
 <?php
 $type = trim($_REQUEST['type']);
 $res ='';
