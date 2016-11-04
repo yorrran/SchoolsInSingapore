@@ -19,7 +19,6 @@ function toggleTable(){
 	}
 }
 </script>
-
 <!-- Begin page content -->
 <div class="container">
 	<form form name="searchForm" action="iteSchool.php" method="get">
@@ -38,19 +37,17 @@ function toggleTable(){
 						<option value="Olevel/Nlevel">Olevel/Nlevel</option>
 					</select>
 				</td>
-
 				<td align="right" >
 					English Score
 				</td>
 				<td align="left">
 					<?php
 						if(isset($_GET['score'])){
-							echo '<input type="text" name="English_Score" onchange="ValidateNumber()" value="'.$_GET['English_Score'].'" required \>';
+							echo '<input type="text" name="English_Score" id="iteenglish" onchange="ValidateInput()" value="'.$_GET['English_Score'].'" required \>';
 						} else {
-							echo '<input type="text" name="English_Score" onchange="ValidateNumber()" value="" required \>';
+							echo '<input type="text" name="English_Score" id="iteenglish" onchange="ValidateInput()" value="" required \>';
 						}
 					?>
-
 				</td>
 			</tr>
 			<tr>
@@ -60,14 +57,13 @@ function toggleTable(){
 				<td align="left">
 					<?php
 						if(isset($_GET['Math_Score'])){
-							echo '<input type="text" name="Math_Score" onchange="ValidateNumber()" value="'.$_GET['Math_Score'].'"  \>';
+							echo '<input type="text" name="Math_Score" id="itemath" onchange="ValidateInput()" value="'.$_GET['Math_Score'].'"  \>';
 						} else {
-							echo '<input type="text" name="Math_Score" onchange="ValidateNumber()" required\>';
+							echo '<input type="text" name="Math_Score" id="itemath" onchange="ValidateInput()" required\>';
 						}
 					?>
 
 				</td>
-
 				<td align="right" >
 					With Grade 7 and Above
 				</td>
@@ -78,7 +74,6 @@ function toggleTable(){
 					</select>
 				</td>
 			</tr>
-
 			<tr align="center">
 				<td colspan=10>
 				<input type="submit" id="simple_submit" value="Submit" class="btn btn-default" \>
@@ -87,21 +82,22 @@ function toggleTable(){
 			</tr>
 		</table>
 		<table class="table table-striped" border="0" width="100%" id="advanced" style="display: none;">
-			<tr align="left">
+			<tr align="center">
 				<td colspan=10><h3>Advanced Search</h3></td>
 			</tr>
 			<tr>
 				<td align="right">Code: </td>
-				<td align="left" colspan=2><input type="textfield" name= "code" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "code" class="btn btn-default" size="10" id="primarycode" onchange="ValidateInput()" /></td>
 				<td align="right">MRT: </td>
-				<td align="left" colspan=2><input type="textfield" name= "MRT" class="btn btn-default  typeahead_mrt_name" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "MRT" class="btn btn-default typeahead_mrt_name" size="10" id="itemrt" onchange="ValidateInput()" /></td>
 				<td align="right">Bus: </td>
-				<td align="left" colspan=2><input type="textfield" name= "Bus" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "Bus" class="btn btn-default" size="10" id="primarybus" onchange="ValidateInput()" /></td>
+				<td align="center" co>Availability of Shuttle Bus <input type="checkbox" id="Shuttle_Bus"></td>
 			</tr>
 			<tr>
 			<td colspan=10 align="center">
-			<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
-			<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
+				<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
+				<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
 			</td>
 			</tr>
 		</table>

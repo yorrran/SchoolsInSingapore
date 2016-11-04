@@ -19,7 +19,6 @@ function toggleTable(){
 	}
 }
 </script>
-
 <!-- Begin page content -->
 <div class="container">
 	<form name="searchForm" action="polySchool.php" method="get">
@@ -28,18 +27,17 @@ function toggleTable(){
 				<td colspan=10><h1>Poly Search Page</h1></td>
 			</tr>
 			<tr>
-
 				<td align="right" >
 					Cut Off Point
 				</td>
 				<td align="left">
-					<input type="text" name="cut_off_point" onchange="ValidateNumber()" required \>
+					<input type="text" name="cut_off_point" id="polycof" onchange="ValidateInput()" required \>
 				</td>
 				<td align="right" >
 					area
 				</td>
 				<td align="left">
-					<input type="text" name="area" class="typeahead_area" \>
+					<input type="text" name="area" class="typeahead_area" id="polyarea" onchange="ValidateInput()" \>
 				</td>
 			</tr>
 			<tr>
@@ -47,14 +45,13 @@ function toggleTable(){
 					Course Cluster
 				</td>
 				<td align="left">
-					<input type="text" name="course_cluster" class="typeahead_course_cluster" />
+					<input type="text" name="course_cluster" class="typeahead_course_cluster" id="polyccluster" onchange="ValidateInput()" />
 				</td>
-
 				<td align="right" >
 					Course Title
 				</td>
 				<td align="left">
-					<input type="text" name="courseTitle" class="typeahead_courseTitle" />
+					<input type="text" name="courseTitle" class="typeahead_courseTitle" id="polyctitle" onchange="ValidateInput()" />
 				</td>
 			</tr>
 			<tr align="center">
@@ -65,21 +62,22 @@ function toggleTable(){
 			</tr>
 		</table>
 		<table class="table table-striped" border="0" width="100%" id="advanced" style="display: none;">
-			<tr align="left">
+			<tr align="center">
 				<td colspan=10><h3>Advanced Search</h3></td>
 			</tr>
 			<tr>
 				<td align="right">Code: </td>
-				<td align="left" colspan=2><input type="textfield" name="code" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "code" class="btn btn-default" size="10" id="polycode" onchange="ValidateInput()" /></td>
 				<td align="right">MRT: </td>
-				<td align="left" colspan=2><input type="textfield" name="mrt" class="btn btn-default typeahead_mrt_name" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "MRT" class="btn btn-default typeahead_mrt_name" size="10" id="polymrt" onchange="ValidateInput()" /></td>
 				<td align="right">Bus: </td>
-				<td align="left" colspan=2><input type="textfield" name="bus" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "Bus" class="btn btn-default" size="10" id="polybus" onchange="ValidateInput()" /></td>
+				<td align="center" co>Availability of Shuttle Bus <input type="checkbox" id="Shuttle_Bus"></td>
 			</tr>
 			<tr>
 			<td colspan=10 align="center">
-			<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
-			<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
+				<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
+				<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
 			</td>
 			</tr>
 		</table>

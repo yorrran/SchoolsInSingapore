@@ -19,7 +19,6 @@ function toggleTable(){
 	}
 }
 </script>
-
 <!-- Begin page content -->
 <div class="container">
 	<form form name="searchForm" action="university.php" method="get">
@@ -28,38 +27,33 @@ function toggleTable(){
 				<td colspan=10><h1>University Search Page</h1></td>
 			</tr>
 			<tr>
-
 				<td align="right" >
 					University Name
 				</td>
 				<td align="left">
 					<?php if(isset($_GET['university_name'])) { ?>
-					<input type="text" name="university_name" class="typeahead_university_name" value="<?php echo $_GET['university_name'] ?>" \>
+					<input type="text" name="university_name" class="typeahead_university_name" id="uniname" onchange="ValidateInput()" value="<?php echo $_GET['university_name'] ?>" \>
 					<?php }else { ?>
-					<input type="text" name="university_name" class="typeahead_university_name" value="" \>
+					<input type="text" name="university_name" class="typeahead_university_name" id="uniname" onchange="ValidateInput()" value="" \>
 					<?php } ?>
 				</td>
 			</tr>
 			<tr>
-
 				<td align="right">
 					Subjects
 				</td>
 				<td align="left">
 					<?php if(isset($_GET['course_name'])) { ?>
-					<input type="text" name="course_name" class="typeahead_course_name" value="<?php echo $_GET['course_name'] ?>" />
+					<input type="text" name="course_name" class="typeahead_course_name" id="unisubject" onchange="ValidateInput()" value="<?php echo $_GET['course_name'] ?>" />
 					<?php }else { ?>
-					<input type="text" name="course_name" class="typeahead_course_name" value="" />
+					<input type="text" name="course_name" class="typeahead_course_name" id="unisubject" onchange="ValidateInput()" value="" />
 					<?php } ?>
-
 				</td>
-
-
 				<td align="right" >
 					area
 				</td>
 				<td align="left">
-					<input type="text" name="area" class="typeahead_area_name" \>
+					<input type="text" name="area" class="typeahead_area_name" id="uniarea" onchange="ValidateInput()" \>
 				</td>
 			</tr>
 
@@ -71,21 +65,22 @@ function toggleTable(){
 			</tr>
 		</table>
 		<table class="table table-striped" border="0" width="100%" id="advanced" style="display: none;">
-			<tr align="left">
+			<tr align="center">
 				<td colspan=10><h3>Advanced Search</h3></td>
 			</tr>
 			<tr>
 				<td align="right">Code: </td>
-				<td align="left" colspan=2><input type="textfield" name="code" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "code" class="btn btn-default" size="10" id="unicode" onchange="ValidateInput()" /></td>
 				<td align="right">MRT: </td>
-				<td align="left" colspan=2><input type="textfield" name="mrt" class="btn btn-default typeahead_mrt_name " size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "MRT" class="btn btn-default typeahead_mrt_name" size="10" id="unimrt" onchange="ValidateInput()" /></td>
 				<td align="right">Bus: </td>
-				<td align="left" colspan=2><input type="textfield" name="bus" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "Bus" class="btn btn-default" size="10" id="unibus" onchange="ValidateInput()" /></td>
+				<td align="center" co>Availability of Shuttle Bus <input type="checkbox" id="Shuttle_Bus"></td>
 			</tr>
 			<tr>
 			<td colspan=10 align="center">
-			<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
-			<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
+				<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
+				<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
 			</td>
 			</tr>
 		</table>
@@ -235,5 +230,4 @@ $(document).ready(function()
 	});
 });
 </script>
-
 <?php include_once('../footer.php') ?>

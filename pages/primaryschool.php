@@ -31,9 +31,9 @@ function toggleTable(){
 				</td>
 				<td align="left" colspan=2>
 					<?php if(isset($_GET['area'])) { ?>
-					<input name="area" type="text" class="typeahead_area_name" value="<?php echo $_GET['area'];?>" />
+					<input name="area" type="text" class="typeahead_area_name" id="primaryarea" onchange="ValidateInput()" value="<?php echo $_GET['area'];?>" />
 					<?php } else {?>
-					<input name="area" type="text" class="typeahead_area_name" value="" />
+					<input name="area" type="text" class="typeahead_area_name" id="primaryarea" onchange="ValidateInput()" value="" />
 					<?php } ?>
 					<div name=""></div>
 				</td>
@@ -42,9 +42,9 @@ function toggleTable(){
 				</td>
 				<td align="left" colspan=2>
 					<?php if(isset($_GET['cca'])) { ?>
-					<input name="cca" type="text" class="typeahead_cca_name" value="<?php echo $_GET['cca']; ?>" />
+					<input name="cca" type="text" class="typeahead_cca_name" id="primarycca" onchange="ValidateInput()" value="<?php echo $_GET['cca']; ?>" />
 					<?php } else {?>
-					<input name="cca" type="text" class="typeahead_cca_name" value="" />
+					<input name="cca" type="text" class="typeahead_cca_name" id="primarycca" onchange="ValidateInput()" value="" />
 					<?php } ?>
 				</td>
 				<td align="right" colspan=1>
@@ -52,9 +52,9 @@ function toggleTable(){
 				</td>
 				<td align="left" colspan=3>
 					<?php if(isset($_GET['subjects'])) { ?>
-					<input name="subjects" type="text" class="=typeahead_subject_name" value="<?php echo $_GET['subjects'];?>" />
+					<input name="subjects" type="text" class="=typeahead_subject_name" id="primarysubject" onchange="ValidateInput()" value="<?php echo $_GET['subjects'];?>" />
 					<?php } else {?>
-					<input name="subjects" type="text" class="typeahead_subject_name" value="" />
+					<input name="subjects" type="text" class="typeahead_subject_name" id="primarysubject" onchange="ValidateInput()" value="" />
 					<?php } ?>
 				</td>
 				<tr>
@@ -74,11 +74,11 @@ function toggleTable(){
 				</tr>
 				<tr>
 					<td align="right">Code: </td>
-					<td align="left" colspan=2><input type="textfield" name= "code" class="btn btn-default" size="10" /></td>
+					<td align="left" colspan=2><input type="textfield" name= "code" class="btn btn-default" size="10" id="primarycode" onchange="ValidateInput()" /></td>
 					<td align="right">MRT: </td>
-					<td align="left" colspan=2><input type="textfield" name= "MRT" class="btn btn-default typeahead_mrt_name" size="10" /></td>
+					<td align="left" colspan=2><input type="textfield" name= "MRT" class="btn btn-default typeahead_mrt_name" size="10" id="primarymrt" onchange="ValidateInput()" /></td>
 					<td align="right">Bus: </td>
-					<td align="left" colspan=2><input type="textfield" name= "Bus" class="btn btn-default" size="10" /></td>
+					<td align="left" colspan=2><input type="textfield" name= "Bus" class="btn btn-default" size="10" id="primarybus" onchange="ValidateInput()" /></td>
 					<td align="center" co>Availability of Shuttle Bus <input type="checkbox" id="Shuttle_Bus"></td>
 				</tr>
 				<tr>

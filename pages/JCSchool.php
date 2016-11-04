@@ -19,7 +19,6 @@ function toggleTable(){
 	}
 }
 </script>
-
 <!-- Begin page content -->
 <div class="container">
 	<form form name="searchForm" action="JCSchool.php" method="get">
@@ -37,19 +36,17 @@ function toggleTable(){
 						<option value="science">science</option>
 					</select>
 				</td>
-
 				<td align="right" >
 					Minimum L1R5 score:
 				</td>
 				<td align="left">
 					<?php
 						if(isset($_GET['score'])){
-							echo '<input type="text" name="score" onchange="ValidateNumber()" value="'.$_GET['score'].'" required \>';
+							echo '<input type="text" name="score" id="jccop" onchange="ValidateInput()" value="'.$_GET['score'].'" required \>';
 						} else {
-							echo '<input type="text" name="score" onchange="ValidateNumber()" value="" required \>';
+							echo '<input type="text" name="score" id="jccop" onchange="ValidateInput()" value="" required \>';
 						}
 					?>
-
 				</td>
 			</tr>
 			<tr>
@@ -57,18 +54,17 @@ function toggleTable(){
 					area
 				</td>
 				<td align="left">
-					<input type="text" name="area" class="typeahead_area_name" \>
+					<input type="text" name="area" class="typeahead_area_name" id="jcarea" onchange="ValidateInput()" \>
 				</td>
-
 				<td align="right" colspan=1>
 					Subjects
 				</td>
 				<td align="left" colspan=3	>
 					<?php
 						if(isset($_GET['subjects'])){
-							echo '<input type="text" name="subject" class="typeahead_subject_name" value="'.$_GET['subjects'].'"  \>';
+							echo '<input type="text" name="subject" class="typeahead_subject_name" id="jcsubject" onchange="ValidateInput()" value="'.$_GET['subjects'].'"  \>';
 						} else {
-							echo '<input type="text" name="subject" class="typeahead_subject_name" \>';
+							echo '<input type="text" name="subject" class="typeahead_subject_name" id="jcsubject" onchange="ValidateInput()" \>';
 						}
 					?>
 				</td>
@@ -81,21 +77,22 @@ function toggleTable(){
 			</tr>
 		</table>
 		<table class="table table-striped" border="0" width="100%" id="advanced" style="display: none;">
-			<tr align="left">
+			<tr align="center">
 				<td colspan=10><h3>Advanced Search</h3></td>
 			</tr>
 			<tr>
 				<td align="right">Code: </td>
-				<td align="left" colspan=2><input type="textfield" name="code" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "code" class="btn btn-default" size="10" id="jccode" onchange="ValidateInput()" /></td>
 				<td align="right">MRT: </td>
-				<td align="left" colspan=2><input type="textfield" name="mrt" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "MRT" class="btn btn-default typeahead_mrt_name" size="10" id="jcmrt" onchange="ValidateInput()" /></td>
 				<td align="right">Bus: </td>
-				<td align="left" colspan=2><input type="textfield" name="bus" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "Bus" class="btn btn-default" size="10" id="jcbus" onchange="ValidateInput()" /></td>
+				<td align="center" co>Availability of Shuttle Bus <input type="checkbox" id="Shuttle_Bus"></td>
 			</tr>
 			<tr>
 			<td colspan=10 align="center">
-			<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
-			<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
+				<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
+				<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
 			</td>
 			</tr>
 		</table>
@@ -169,7 +166,7 @@ function toggleTable(){
 
 				if(!in_array($result['school_name'], $_SESSION['clist'])){
 					echo '<form action="addToCompare.php" method="POST" style="display:inline">
-					<button name="compare" class="btn btn-primary" value="'.$result['school_name'].'">add to Comparison</button>
+					<button name="compare" class="btn btn-jc" value="'.$result['school_name'].'">add to Comparison</button>
 					</form>';
 				}else if(in_array($result['school_name'],$_SESSION['clist'])){
 					echo '<form action="addToCompare.php" method="POST" style="display:inline">

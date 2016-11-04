@@ -34,7 +34,6 @@ function toggleTable(){
 						<option value="min">minimum score</option>
 					</select>
 				</td>
-
 				<td align="right" >
 					category
 				</td>
@@ -49,7 +48,7 @@ function toggleTable(){
 					score
 				</td>
 				<td align="left">
-					<input type="text" name="score" onchange="ValidateNumber()" required \>
+					<input type="text" name="score" id="secondaryscore" onchange="ValidateInput()" required \>
 				</td>
 			</tr>
 			<tr>
@@ -57,19 +56,19 @@ function toggleTable(){
 					area
 				</td>
 				<td align="left">
-					<input type="text" name="area" class="typeahead_area_name" \>
+					<input type="text" name="area" class="typeahead_area_name" id="secondaryarea" onchange="ValidateInput()" \>
 				</td>
 				<td align="right" >
 					cca
 				</td>
 				<td align="left">
-					<input type="text" name="cca" class="typeahead_cca_name"\>
+					<input type="text" name="cca" class="typeahead_cca_name" id="secondarycca" onchange="ValidateInput()" \>
 				</td>
 				<td align="right" colspan=1>
 					Subjects
 				</td>
 				<td align="left" colspan=3	>
-					<input type="text" name="subjects" class="typeahead_subject_name" />
+					<input type="text" name="subjects" class="typeahead_subject_name" id="secondarysubject" onchange="ValidateInput()" />
 				</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
@@ -87,18 +86,18 @@ function toggleTable(){
 			</tr>
 			<tr>
 				<td align="right">Code: </td>
-				<td align="left" colspan=2><input type="textfield" name= "code" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "code" class="btn btn-default" size="10" id="secondarycode" onchange="ValidateInput()" /></td>
 				<td align="right">MRT: </td>
-				<td align="left" colspan=2><input type="textfield" name= "MRT"  class="btn btn-default typeahead_mrt_name" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "MRT" class="btn btn-default typeahead_mrt_name" size="10" id="secondarymrt" onchange="ValidateInput()" /></td>
 				<td align="right">Bus: </td>
-				<td align="left" colspan=2><input type="textfield" name= "Bus"  class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "Bus" class="btn btn-default" size="10" id="secondarybus" onchange="ValidateInput()" /></td>
 				<td align="center" co>Availability of Shuttle Bus <input type="checkbox" id="Shuttle_Bus"></td>
 			</tr>
 			<tr>
-				<td colspan=10 align="center">
-					<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
-					<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
-				</td>
+			<td colspan=10 align="center">
+				<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
+				<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
+			</td>
 			</tr>
 		</table>
 	</form>
