@@ -4,7 +4,7 @@
 <script>
 function toggleTable(){
 	if(document.getElementById("advanced").style.display == "none"){ //show
-		document.getElementById("advanced").style.display = "block";
+		document.getElementById("advanced").style.display = "";
 		document.getElementById("advanced_submit").style.display = "inline";
 		document.getElementById("simple_submit").style.display = "none";
 		document.getElementById("ShowBtn").style.display = "none";
@@ -15,7 +15,6 @@ function toggleTable(){
 		document.getElementById("simple_submit").style.display = "inline";
 		document.getElementById("ShowBtn").style.display = "inline";
 		document.getElementById("HideBtn").style.display = "none";
-
 	}
 }
 </script>
@@ -76,10 +75,10 @@ function toggleTable(){
 				<td>&nbsp;</td>
 			</tr>
 			<tr align="center">
-				<td colspan=10>
-				<input type="submit" value="Submit" class="btn btn-default" \>
-				<input type="button" id="ShowBtn" onclick="toggleTable();" value="Show Advanced Settings" class="btn btn-default" />
-				</td>
+			<td colspan=10 align="center">
+			<input type="submit" id="simple_submit" value="Submit" class="btn btn-default" />
+			<input type="button" id="ShowBtn" onclick="toggleTable();" value="Show Advanced Settings" class="btn btn-default" />
+			</td>
 			</tr>
 		</table>
 		<table class="table table-striped" border="0" width="100%" id="advanced" style="display: none;">
@@ -146,7 +145,7 @@ function toggleTable(){
 		//TODO: Display no search input
 		if(empty($_GET['type'])&&empty($_GET['category'])&&empty($_GET['score'])&& empty($_GET['area'])&&empty($_GET['cca'])&& empty($_GET['subjects'])&&empty($_GET['Bus'])&& empty($_GET['ShuttleBus'])){
 			echo "No Search Result";
- 
+
 		} else {
 		$results = searchSecondarySchool($type,$category,$score,$area,$cca,$subjects,$MRT, $Bus, $ShuttleBus);
 	?>

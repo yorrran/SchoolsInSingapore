@@ -5,7 +5,7 @@
 <script>
 function toggleTable(){
 	if(document.getElementById("advanced").style.display == "none"){ //show
-		document.getElementById("advanced").style.display = "block";
+		document.getElementById("advanced").style.display = "";
 		document.getElementById("advanced_submit").style.display = "inline";
 		document.getElementById("simple_submit").style.display = "none";
 		document.getElementById("ShowBtn").style.display = "none";
@@ -16,7 +16,6 @@ function toggleTable(){
 		document.getElementById("simple_submit").style.display = "inline";
 		document.getElementById("ShowBtn").style.display = "inline";
 		document.getElementById("HideBtn").style.display = "none";
-
 	}
 }
 </script>
@@ -43,14 +42,14 @@ function toggleTable(){
 					Minimum L1R5 score:
 				</td>
 				<td align="left">
-					<?php 
+					<?php
 						if(isset($_GET['score'])){
 							echo '<input type="text" name="score" value="'.$_GET['score'].'" required \>';
 						} else {
 							echo '<input type="text" name="score" value="" required \>';
-						} 
+						}
 					?>
-					
+
 				</td>
 			</tr>
 			<tr>
@@ -60,17 +59,17 @@ function toggleTable(){
 				<td align="left">
 					<input type="text" name="area" class="typeahead_area_name" \>
 				</td>
-				
+
 				<td align="right" colspan=1>
 					Subjects
 				</td>
 				<td align="left" colspan=3	>
-					<?php 
+					<?php
 						if(isset($_GET['subjects'])){
 							echo '<input type="text" name="subject" class="typeahead_subject_name" value="'.$_GET['subjects'].'"  \>';
 						} else {
 							echo '<input type="text" name="subject" class="typeahead_subject_name" \>';
-						} 
+						}
 					?>
 				</td>
 			</tr>
@@ -127,7 +126,7 @@ function toggleTable(){
 	if( isset($_GET['mrt'])){
 		$mrt = $_GET['mrt'];
 	}
-	if( isset($_GET['area']) || isset($_GET['subject']) || isset($_GET['type']) || isset($_GET['score']) || 
+	if( isset($_GET['area']) || isset($_GET['subject']) || isset($_GET['type']) || isset($_GET['score']) ||
 		isset($_GET['code']) || isset($_GET['bus']) || isset($_GET['mrt']))
 	{
 
@@ -137,8 +136,8 @@ function toggleTable(){
 			echo "No search Result";
 		} else {
 		   $results = searchJC($area, $subject, $type, $score,$mrt,$bus,$code);
-	     ?>	
-		
+	     ?>
+
 
 		<table class="table table-striped table-bordered secondaryTable" >
 			<tr>
@@ -174,13 +173,13 @@ function toggleTable(){
 					</form>
 					-->
 					<?php
-						$fav_list = get_fav_list('user1');//return an array 
+						$fav_list = get_fav_list('user1');//return an array
 						if (!$fav_list) {
 							die('Invalid query: ' . mysql_error());
 						}
-						
+
 						if(!in_array($result['school_name'] ,$_SESSION['clist'])){
-							
+
 							echo '<form action="addToCompare.php" method="POST" style="display:inline">
 								<button name="compare" class="btn btn-primary" value="'.$result['school_name'].'">Add to Comparison</button>
 							</form>';
@@ -189,11 +188,11 @@ function toggleTable(){
 								<button name="remove" class="compare" value="'.$result['school_name'].'">Remove from Comparison</button>
 							</form>';
 						}
-						
-						if(in_array($result['school_name'],$fav_list)){ //display unfavourite button if in favourite list			
+
+						if(in_array($result['school_name'],$fav_list)){ //display unfavourite button if in favourite list
 							echo '<form method="POST" action="addToFav.php" ><button name="unfavorite" value="'.$result['school_name'].'" class="btn btn-success">Unfavorite</button></form>';
 
-						}else { //display add to favourite button if not in favourite list 
+						}else { //display add to favourite button if not in favourite list
 							echo '<form method="POST" action="addToFav.php" ><button name="favorite" value="'.$result['school_name'].'" class="btn btn-success">Favorite</button></form>';
 
 						}

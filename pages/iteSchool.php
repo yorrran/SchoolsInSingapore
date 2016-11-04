@@ -5,7 +5,7 @@
 <script>
 function toggleTable(){
 	if(document.getElementById("advanced").style.display == "none"){ //show
-		document.getElementById("advanced").style.display = "block";
+		document.getElementById("advanced").style.display = "";
 		document.getElementById("advanced_submit").style.display = "inline";
 		document.getElementById("simple_submit").style.display = "none";
 		document.getElementById("ShowBtn").style.display = "none";
@@ -16,7 +16,6 @@ function toggleTable(){
 		document.getElementById("simple_submit").style.display = "inline";
 		document.getElementById("ShowBtn").style.display = "inline";
 		document.getElementById("HideBtn").style.display = "none";
-
 	}
 }
 </script>
@@ -44,14 +43,14 @@ function toggleTable(){
 					English Score
 				</td>
 				<td align="left">
-					<?php 
+					<?php
 						if(isset($_GET['score'])){
 							echo '<input type="text" name="English_Score" value="'.$_GET['English_Score'].'" required \>';
 						} else {
 							echo '<input type="text" name="English_Score" value="" required \>';
-						} 
+						}
 					?>
-					
+
 				</td>
 			</tr>
 			<tr>
@@ -59,16 +58,16 @@ function toggleTable(){
 					Math Score
 				</td>
 				<td align="left">
-					<?php 
+					<?php
 						if(isset($_GET['Math_Score'])){
 							echo '<input type="text" name="Math_Score" value="'.$_GET['Math_Score'].'"  \>';
 						} else {
 							echo '<input type="text" name="Math_Score" required\>';
-						} 
+						}
 					?>
-					
+
 				</td>
-				
+
 				<td align="right" >
 					With Grade 7 and Above
 				</td>
@@ -77,7 +76,7 @@ function toggleTable(){
 						<option value="twoSubject">Two Subject</option>
 						<option value="oneSubject">One Subject</option>
 					</select>
-				</td>	
+				</td>
 			</tr>
 
 			<tr align="center">
@@ -134,7 +133,7 @@ function toggleTable(){
 	if( isset($_GET['code'])){
 		$code = $_GET['code'];
 	}
-	
+
 	if( isset($_GET['English_Score']) || isset($_GET['Math_Score']) ||isset($_GET['certification']) ||isset($_GET['subject'])|| isset($_GET['bus']) || isset($_GET['mrt'])||isset($_GET['code']))
 	{
 

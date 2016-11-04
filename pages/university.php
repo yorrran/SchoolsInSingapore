@@ -5,7 +5,7 @@
 <script>
 function toggleTable(){
 	if(document.getElementById("advanced").style.display == "none"){ //show
-		document.getElementById("advanced").style.display = "block";
+		document.getElementById("advanced").style.display = "";
 		document.getElementById("advanced_submit").style.display = "inline";
 		document.getElementById("simple_submit").style.display = "none";
 		document.getElementById("ShowBtn").style.display = "none";
@@ -16,7 +16,6 @@ function toggleTable(){
 		document.getElementById("simple_submit").style.display = "inline";
 		document.getElementById("ShowBtn").style.display = "inline";
 		document.getElementById("HideBtn").style.display = "none";
-
 	}
 }
 </script>
@@ -31,7 +30,7 @@ function toggleTable(){
 			<tr>
 
 				<td align="right" >
-					University Name 
+					University Name
 				</td>
 				<td align="left">
 					<?php if(isset($_GET['university_name'])) { ?>
@@ -42,7 +41,7 @@ function toggleTable(){
 				</td>
 			</tr>
 			<tr>
-				
+
 				<td align="right">
 					Subjects
 				</td>
@@ -52,7 +51,7 @@ function toggleTable(){
 					<?php }else { ?>
 					<input type="text" name="course_name" class="typeahead_course_name" value="" />
 					<?php } ?>
-					
+
 				</td>
 
 
@@ -123,7 +122,7 @@ function toggleTable(){
 		isset($_GET['code']) || isset($_GET['bus']) || isset($_GET['mrt']))
 	{
 
-		if(!empty($_GET['course_name']) || !empty($_GET['location']) || !empty($_GET['university_name']) || 
+		if(!empty($_GET['course_name']) || !empty($_GET['location']) || !empty($_GET['university_name']) ||
 			!empty($_GET['code']) || !empty($_GET['bus']) || !empty($_GET['mrt'])){
 
 

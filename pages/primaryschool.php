@@ -3,7 +3,7 @@
 <script>
 function toggleTable(){
 	if(document.getElementById("advanced").style.display == "none"){ //show
-		document.getElementById("advanced").style.display = "block";
+		document.getElementById("advanced").style.display = "";
 		document.getElementById("advanced_submit").style.display = "inline";
 		document.getElementById("simple_submit").style.display = "none";
 		document.getElementById("ShowBtn").style.display = "none";
@@ -14,7 +14,6 @@ function toggleTable(){
 		document.getElementById("simple_submit").style.display = "inline";
 		document.getElementById("ShowBtn").style.display = "inline";
 		document.getElementById("HideBtn").style.display = "none";
-
 	}
 }
 </script>
@@ -25,7 +24,7 @@ function toggleTable(){
 			<tr align="center" >
 				<td colspan=10><h1>Primary School Search Page</h1></td>
 			</tr>
-			
+
 			<tr>
 				<td align="right" colspan=1>
 					area
@@ -66,27 +65,29 @@ function toggleTable(){
 				</tr>
 			</tr>
 		</table>
-		
+
 <!-- advanced search -->
 		<table class="table table-striped" border="0" width="100%" id="advanced" style="display: none;">
-			<tr align="center">
-				<td colspan=10><h3>Advanced Search</h3></td>
-			</tr>
-			<tr>
-				<td align="right">Code: </td>
-				<td align="left" colspan=2><input type="textfield" class="btn btn-default" size="10" /></td>
-				<td align="right">MRT: </td>
-				<td align="left" colspan=2><input type="textfield" class="btn btn-default" size="10" /></td>
-				<td align="right">Bus: </td>
-				<td align="left" colspan=2><input type="textfield" class="btn btn-default" size="10" /></td>
-				<td align="center" co>Availability of Shuttle Bus <input type="checkbox" id="Shuttle_Bus"></td>
-			</tr>
-			<tr>
-			<td colspan=10 align="center">
-			<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
-			<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
-			</td>
-			</tr>
+			<div class="center-block">
+				<tr align="center">
+					<td colspan=10><h3>Advanced Search</h3></td>
+				</tr>
+				<tr>
+					<td align="right">Code: </td>
+					<td align="left" colspan=2><input type="textfield" class="btn btn-default" size="10" /></td>
+					<td align="right">MRT: </td>
+					<td align="left" colspan=2><input type="textfield" class="btn btn-default" size="10" /></td>
+					<td align="right">Bus: </td>
+					<td align="left" colspan=2><input type="textfield" class="btn btn-default" size="10" /></td>
+					<td align="center" co>Availability of Shuttle Bus <input type="checkbox" id="Shuttle_Bus"></td>
+				</tr>
+				<tr>
+				<td colspan=10 align="center">
+					<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
+					<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
+				</td>
+				</tr>
+			</div>
 		</table>
 	</form>
 	<?php
@@ -120,7 +121,7 @@ function toggleTable(){
 
 			echo "No Search Result";
 
-		//TODO: Display no search input 
+		//TODO: Display no search input
 
 		} else {
 		$results = searchPrimarySchool($area, $cca, $subject, $MRT, $Bus, $ShuttleBus);
@@ -152,16 +153,16 @@ function toggleTable(){
 				<td><?php echo $result['school_website'] ?></td>
 				<td><?php echo $result['Nearest_MRT'] ?></td>
 				<td><?php echo $result['Bus_number'] ?></td>
-				
+
 				<td style="text-align:center">
 					<?php
-						$fav_list = get_fav_list('user1');//return an array 
+						$fav_list = get_fav_list('user1');//return an array
 						if (!$fav_list) {
 							die('Invalid query: ' . mysql_error());
 						}
-						
+
 						if(!in_array($result['school_name'] ,$_SESSION['clist'])){
-							
+
 							echo '<form action="addToCompare.php" method="POST" style="display:inline">
 								<button name="compare" class="btn btn-primary" value="'.$result['school_name'].'">add to Comparison</button>
 							</form>';
@@ -170,11 +171,11 @@ function toggleTable(){
 								<button name="remove" class="compare" value="'.$result['school_name'].'">remove from Comparison</button>
 							</form>';
 						}
-						
-						if(in_array($result['school_name'],$fav_list)){ //display unfavourite button if in favourite list			
+
+						if(in_array($result['school_name'],$fav_list)){ //display unfavourite button if in favourite list
 							echo '<form method="POST" action="addToFav.php" ><button name="unfavorite" value="'.$result['school_name'].'" class="btn btn-success">Unfavorite</button></form>';
 
-						}else { //display add to favourite button if not in favourite list 
+						}else { //display add to favourite button if not in favourite list
 							echo '<form method="POST" action="addToFav.php" ><button name="favorite" value="'.$result['school_name'].'" class="btn btn-success">Favorite</button></form>';
 
 						}

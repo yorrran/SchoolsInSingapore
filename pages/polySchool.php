@@ -5,7 +5,7 @@
 <script>
 function toggleTable(){
 	if(document.getElementById("advanced").style.display == "none"){ //show
-		document.getElementById("advanced").style.display = "block";
+		document.getElementById("advanced").style.display = "";
 		document.getElementById("advanced_submit").style.display = "inline";
 		document.getElementById("simple_submit").style.display = "none";
 		document.getElementById("ShowBtn").style.display = "none";
@@ -16,7 +16,6 @@ function toggleTable(){
 		document.getElementById("simple_submit").style.display = "inline";
 		document.getElementById("ShowBtn").style.display = "inline";
 		document.getElementById("HideBtn").style.display = "none";
-
 	}
 }
 </script>
@@ -50,7 +49,7 @@ function toggleTable(){
 				<td align="left">
 					<input type="text" name="course_cluster" class="typeahead_course_cluster" />
 				</td>
-				
+
 				<td align="right" >
 					Course Title
 				</td>
@@ -108,10 +107,10 @@ function toggleTable(){
 	if( isset($_GET['mrt'])){
 		$mrt = $_GET['mrt'];
 	}
-	if( isset($_GET['area']) || isset($_GET['course_cluster']) || isset($_GET['courseTitle']) || isset($_GET['cut_off_point']) || 
+	if( isset($_GET['area']) || isset($_GET['course_cluster']) || isset($_GET['courseTitle']) || isset($_GET['cut_off_point']) ||
 		isset($_GET['code']) || isset($_GET['bus']) || isset($_GET['mrt']))
 	{
-		if(!empty($_GET['area']) || !empty($_GET['course_cluster']) || !empty($_GET['courseTitle']) || !empty($_GET['cut_off_point']) || 
+		if(!empty($_GET['area']) || !empty($_GET['course_cluster']) || !empty($_GET['courseTitle']) || !empty($_GET['cut_off_point']) ||
 			!empty($_GET['code']) || !empty($_GET['bus']) || !empty($_GET['mrt'])){
 
 		$results = searchPoly($area, $course_cluster, $courseTitle, $score, $mrt, $bus, $code);
@@ -166,7 +165,7 @@ $(document).ready(function()
 	var area = [<?php echo $poly_typeahead['area'];?>];
 	var course_cluster = [<?php echo $poly_typeahead['course_cluster'];?>];
 	var courseTitle = [<?php echo $poly_typeahead['courseTitle'];?>];
-	
+
 	$('.typeahead_area').typeahead({
 		hint: true,
 		highlight: true,
