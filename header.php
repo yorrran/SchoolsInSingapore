@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 session_start();
-include_once('backend/listGenerator.php') ?>
+include_once('backend/listGenerator.php'); ?>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -32,12 +32,12 @@ include_once('backend/listGenerator.php') ?>
             highlight: true,
             minLength: 1
         },{
-            name: 'secondary',
+            name: 'schoolName',
             source: substringMatcher(schoolName)
         });
 
     });
-	
+
 	function isEmpty(){
 		var school_name = document.getElementById("school_name");
 		if(school_name.value == ""){
