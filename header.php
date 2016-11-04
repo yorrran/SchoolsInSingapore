@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php 
+session_start();
+include_once('backend/listGenerator.php') ?>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -20,21 +23,21 @@
 	<script src="js/typeahead.js/typeahead.bundle.min.js"></script>
 	<script src="js/typeahead.js/typeahead.jquery.min.js"></script>
 	<script src="js/script.js"></script>
-	<script>
-	$(document).ready(function(){
-		var schoolName = ['anglican high school','ang mo kio secondary school', 'admiralty secondary school', 'ahmad ibrahim secondary school', 'anderson secondary school', 'alexandra primary school'];
+    <script>
+    $(document).ready(function(){
+        var schoolName = [<?php echo $schools_typeahead['school_name']; ?>];
 
-		$('.typeahead_schoolName').typeahead({
-			hint: true,
-			highlight: true,
-			minLength: 1
-		},{
-			name: 'secondary',
-			source: substringMatcher(schoolName)
-		});
+        $('.typeahead_schoolName').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        },{
+            name: 'secondary',
+            source: substringMatcher(schoolName)
+        });
 
-	});
-	</script>
+    });
+    </script>
 </head>
 <body><!-- Fixed navbar -->
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -51,14 +54,15 @@
                     <ul class="dropdown-menu">
                         <li><a href="pages/primaryschool.php">Primary School</a></li>
                         <li><a href="pages/secondaryschool.php">Secondary School</a></li>
-                        <li><a href="pages/poly.php">Polytechnic</a></li>
-                        <li><a href="pages/uni.php">University</a></li>
+                        <li><a href="pages/polySchool.php">Polytechnic</a></li>
+                        <li><a href="pages/JCSchool.php">Junior College</a></li>
+                        <li><a href="pages/university.php">University</a></li>
                     </ul>
                 </li>
 		<li><a href="pages/comparisonlist.php">Comparison List</a></li>
                 <li><a href="pages/forum.php">Forum</a></li>
                 <?php
-                session_start();
+                
                 if (isset($_COOKIE['signed_in_id']))
                 {
                     echo '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">' . $_COOKIE['signed_in_id'] . '<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="pages/favlist.php">Favourite List</a></li><li><a href="backend/logoutManager.php">Logout</a></li></ul></li>';

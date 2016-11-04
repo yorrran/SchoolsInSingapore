@@ -57,15 +57,10 @@ function toggleTable(){
 
 
 				<td align="right" >
-					Location
+					area
 				</td>
 				<td align="left">
-					<?php if(isset($_GET['location'])) { ?>
-					<input type="text" name="location" class="typeahead_location" value="<?php echo $_GET['location'] ?>" />
-					<?php }else { ?>
-					<input type="text" name="location" class="typeahead_location" value="" />
-					<?php } ?>
-					
+					<input type="text" name="area" class="typeahead_area_name" \>
 				</td>
 			</tr>
 
@@ -103,6 +98,7 @@ function toggleTable(){
 	$code = "";
 	$bus = "";
 	$mrt = "";
+	$school_name="";
 
 	if(isset($_GET['course_name'])){
 		$course_name = $_GET['course_name'];
@@ -168,10 +164,10 @@ function toggleTable(){
 				<td><?php echo $result['Bus_number'] ?></td>
 				<td>
 					<form method="POST" action="addToCompare.php">
-						<button name="compare" value="<?php echo $result['school_name'] ?>" class="btn btn-primary">Compare</button>
+						<button name="compare" value="<?php echo $result['University_name'] ?>" class="btn btn-primary">Compare</button>
 					</form>
 					<form method="POST" action="addToFav.php">
-						<button name="favorite" value="<?php echo $result['school_name'] ?>" class="btn btn-success">Favorite</button>
+						<button name="favorite" value="<?php echo $result['University_name'] ?>" class="btn btn-success">Favorite</button>
 					</form>
 				</td>
 			</tr>
@@ -186,6 +182,7 @@ $(document).ready(function()
 {
 	var university_name = [<?php echo $uni_typeahead['university_name']; ?>];
 	var course_name = [<?php echo $uni_typeahead['course_name']; ?>];
+	var area_name = [<?php echo $area_typeahead['area']; ?>];
 
 	$('.typeahead_university_name').typeahead({
 		hint: true,
@@ -203,6 +200,14 @@ $(document).ready(function()
 	},{
 		name: 'course_name',
 		source: substringMatcher(course_name)
+	});
+	$('.typeahead_area_name').typeahead({
+		hint: true,
+		highlight: true,
+		minLength: 1
+	},{
+		name: 'area_name',
+		source: substringMatcher(area_name)
 	});
 });
 </script>

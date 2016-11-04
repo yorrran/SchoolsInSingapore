@@ -1,5 +1,4 @@
 <?php include_once('header.php') ?>
-<?php include_once('../backend/searchManager.php') ?>
 <?php include_once('../backend/listGenerator.php') ?>
 <script>
 function toggleTable(){
@@ -26,19 +25,16 @@ function toggleTable(){
 			<tr align="center" >
 				<td colspan=10><h1>Primary School Search Page</h1></td>
 			</tr>
-			<tr>
-				<td align="right" colspan=1>School Name: </td>
-				<td align="left" colspan=9><input type="textfield" /></td>
-			</tr>
+			
 			<tr>
 				<td align="right" colspan=1>
 					area
 				</td>
 				<td align="left" colspan=2>
 					<?php if(isset($_GET['area'])) { ?>
-					<input name="area" type="text" class="typeahead_area" value="<?php echo $_GET['area'];?>" />
+					<input name="area" type="text" class="typeahead_area_name" value="<?php echo $_GET['area'];?>" />
 					<?php } else {?>
-					<input name="area" type="text" class="typeahead_area" value="" />
+					<input name="area" type="text" class="typeahead_area_name" value="" />
 					<?php } ?>
 					<div name=""></div>
 				</td>
@@ -47,9 +43,9 @@ function toggleTable(){
 				</td>
 				<td align="left" colspan=2>
 					<?php if(isset($_GET['cca'])) { ?>
-					<input name="cca" type="text" class="typeahead_cca" value="<?php echo $_GET['cca']; ?>" />
+					<input name="cca" type="text" class="typeahead_cca_name" value="<?php echo $_GET['cca']; ?>" />
 					<?php } else {?>
-					<input name="cca" type="text" class="typeahead_cca" value="" />
+					<input name="cca" type="text" class="typeahead_cca_name" value="" />
 					<?php } ?>
 				</td>
 				<td align="right" colspan=1>
@@ -57,9 +53,9 @@ function toggleTable(){
 				</td>
 				<td align="left" colspan=3>
 					<?php if(isset($_GET['subjects'])) { ?>
-					<input name="subjects" type="text" class="=typeahead_subject" value="<?php echo $_GET['subjects'];?>" />
+					<input name="subjects" type="text" class="=typeahead_subject_name" value="<?php echo $_GET['subjects'];?>" />
 					<?php } else {?>
-					<input name="subjects" type="text" class="typeahead_subject" value="" />
+					<input name="subjects" type="text" class="typeahead_subject_name" value="" />
 					<?php } ?>
 				</td>
 				<tr>
@@ -70,13 +66,11 @@ function toggleTable(){
 				</tr>
 			</tr>
 		</table>
+		
+<!-- advanced search -->
 		<table class="table table-striped" border="0" width="100%" id="advanced" style="display: none;">
-			<tr align="left">
+			<tr align="center">
 				<td colspan=10><h3>Advanced Search</h3></td>
-			</tr>
-			<tr>
-				<td align="right" colspan=1>Achievements: </td>
-				<td align="left" colspan=9><input type="textfield" class="btn btn-default" size="140" /></td>
 			</tr>
 			<tr>
 				<td align="right">Code: </td>
@@ -96,12 +90,12 @@ function toggleTable(){
 		</table>
 	</form>
 	<?php
-	$area=" ";
-	$cca=" ";
-	$subjects=" ";
-	$MRT=" ";
-	$Bus=" ";
-	$ShuttleBus=" ";
+	$area="";
+	$cca="";
+	$subjects="";
+	$MRT="";
+	$Bus="";
+	$ShuttleBus="";
 	if(isset($_GET['area'])){
 		$area = $_GET['area'];
 	}
@@ -124,39 +118,42 @@ function toggleTable(){
 	{
 		if(empty($_GET['area'])&&empty($_GET['cca'])&&empty($_GET['subjects'])&& empty($_GET['MRT'])&&empty($_GET['Bus'])&& empty($_GET['ShuttleBus'])){
 
+			echo "No Search Result";
+
 		//TODO: Display no search input 
 
 		} else {
 		$results = searchPrimarySchool($area, $cca, $subject, $MRT, $Bus, $ShuttleBus);
 		?>
-		<table id="sortabletable" class="table table-striped table-bordered secondaryTable sortable" width="100%" >
+<!-- end of advanced search -->
+</div>
+<div align="center">
+		<table id="sortabletable" class="table table-striped table-bordered secondaryTable sortable" width="100%">
 			<tr>
-				<th width="10%">Name</th>
-				<th width="10%">Type</th>
-				<th width="15%">area</th>
-				<th width="15%">location</th>
-				<th width="10%">Telephone</th>
-				<th width="10%">Email</th>
-				
-				<th width="10%">PLSE Score</th>
-				<th width="20%">List</th>
+				<th>Name</th>
+				<th>Location</th>
+				<th>Area</th>
+				<th>Telephone</th>
+				<th>Email</th>
+				<th>Website</th>
+				<th>Nearest MRT</th>
+				<th>Bus</th>
+				<th>Options</th>
 			</tr>
 			<?php foreach ($results as $result){ ?>
 			<tr>
 				<td>
 					<a href="IndividualSchool.php?school_name=<?php echo $result['school_name']?>" ><?php echo $result['school_name'] ?></a>
 				</td>
-				<td><?php echo $result['school_type'] ?></td>
-				<td><?php echo $result['school_area'] ?></td>
 				<td><?php echo $result['school_location'] ?></td>
+				<td><?php echo $result['school_area'] ?></td>
 				<td><?php echo $result['school_telephone'] ?></td>
 				<td><?php echo $result['school_email'] ?></td>
+				<td><?php echo $result['school_website'] ?></td>
+				<td><?php echo $result['Nearest_MRT'] ?></td>
+				<td><?php echo $result['Bus_number'] ?></td>
 				
-				<td><?php ?></td>
 				<td style="text-align:center">
-					<!--<form method="POST" action="addToCompare.php" style="display:inline">
-						<button name="compare" value="<?php echo $result['school_name'] ?>" class="btn btn-primary">Compare</button>
-					</form>-->
 					<?php
 						$fav_list = get_fav_list('user1');//return an array 
 						if (!$fav_list) {
@@ -182,11 +179,6 @@ function toggleTable(){
 
 						}
 					?>
-					<!--
-					<form method="POST" action="addToFav.php" style="display:inline">
-						<button name="favorite" value="<?php echo $result['school_name'] ?>" class="btn btn-success">Favorite</button>
-					</form>
-					-->
 				</td>
 			</tr>
 			<?php } ?>
@@ -195,37 +187,37 @@ function toggleTable(){
 </div>
 
 <script>
+
 $(document).ready(function()
 {
-	var area = [<?php if (strpos($area, "'") !== FALSE) echo $area; else echo "'".$area."'"; ?>];
-	var cca = [<?php if (strpos($cca_options, "'") !== FALSE) echo $cca_options; else echo "'".$cca_options."'"; ?>];
-	var subject = [<?php if (strpos($subject_name , "'") !== FALSE) echo $subject_name ; else echo "'".$subject_name ."'"; ?>];
+	var cca_name = [<?php echo $cca_typeahead['cca_options']; ?>];
+	var subject_name = [<?php echo $subject_typeahead['subjects']; ?>];
+	var area_name = [<?php echo $area_typeahead['area']; ?>];
 
-	$('.typeahead_area').typeahead({
+	$('.typeahead_cca_name').typeahead({
 		hint: true,
 		highlight: true,
 		minLength: 1
 	},{
-		name: 'secondary',
-		source: substringMatcher(area)
+		name: 'cca_name',
+		source: substringMatcher(cca_name)
 	});
 
-	$('.typeahead_subject').typeahead({
+	$('.typeahead_subject_name').typeahead({
 		hint: true,
 		highlight: true,
 		minLength: 1
 	},{
-		name: 'subject',
-		source: substringMatcher(subject)
+		name: 'subject_name',
+		source: substringMatcher(subject_name)
 	});
-
-	$('.typeahead_cca').typeahead({
+	$('.typeahead_area_name').typeahead({
 		hint: true,
 		highlight: true,
 		minLength: 1
 	},{
-		name: 'cca',
-		source: substringMatcher(cca)
+		name: 'area_name',
+		source: substringMatcher(area_name)
 	});
 });
 </script>

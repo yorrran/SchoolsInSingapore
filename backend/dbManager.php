@@ -2,9 +2,9 @@
 function dbConnect()
 {
 	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$database = "eis";
+	$username = "Admin";
+	$password = "admin";
+	$database = "justdoitdb";	
 
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $database);

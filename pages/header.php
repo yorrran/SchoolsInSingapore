@@ -1,3 +1,6 @@
+<?php session_start();
+include_once('../backend/searchManager.php'); ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,21 +22,48 @@
 	<script src="../js/typeahead.js/bloodhound.min.js"></script>
 	<script src="../js/typeahead.js/typeahead.bundle.min.js"></script>
 	<script src="../js/typeahead.js/typeahead.jquery.min.js"></script>
+	<?php 
+		$conn = dbConnect();
+		$schools_typeahead = array(
+        'school_name' => "'"
+        );
+    $sql = "select distinct schools from schools";
+    $result = $conn->query($sql);
+    $i = 1;
+
+    if ($result->num_rows > 0)  // if the number of result is greater than 0
+    {
+        while($row = $result->fetch_assoc())    // get each result and put them into the array
+        {
+            $row_item = str_replace("'", "&#39;", $row['schools']);
+
+            if($i == $result->num_rows){
+                $schools_typeahead['school_name'] .= $row_item."'";
+            }
+            else {
+                $schools_typeahead['school_name'] .= $row_item."', '";
+            }
+            
+            $i++;
+        }
+        
+    }
+	 ?>
 	<script>
 	$(document).ready(function(){
-		var schoolName = ['anglican high school','ang mo kio secondary school', 'admiralty secondary school', 'ahmad ibrahim secondary school', 'anderson secondary school', 'alexandra primary school'];
+		var schoolName = [<?php echo $schools_typeahead['school_name']; ?>];
 
 		$('.typeahead_schoolName').typeahead({
 			hint: true,
 			highlight: true,
 			minLength: 1
 		},{
-			name: 'secondary',
+			name: 'schoolName',
 			source: substringMatcher(schoolName)
 		});
 
 	});
-	</script>
+</script>
 </head>
 <body class="index" id="page-top" data-spy="scroll" data-target=".navbar" data-offset="150">
 	<!-- Fixed navbar -->
@@ -49,17 +79,17 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">School <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="primaryschool.php">Primary School</a></li>
-							<li><a href="secondaryschool.php">Secondary School</a></li>
-							<li><a href="JuniorCollege.php">JuniorCollege</a></li>
-							<li><a href="polySchool.php">Polytechnic</a></li>
-							<li><a href="university.php">University</a></li>
+						<li><a href="primaryschool.php">Primary School</a></li>
+                        <li><a href="secondaryschool.php">Secondary School</a></li>
+                        <li><a href="polySchool.php">Polytechnic</a></li>
+                        <li><a href="JCSchool.php">Junior College</a></li>
+                        <li><a href="university.php">University</a></li>
 						</ul>
 					</li>
 					<li><a href="comparisonlist.php">Comparison List</a></li>
 					<li><a href="forum.php">Forum</a></li>
 					<?php
-					session_start();
+					
 					if (isset($_COOKIE['signed_in_id']))
 					{
 						echo '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">' . $_COOKIE['signed_in_id'] . '<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="favlist.php">Favourite List</a></li><li><a href="../backend/logoutManager.php">Logout</a></li></ul></li>';

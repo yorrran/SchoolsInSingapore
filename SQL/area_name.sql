@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-10-27 04:41:52
+-- Generation Time: 2016-11-03 15:52:44
 -- 服务器版本： 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -35,7 +35,6 @@ CREATE TABLE `area_name` (
 --
 
 INSERT INTO `area_name` (`area_name`) VALUES
-('Distinct Area Name'),
 ('Amber Road'),
 ('Ang Mo Kio'),
 ('Anson'),

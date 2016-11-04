@@ -1,6 +1,6 @@
 <?php
 include_once('header.php');
-include_once('../backend/searchManager.php');
+
  $school_name=" ";
 
 if(isset($_GET['school_name']))
@@ -10,13 +10,14 @@ if(isset($_GET['school_name']))
 ?>
 <table class="table table-striped table-bordered secondaryTable" >
 	<tr>
-		<th width="10%">Name</th>
-		<th width="10%">Type</th>
-		<th width="15%">Location</th>
-		<th width="10%">Telephone</th>
-		<th width="10%">Email</th>
-		<th width="15%">Subject</th>
-		<th width="20%">List</th>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Location</th>
+		<th>Telephone</th>
+		<th>Email</th>
+		<th>Nearest MRT</th>
+		<th>Bus</th>
+		<th>List</th>
     </tr>
 	<?php foreach ($results as $result){ ?>
 		<tr>
@@ -25,7 +26,8 @@ if(isset($_GET['school_name']))
 			<td><?php echo $result['school_location'] ?></td>
 			<td><?php echo $result['school_telephone'] ?></td>
 			<td><?php echo $result['school_email'] ?></td>
-			<td><?php echo $result['school_subject'] ?></td>
+			<td><?php echo $result['Nearest_MRT'] ?></td>
+			<td><?php echo $result['Bus_number'] ?></td>
 			<td><button name="compare" class="btn btn-primary">Compare</button>&nbsp;&nbsp;<button name="favorite" class="btn btn-success">Favorite</button></td>
 		</tr>
 	<?php } ?>

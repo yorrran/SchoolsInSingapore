@@ -1,5 +1,5 @@
-<?php include('header.php') ?>
-<?php include('../backend/searchManager.php') ?>
+<?php include_once('header.php') ?>
+<?php include_once('../backend/searchManager.php') ?>
 <!DOCTYPE html>
 
 <html>

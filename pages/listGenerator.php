@@ -1,7 +1,6 @@
 <?php
 
-include_once('dbManager.php');
-
+include_once('../backend/dbManager.php');
 $conn = dbConnect();
 
 $cca_typeahead=array(
@@ -30,20 +29,20 @@ if ($result->num_rows > 0)	// if the number of result is greater than 0
 	
 }
 
-$subject_typeahead=array(
+$subjects_typeahead=array(
 	'subjects'=>"'"
 );
 
-$sql= "select subjects from subjects";
+$sql_subjects = "select * from subjects";
 $result=$conn->query($sql);
 
-$i = 1;
+$j = 1;
 
 if ($result->num_rows > 0)	// if the number of result is greater than 0
 {
 	while($row = $result->fetch_assoc())	// get each result and put them into the array
 	{
-		if($i == $result->num_rows){
+		if($j == $result->num_rows){
 			$subject_typeahead['subjects'] .= $row['subjects']."'";
 		} 
 		else
@@ -51,7 +50,7 @@ if ($result->num_rows > 0)	// if the number of result is greater than 0
 			$subject_typeahead['subjects'] .= $row['subjects']."', '";
 		}
 		
-		$i++;
+		$j++;
 	}
 	
 }
@@ -63,7 +62,7 @@ $area_typeahead=array(
 	'area'=>"'"
 );
 
-$sql = "select area_name from area_name";
+$sql_area = "select area_name from area_name";
 $result=$conn->query($sql);
 
 $j = 1;
@@ -228,9 +227,9 @@ if ($result->num_rows > 0)	// if the number of result is greater than 0
 			$poly_typeahead['course_cluster'] .= $row['Course_cluster']."'";
 			$poly_typeahead['courseTitle'] .= $row['Course_Title']."'";
 		} else {
-			$poly_typeahead['area'] .= $row['area']."','";
-			$poly_typeahead['course_cluster'] .= $row['Course_cluster']."','";
-			$poly_typeahead['courseTitle'] .= $row['Course_Title']."','";
+			$poly_typeahead['area'] .= $row['area']."', ' ";
+			$poly_typeahead['course_cluster'] .= $row['Course_cluster']."', ' ";
+			$poly_typeahead['courseTitle'] .= $row['Course_Title']."', ' ";
 		}
 		
 		$i++;
