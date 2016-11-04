@@ -33,7 +33,7 @@ function toggleTable(){
 					Cut Off Point
 				</td>
 				<td align="left">
-					<input type="text" name="cut_off_point" required \>
+					<input type="text" name="cut_off_point" onchange="ValidateNumber()" required \>
 				</td>
 				<td align="right" >
 					area

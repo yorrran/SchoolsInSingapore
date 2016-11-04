@@ -45,9 +45,9 @@ function toggleTable(){
 				<td align="left">
 					<?php
 						if(isset($_GET['score'])){
-							echo '<input type="text" name="English_Score" value="'.$_GET['English_Score'].'" required \>';
+							echo '<input type="text" name="English_Score" onchange="ValidateNumber()" value="'.$_GET['English_Score'].'" required \>';
 						} else {
-							echo '<input type="text" name="English_Score" value="" required \>';
+							echo '<input type="text" name="English_Score" onchange="ValidateNumber()" value="" required \>';
 						}
 					?>
 
@@ -60,9 +60,9 @@ function toggleTable(){
 				<td align="left">
 					<?php
 						if(isset($_GET['Math_Score'])){
-							echo '<input type="text" name="Math_Score" value="'.$_GET['Math_Score'].'"  \>';
+							echo '<input type="text" name="Math_Score" onchange="ValidateNumber()" value="'.$_GET['Math_Score'].'"  \>';
 						} else {
-							echo '<input type="text" name="Math_Score" required\>';
+							echo '<input type="text" name="Math_Score" onchange="ValidateNumber()" required\>';
 						}
 					?>
 

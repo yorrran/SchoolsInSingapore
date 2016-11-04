@@ -49,7 +49,7 @@ function toggleTable(){
 					score
 				</td>
 				<td align="left">
-					<input type="text" name="score" required \>
+					<input type="text" name="score" onchange="ValidateNumber()" required \>
 				</td>
 			</tr>
 			<tr>

@@ -22,6 +22,7 @@ if(!isset($fav_list))  $fav_list= array();
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/script.js"></script>
 	<script src="../js/sortable.js"></script>
+	<script src="../js/inputValidation.js"></script>
 	<script src="../js/typeahead.js/bloodhound.min.js"></script>
 	<script src="../js/typeahead.js/typeahead.bundle.min.js"></script>
 	<script src="../js/typeahead.js/typeahead.jquery.min.js"></script>
@@ -86,6 +87,7 @@ if(!isset($fav_list))  $fav_list= array();
                         <li><a href="secondaryschool.php">Secondary School</a></li>
                         <li><a href="polySchool.php">Polytechnic</a></li>
                         <li><a href="JCSchool.php">Junior College</a></li>
+						<li><a href="iteSchool.php">ITE</a></li>
                         <li><a href="university.php">University</a></li>
 						</ul>
 					</li>

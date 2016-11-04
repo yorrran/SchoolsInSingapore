@@ -44,9 +44,9 @@ function toggleTable(){
 				<td align="left">
 					<?php
 						if(isset($_GET['score'])){
-							echo '<input type="text" name="score" value="'.$_GET['score'].'" required \>';
+							echo '<input type="text" name="score" onchange="ValidateNumber()" value="'.$_GET['score'].'" required \>';
 						} else {
-							echo '<input type="text" name="score" value="" required \>';
+							echo '<input type="text" name="score" onchange="ValidateNumber()" value="" required \>';
 						}
 					?>
 
