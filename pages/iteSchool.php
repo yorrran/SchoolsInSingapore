@@ -33,9 +33,9 @@ function toggleTable(){
 				</td>
 				<td align="left" >
 					<select id="certification" name="certification">
-						<option value="Olevel/Nlevel">Olevel/Nlevel</option>
 						<option value="Olevel">Olevel</option>
 						<option value="Nlevel">Nlevel</option>
+						<option value="Olevel/Nlevel">Olevel/Nlevel</option>
 					</select>
 				</td>
 
@@ -92,11 +92,11 @@ function toggleTable(){
 			</tr>
 			<tr>
 				<td align="right">Code: </td>
-				<td align="left" colspan=2><input type="textfield" name="code" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "code" class="btn btn-default" size="10" /></td>
 				<td align="right">MRT: </td>
-				<td align="left" colspan=2><input type="textfield" name="mrt" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "MRT" class="btn btn-default  typeahead_mrt_name" size="10" /></td>
 				<td align="right">Bus: </td>
-				<td align="left" colspan=2><input type="textfield" name="bus" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "Bus" class="btn btn-default" size="10" /></td>
 			</tr>
 			<tr>
 			<td colspan=10 align="center">
@@ -111,6 +111,8 @@ function toggleTable(){
 	$Math_Score=" ";
 	$certification=" ";
 	$subject=" ";
+	$mrt=" ";
+	$bus=" ";
 	$code=" ";
 	if(isset($_GET['English_Score'])){
 		$English_Score = $_GET['English_Score'];
@@ -124,22 +126,21 @@ function toggleTable(){
 	if( isset($_GET['subject'])){
 		$subject = $_GET['subject'];
 	}
-	if( isset($_GET['bus'])){
-		$bus = $_GET['bus'];
-	}
-	if( isset($_GET['mrt'])){
-		$mrt = $_GET['mrt'];
-	}
 	if( isset($_GET['code'])){
 		$code = $_GET['code'];
 	}
-
-	if( isset($_GET['English_Score']) || isset($_GET['Math_Score']) ||isset($_GET['certification']) ||isset($_GET['subject'])|| isset($_GET['bus']) || isset($_GET['mrt'])||isset($_GET['code']))
+	if( isset($_GET['MRT'])){
+		$MRT = $_GET['MRT'];
+	}
+	if( isset($_GET['Bus'])){
+		$Bus = $_GET['Bus'];
+	}
+	if( isset($_GET['ShuttleBus'])){
+		$ShuttleBus = $_GET['ShuttleBus'];
+	}
+	
+	if(isset($_GET['English_Score']) || isset($_GET['Math_Score']) ||isset($_GET['certification']) ||isset($_GET['subject'])|| isset($_GET['bus']) || isset($_GET['MRT'])||isset($_GET['code']))
 	{
-
-		if(!empty($_GET['English_Score']) || !empty($_GET['Math_Score']) || !empty($_GET['certification']) ||!empty($_GET['subject'])||!empty($_GET['bus']) || !empty($_GET['mrt'])||!empty($_GET['code'])){
-
-
 		$results = searchITE($English_Score, $Math_Score, $certification,$subject,$mrt,$bus,$code);
 		?>
 
@@ -178,8 +179,22 @@ function toggleTable(){
 			</tr>
 			<?php } ?>
 		</table>
-	<?php }} ?>
+	<?php } ?>
 </div>
+<script>
+$(document).ready(function()
+{
+	var mrt_name = [<?php echo $mrt_typeahead['nearest_mrt']; ?>];
 
+	$('.typeahead_mrt_name').typeahead({
+		hint: true,
+		highlight: true,
+		minLength: 1
+	},{
+		name: 'mrt_name',
+		source: substringMatcher(mrt_name)
+	});
+});
+</script>
 
 <?php include_once('../footer.php') ?>

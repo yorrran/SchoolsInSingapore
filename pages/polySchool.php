@@ -22,7 +22,7 @@ function toggleTable(){
 
 <!-- Begin page content -->
 <div class="container">
-	<form form name="searchForm" action="polySchool.php" method="get">
+	<form name="searchForm" action="polySchool.php" method="get">
 		<table class="table table-striped" width="100%">
 			<tr align="center" >
 				<td colspan=10><h1>Poly Search Page</h1></td>
@@ -72,7 +72,7 @@ function toggleTable(){
 				<td align="right">Code: </td>
 				<td align="left" colspan=2><input type="textfield" name="code" class="btn btn-default" size="10" /></td>
 				<td align="right">MRT: </td>
-				<td align="left" colspan=2><input type="textfield" name="mrt" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name="mrt" class="btn btn-default typeahead_mrt_name" size="10" /></td>
 				<td align="right">Bus: </td>
 				<td align="left" colspan=2><input type="textfield" name="bus" class="btn btn-default" size="10" /></td>
 			</tr>
@@ -85,7 +85,6 @@ function toggleTable(){
 		</table>
 	</form>
 	<?php
-
 	if( isset($_GET['area'])){
 		$area = $_GET['area'];
 	}
@@ -107,15 +106,11 @@ function toggleTable(){
 	if( isset($_GET['mrt'])){
 		$mrt = $_GET['mrt'];
 	}
-	if( isset($_GET['area']) || isset($_GET['course_cluster']) || isset($_GET['courseTitle']) || isset($_GET['cut_off_point']) ||
-		isset($_GET['code']) || isset($_GET['bus']) || isset($_GET['mrt']))
-	{
-		if(!empty($_GET['area']) || !empty($_GET['course_cluster']) || !empty($_GET['courseTitle']) || !empty($_GET['cut_off_point']) ||
-			!empty($_GET['code']) || !empty($_GET['bus']) || !empty($_GET['mrt'])){
 
+	if(isset($_GET['area']) || isset($_GET['course_cluster']) || isset($_GET['courseTitle']) || isset($_GET['cut_off_point']) || isset($_GET['code']) || isset($_GET['bus']) || isset($_GET['mrt']))
+	{
 		$results = searchPoly($area, $course_cluster, $courseTitle, $score, $mrt, $bus, $code);
 		?>
-
 		<table class="table table-striped table-bordered secondaryTable" >
 			<tr>
 				<th>Name</th>
@@ -155,7 +150,7 @@ function toggleTable(){
 			</tr>
 			<?php } ?>
 		</table>
-	<?php } }?>
+	<?php } ?>
 </div>
 
 <script>
@@ -165,6 +160,7 @@ $(document).ready(function()
 	var area = [<?php echo $poly_typeahead['area'];?>];
 	var course_cluster = [<?php echo $poly_typeahead['course_cluster'];?>];
 	var courseTitle = [<?php echo $poly_typeahead['courseTitle'];?>];
+	var mrt_name = [<?php echo $mrt_typeahead['nearest_mrt']; ?>];
 
 	$('.typeahead_area').typeahead({
 		hint: true,
@@ -191,6 +187,14 @@ $(document).ready(function()
 	},{
 		name: 'courseTitle',
 		source: substringMatcher(courseTitle)
+	});
+	$('.typeahead_mrt_name').typeahead({
+		hint: true,
+		highlight: true,
+		minLength: 1
+	},{
+		name: 'mrt_name',
+		source: substringMatcher(mrt_name)
 	});
 
 });

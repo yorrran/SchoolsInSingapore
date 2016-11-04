@@ -87,11 +87,11 @@ function toggleTable(){
 			</tr>
 			<tr>
 				<td align="right">Code: </td>
-				<td align="left" colspan=2><input type="textfield" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "code" class="btn btn-default" size="10" /></td>
 				<td align="right">MRT: </td>
-				<td align="left" colspan=2><input type="textfield" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "MRT"  class="btn btn-default typeahead_mrt_name" size="10" /></td>
 				<td align="right">Bus: </td>
-				<td align="left" colspan=2><input type="textfield" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name= "Bus"  class="btn btn-default" size="10" /></td>
 				<td align="center" co>Availability of Shuttle Bus <input type="checkbox" id="Shuttle_Bus"></td>
 			</tr>
 			<tr>
@@ -105,16 +105,18 @@ function toggleTable(){
 	<?php
 	$type=" ";
 	$category=" ";
+	$score="";
 	$area=" ";
 	$cca=" ";
 	$subjects=" ";
-	$Bus=" ";
+	$code="";
 	$MRT=" ";
+	$Bus=" ";
 	$ShuttleBus=" ";
+
 	if(isset($_GET['type'])){
 		$type = $_GET['type'];
 	}
-
 	if(isset($_GET['category'])){
 		$category = $_GET['category'];
 	}
@@ -130,27 +132,24 @@ function toggleTable(){
 	if( isset($_GET['subjects'])){
 		$subjects = $_GET['subjects'];
 	}
+	if( isset($_GET['code'])){
+		$code = $_GET['code'];
+	}
 	if( isset($_GET['MRT'])){
-		$subject = $_GET['MRT'];
+		$MRT = $_GET['MRT'];
 	}
 	if( isset($_GET['Bus'])){
-		$subject = $_GET['Bus'];
+		$Bus = $_GET['Bus'];
 	}
-	if( isset($_GET['ShuttleBus'])){
-		$subject = $_GET['ShuttleBus'];
+	if( isset($_GET['Bus'])){
+		$ShuttleBus = $_GET['Bus'];
 	}
-	if( isset($_GET['type'])|| isset($_GET['category'])|| isset($_GET['score'])|| isset($_GET['area'])|| isset($_GET['cca'])||isset($_GET['subjects'])||isset($_GET['MRT'])||isset($_GET['Bus'])|| isset($_GET['ShuttleBus']))
+	if (isset($_GET['type'])|| isset($_GET['category'])|| isset($_GET['score'])|| isset($_GET['area'])|| isset($_GET['cca'])||isset($_GET['subjects'])||isset($_GET['code'])||isset($_GET['MRT'])||isset($_GET['Bus'])||isset($_GET['Bus']))
 	{
-
-		//TODO: Display no search input
-		if(empty($_GET['type'])&&empty($_GET['category'])&&empty($_GET['score'])&& empty($_GET['area'])&&empty($_GET['cca'])&& empty($_GET['subjects'])&&empty($_GET['Bus'])&& empty($_GET['ShuttleBus'])){
-			echo "No Search Result";
-
-		} else {
-		$results = searchSecondarySchool($type,$category,$score,$area,$cca,$subjects,$MRT, $Bus, $ShuttleBus);
+		$results = searchSecondarySchool($type, $category, $score, $area, $cca, $subjects, $MRT, $Bus, $ShuttleBus);
 	?>
 
-		<table class="table table-striped table-bordered secondaryTable" width="100%">
+		<table class="table table-striped table-bordered secondaryTable">
 			<tr>
 				<th>Name</th>
 				<th>Location</th>
@@ -187,7 +186,7 @@ function toggleTable(){
 			</tr>
 			<?php } ?>
 		</table>
-	<?php } }?>
+	<?php }?>
 </div>
 
 <script>
@@ -197,6 +196,7 @@ $(document).ready(function()
 	var cca_name = [<?php echo $cca_typeahead['cca_options'];?>];
 	var subject_name = [<?php echo $subject_typeahead['subjects']; ?>];
 	var area_name = [<?php echo $area_typeahead['area']; ?>];
+	var mrt_name = [<?php echo $mrt_typeahead['nearest_mrt']; ?>];
 
 	$('.typeahead_cca_name').typeahead({
 		hint: true,
@@ -222,6 +222,14 @@ $(document).ready(function()
 	},{
 		name: 'area_name',
 		source: substringMatcher(area_name)
+	});
+	$('.typeahead_mrt_name').typeahead({
+		hint: true,
+		highlight: true,
+		minLength: 1
+	},{
+		name: 'mrt_name',
+		source: substringMatcher(mrt_name)
 	});
 });
 </script>

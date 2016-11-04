@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php 
+<?php
 session_start();
 include_once('backend/listGenerator.php') ?>
 <html>
@@ -56,13 +56,14 @@ include_once('backend/listGenerator.php') ?>
                         <li><a href="pages/secondaryschool.php">Secondary School</a></li>
                         <li><a href="pages/polySchool.php">Polytechnic</a></li>
                         <li><a href="pages/JCSchool.php">Junior College</a></li>
+						<li><a href="pages/iteSchool.php">ITE</a></li>
                         <li><a href="pages/university.php">University</a></li>
                     </ul>
                 </li>
 		<li><a href="pages/comparisonlist.php">Comparison List</a></li>
                 <li><a href="pages/forum.php">Forum</a></li>
                 <?php
-                
+
                 if (isset($_COOKIE['signed_in_id']))
                 {
                     echo '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">' . $_COOKIE['signed_in_id'] . '<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="pages/favlist.php">Favourite List</a></li><li><a href="backend/logoutManager.php">Logout</a></li></ul></li>';
@@ -72,7 +73,7 @@ include_once('backend/listGenerator.php') ?>
                     echo '<li><a href="login.php">Login</a></li>';
                 }
                 ?>
-                <form class="navbar-form navbar-right" action="pages/schoollist.php" method="get">
+                <form class="navbar-form navbar-right" action="pages/individualSchool.php" method="get">
                     <div class="form-group">
                         <input type="text" name="school_name" class="form-control typeahead_schoolName" placeholder="Search">
                     </div>

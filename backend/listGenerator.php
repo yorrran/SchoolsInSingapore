@@ -19,15 +19,15 @@ if ($result->num_rows > 0)	// if the number of result is greater than 0
 	{
 		if($i == $result->num_rows){
 			$cca_typeahead['cca_options'] .= $row['CCA']."'";
-		} 
+		}
 		else
 		{
 			$cca_typeahead['cca_options'] .= $row['CCA']."', '";
 		}
-		
+
 		$i++;
 	}
-	
+
 }
 
 $subject_typeahead=array(
@@ -45,17 +45,42 @@ if ($result->num_rows > 0)	// if the number of result is greater than 0
 	{
 		if($i == $result->num_rows){
 			$subject_typeahead['subjects'] .= $row['subjects']."'";
-		} 
+		}
 		else
 		{
 			$subject_typeahead['subjects'] .= $row['subjects']."', '";
 		}
-		
+
 		$i++;
 	}
-	
+
 }
 
+$mrt_typeahead=array(
+	'nearest_mrt'=>"'"
+);
+
+$sql= "select nearest_mrt from nearest_mrt";
+$result=$conn->query($sql);
+
+$i = 1;
+
+if ($result->num_rows > 0)	// if the number of result is greater than 0
+{
+	while($row = $result->fetch_assoc())	// get each result and put them into the array
+	{
+		if($i == $result->num_rows){
+			$mrt_typeahead['nearest_mrt'] .= $row['nearest_mrt']."'";
+		}
+		else
+		{
+			$mrt_typeahead['nearest_mrt'] .= $row['nearest_mrt']."', '";
+		}
+
+		$i++;
+	}
+
+}
 $j = 0;
 
 
@@ -74,15 +99,15 @@ if ($result->num_rows > 0)	// if the number of result is greater than 0
 	{
 		if($j == $result->num_rows){
 			$area_typeahead['area'] .= $row['area_name']."'";
-		} 
+		}
 		else
 		{
 			$area_typeahead['area'] .= $row['area_name']."', '";
 		}
-		
+
 		$j++;
 	}
-	
+
 }
 
 $schools_typeahead = array(
@@ -104,10 +129,10 @@ $schools_typeahead = array(
             else {
                 $schools_typeahead['school_name'] .= $row_item."', '";
             }
-            
+
             $i++;
         }
-        
+
     }
 
 $uni_typeahead = array(
@@ -131,10 +156,10 @@ if ($result->num_rows > 0)	// if the number of result is greater than 0
 			$uni_typeahead['university_name'] .= $row['school_name']."', '";
 			$uni_typeahead['location'] .= $row['area']."', ' ";
 		}
-		
+
 		$i++;
 	}
-	
+
 }
 // Uni-typeahead
 $uni_typeahead = array(
@@ -158,10 +183,10 @@ if ($result->num_rows > 0)	// if the number of result is greater than 0
 			$uni_typeahead['university_name'] .= $row['school_name']."', '";
 			$uni_typeahead['location'] .= $row['area']."', ' ";
 		}
-		
+
 		$i++;
 	}
-	
+
 }
 
 $sql = "select distinct course_name from university";
@@ -177,10 +202,10 @@ if ($result->num_rows > 0)	// if the number of result is greater than 0
 		} else {
 			$uni_typeahead['course_name'] .= $row['course_name']."', '";
 		}
-		
+
 		$i++;
 	}
-	
+
 }
 
 // jc_typeahead
@@ -201,10 +226,10 @@ if ($result->num_rows > 0)	// if the number of result is greater than 0
 		} else {
 			$jc_typeahead['location'] .= $row['area']."', ' ";
 		}
-		
+
 		$i++;
 	}
-	
+
 }
 
 // poly_typeahead
@@ -232,10 +257,10 @@ if ($result->num_rows > 0)	// if the number of result is greater than 0
 			$poly_typeahead['course_cluster'] .= $row['Course_cluster']."','";
 			$poly_typeahead['courseTitle'] .= $row['Course_Title']."','";
 		}
-		
+
 		$i++;
 	}
-	
+
 }
 
 dbDisconnect($conn)

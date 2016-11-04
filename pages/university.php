@@ -78,7 +78,7 @@ function toggleTable(){
 				<td align="right">Code: </td>
 				<td align="left" colspan=2><input type="textfield" name="code" class="btn btn-default" size="10" /></td>
 				<td align="right">MRT: </td>
-				<td align="left" colspan=2><input type="textfield" name="mrt" class="btn btn-default" size="10" /></td>
+				<td align="left" colspan=2><input type="textfield" name="mrt" class="btn btn-default typeahead_mrt_name " size="10" /></td>
 				<td align="right">Bus: </td>
 				<td align="left" colspan=2><input type="textfield" name="bus" class="btn btn-default" size="10" /></td>
 			</tr>
@@ -122,11 +122,12 @@ function toggleTable(){
 		isset($_GET['code']) || isset($_GET['bus']) || isset($_GET['mrt']))
 	{
 
-		if(!empty($_GET['course_name']) || !empty($_GET['location']) || !empty($_GET['university_name']) ||
-			!empty($_GET['code']) || !empty($_GET['bus']) || !empty($_GET['mrt'])){
-
-
-		$results = searchUni($university_name,$location,$course_name,$mrt,$bus,$code);
+		if(empty($_GET['course_name']) && empty($_GET['location']) && empty($_GET['university_name']) &&
+			empty($_GET['code']) && empty($_GET['bus']) && empty($_GET['mrt'])){
+			echo "No Search Result";
+		}
+		else {
+			$results = searchUni($university_name,$location,$course_name,$mrt,$bus,$code);
 		?>
 
 		<table class="table table-striped table-bordered secondaryTable" >
@@ -182,6 +183,7 @@ $(document).ready(function()
 	var university_name = [<?php echo $uni_typeahead['university_name']; ?>];
 	var course_name = [<?php echo $uni_typeahead['course_name']; ?>];
 	var area_name = [<?php echo $area_typeahead['area']; ?>];
+	var mrt_name = [<?php echo $mrt_typeahead['nearest_mrt']; ?>];
 
 	$('.typeahead_university_name').typeahead({
 		hint: true,
@@ -207,6 +209,14 @@ $(document).ready(function()
 	},{
 		name: 'area_name',
 		source: substringMatcher(area_name)
+	});
+	$('.typeahead_mrt_name').typeahead({
+		hint: true,
+		highlight: true,
+		minLength: 1
+	},{
+		name: 'mrt_name',
+		source: substringMatcher(mrt_name)
 	});
 });
 </script>

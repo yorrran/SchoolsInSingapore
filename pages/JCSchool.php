@@ -105,6 +105,10 @@ function toggleTable(){
 	$subject=" ";
 	$type=" ";
 	$score=" ";
+	$code="";
+	$bus="";
+	$mrt="";
+
 	if(isset($_GET['area'])){
 		$area = $_GET['area'];
 	}
@@ -126,15 +130,9 @@ function toggleTable(){
 	if( isset($_GET['mrt'])){
 		$mrt = $_GET['mrt'];
 	}
-	if( isset($_GET['area']) || isset($_GET['subject']) || isset($_GET['type']) || isset($_GET['score']) ||
+	if(isset($_GET['area']) || isset($_GET['subject']) || isset($_GET['type']) || isset($_GET['score']) ||
 		isset($_GET['code']) || isset($_GET['bus']) || isset($_GET['mrt']))
 	{
-
-		if(empty($_GET['area']) && empty($_GET['subject']) && empty($_GET['type']) && empty($_GET['score']) &&
-			empty($_GET['code']) && empty($_GET['bus']) && empty($_GET['mrt']))
-		{
-			echo "No search Result";
-		} else {
 		   $results = searchJC($area, $subject, $type, $score,$mrt,$bus,$code);
 	     ?>
 
@@ -201,7 +199,7 @@ function toggleTable(){
 			</tr>
 			<?php } ?>
 		</table>
-	<?php }} ?>
+	<?php } ?>
 </div>
 
 
@@ -211,6 +209,7 @@ $(document).ready(function()
 {
 	var area_name = [<?php echo $area_typeahead['area']; ?>];
 	var subject_name = [<?php echo $subject_typeahead['subjects']; ?>];
+	var mrt_name = [<?php echo $mrt_typeahead['nearest_mrt']; ?>];
 	$('.typeahead_area_name').typeahead({
 		hint: true,
 		highlight: true,
@@ -226,6 +225,14 @@ $(document).ready(function()
 	},{
 		name: 'subject_name',
 		source: substringMatcher(subject_name)
+	});
+	$('.typeahead_mrt_name').typeahead({
+		hint: true,
+		highlight: true,
+		minLength: 1
+	},{
+		name: 'mrt_name',
+		source: substringMatcher(mrt_name)
 	});
 
 });
