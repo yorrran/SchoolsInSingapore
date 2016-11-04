@@ -94,10 +94,12 @@
 
 <?php
 
+	if (isset($_COOKIE['signed_in_id']))
+		$fav_list = get_fav_list($_COOKIE['signed_in_id']);
 
-	$fav_list = get_fav_list("user1");
 	if (!$fav_list) {
-		die('Invalid query: ' . mysql_error());
+		//die('Invalid query: ' . mysql_error());
+		echo "List is empty";
 	}
 /*
 	if(isset($_POST['unfav'])){
@@ -117,7 +119,7 @@
 		}else if(in_array($schoolname,$_SESSION['clist'])){
 			echo '<form action="addToCompare.php" method="POST" ><button name="remove" class="compare" value="'.$schoolname.'" onclick="toggle()">remove from Comparison</button></form>';
 		}
-		
+
 		echo '<button class="accordion" >';echo $schoolname;echo'</button>';
 		echo '<div class="panel">';
 		$results = searchSchool($schoolname);
@@ -138,7 +140,7 @@
 			}else if(document.getElementById("cbutton").contains(document.getElementById("remove"))){
 				document.getElementById("compare").innerHTML="<button name="compare" id="add" class="compare" value="<?php echo $row['schoolname']?>'" onclick="toggle()">add to Comparison</button>";
 			}
-		}*/	
+		}*/
 
         var acc = document.getElementsByClassName("accordion");
         var i;

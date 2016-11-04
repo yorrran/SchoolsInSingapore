@@ -1,5 +1,8 @@
 <?php
-header('Location: ' . $_SERVER['HTTP_REFERER']);
+if ($_SERVER['HTTP_REFERER'] == "http://127.0.0.1/pages/favlist.php")
+	echo "<script>window.location.replace('../index.php')</script>";
+else
+	header('Location: ' . $_SERVER['HTTP_REFERER']);
 
 // Main cookie
 unset($_COOKIE['signed_in_id']);

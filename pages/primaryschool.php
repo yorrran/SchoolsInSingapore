@@ -154,33 +154,28 @@ function toggleTable(){
 				<td><?php echo $result['school_website'] ?></td>
 				<td><?php echo $result['Nearest_MRT'] ?></td>
 				<td><?php echo $result['Bus_number'] ?></td>
-
 				<td style="text-align:center">
-					<?php
-						$fav_list = get_fav_list('user1');//return an array
-						if (!$fav_list) {
-							die('Invalid query: ' . mysql_error());
-						}
+				<?php
+				if(isset($_COOKIE['signed_in_id'])){
+					$fav_list = get_fav_list($_COOKIE['signed_in_id']);//return an array
+				}
 
-						if(!in_array($result['school_name'] ,$_SESSION['clist'])){
+				if(!in_array($result['school_name'], $_SESSION['clist'])){
+					echo '<form action="addToCompare.php" method="POST" style="display:inline">
+					<button name="compare" class="btn btn-primary" value="'.$result['school_name'].'">add to Comparison</button>
+					</form>';
+				}else if(in_array($result['school_name'],$_SESSION['clist'])){
+					echo '<form action="addToCompare.php" method="POST" style="display:inline">
+					<button name="remove" class="compare" value="'.$result['school_name'].'">remove from Comparison</button>
+					</form>';
+				}
 
-							echo '<form action="addToCompare.php" method="POST" style="display:inline">
-								<button name="compare" class="btn btn-primary" value="'.$result['school_name'].'">add to Comparison</button>
-							</form>';
-						}else if(in_array($result['school_name'],$_SESSION['clist'])){
-							echo '<form action="addToCompare.php" method="POST" style="display:inline">
-								<button name="remove" class="compare" value="'.$result['school_name'].'">remove from Comparison</button>
-							</form>';
-						}
-
-						if(in_array($result['school_name'],$fav_list)){ //display unfavourite button if in favourite list
-							echo '<form method="POST" action="addToFav.php" ><button name="unfavorite" value="'.$result['school_name'].'" class="btn btn-success">Unfavorite</button></form>';
-
-						}else { //display add to favourite button if not in favourite list
-							echo '<form method="POST" action="addToFav.php" ><button name="favorite" value="'.$result['school_name'].'" class="btn btn-success">Favorite</button></form>';
-
-						}
-					?>
+				if(in_array($result['school_name'],$fav_list)){ //display unfavourite button if in favourite list
+					echo '<form method="POST" action="addToFav.php" ><button name="unfavorite" value="'.$result['school_name'].'" class="btn btn-success">Unfavorite</button></form>';
+				}else { //display add to favourite button if not in favourite list
+					echo '<form method="POST" action="addToFav.php" ><button name="favorite" value="'.$result['school_name'].'" class="btn btn-success">Favorite</button></form>';
+				}
+				?>
 				</td>
 			</tr>
 			<?php } ?>

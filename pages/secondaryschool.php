@@ -75,10 +75,10 @@ function toggleTable(){
 				<td>&nbsp;</td>
 			</tr>
 			<tr align="center">
-			<td colspan=10 align="center">
-			<input type="submit" id="simple_submit" value="Submit" class="btn btn-default" />
-			<input type="button" id="ShowBtn" onclick="toggleTable();" value="Show Advanced Settings" class="btn btn-default" />
-			</td>
+				<td colspan=10 align="center">
+					<input type="submit" id="simple_submit" value="Submit" class="btn btn-default" />
+					<input type="button" id="ShowBtn" onclick="toggleTable();" value="Show Advanced Settings" class="btn btn-default" />
+				</td>
 			</tr>
 		</table>
 		<table class="table table-striped" border="0" width="100%" id="advanced" style="display: none;">
@@ -95,138 +95,115 @@ function toggleTable(){
 				<td align="center" co>Availability of Shuttle Bus <input type="checkbox" id="Shuttle_Bus"></td>
 			</tr>
 			<tr>
-			<td colspan=10 align="center">
-			<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
-			<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
-			</td>
+				<td colspan=10 align="center">
+					<input type="submit" value="Submit" id="advanced_submit" class="btn btn-default" />
+					<input type="button" id="HideBtn" onclick="toggleTable();" value="Hide Advanced Settings" class="btn btn-default" />
+				</td>
 			</tr>
 		</table>
 	</form>
-	<?php
-	$type=" ";
-	$category=" ";
-	$score="";
-	$area=" ";
-	$cca=" ";
-	$subjects=" ";
-	$code="";
-	$MRT=" ";
-	$Bus=" ";
-	$ShuttleBus=" ";
+<?php
+$type=" ";
+$category=" ";
+$score="";
+$area=" ";
+$cca=" ";
+$subjects=" ";
+$code="";
+$MRT=" ";
+$Bus=" ";
+$ShuttleBus=" ";
 
-	if(isset($_GET['type'])){
-		$type = $_GET['type'];
-	}
-	if(isset($_GET['category'])){
-		$category = $_GET['category'];
-	}
-	if( isset($_GET['score'])){
-		$score = $_GET['score'];
-	}
-	if( isset($_GET['area'])){
-		$area = $_GET['area'];
-	}
-	if( isset($_GET['cca'])){
-		$cca = $_GET['cca'];
-	}
-	if( isset($_GET['subjects'])){
-		$subjects = $_GET['subjects'];
-	}
-	if( isset($_GET['code'])){
-		$code = $_GET['code'];
-	}
-	if( isset($_GET['MRT'])){
-		$MRT = $_GET['MRT'];
-	}
-	if( isset($_GET['Bus'])){
-		$Bus = $_GET['Bus'];
-	}
-	if( isset($_GET['Bus'])){
-		$ShuttleBus = $_GET['Bus'];
-	}
-	if (isset($_GET['type'])|| isset($_GET['category'])|| isset($_GET['score'])|| isset($_GET['area'])|| isset($_GET['cca'])||isset($_GET['subjects'])||isset($_GET['code'])||isset($_GET['MRT'])||isset($_GET['Bus'])||isset($_GET['Bus']))
-	{
-		$results = searchSecondarySchool($type, $category, $score, $area, $cca, $subjects, $MRT, $Bus, $ShuttleBus);
+if(isset($_GET['type'])){
+	$type = $_GET['type'];
+}
+if(isset($_GET['category'])){
+	$category = $_GET['category'];
+}
+if( isset($_GET['score'])){
+	$score = $_GET['score'];
+}
+if( isset($_GET['area'])){
+	$area = $_GET['area'];
+}
+if( isset($_GET['cca'])){
+	$cca = $_GET['cca'];
+}
+if( isset($_GET['subjects'])){
+	$subjects = $_GET['subjects'];
+}
+if( isset($_GET['code'])){
+	$code = $_GET['code'];
+}
+if( isset($_GET['MRT'])){
+	$MRT = $_GET['MRT'];
+}
+if( isset($_GET['Bus'])){
+	$Bus = $_GET['Bus'];
+}
+if( isset($_GET['Bus'])){
+	$ShuttleBus = $_GET['Bus'];
+}
+if (isset($_GET['type'])|| isset($_GET['category'])|| isset($_GET['score'])|| isset($_GET['area'])|| isset($_GET['cca'])||isset($_GET['subjects'])||isset($_GET['code'])||isset($_GET['MRT'])||isset($_GET['Bus'])||isset($_GET['Bus']))
+{
+	$results = searchSecondarySchool($type, $category, $score, $area, $cca, $subjects, $MRT, $Bus, $ShuttleBus);
 	?>
 
-		<table class="table table-striped table-bordered secondaryTable">
-			<tr>
-				<th>Name</th>
-				<th>Location</th>
-				<th>Area</th>
-				<th>Telephone</th>
-				<th>Email</th>
-				<th>Website</th>
-				<th>Nearest MRT</th>
-				<th>Bus</th>
-				<th>PLSE Score</th>
-				<th>List</th>
-			</tr>
-			<?php foreach ($results as $result){ ?>
-			<tr>
-				<td>
-					<a href="IndividualSchool.php?school_name=<?php echo $result['school_name']?>" ><?php echo $result['school_name'] ?></a>
-				</td>
-				<td><?php echo $result['school_location'] ?></td>
-				<td><?php echo $result['school_area'] ?></td>
-				<td><?php echo $result['school_telephone'] ?></td>
-				<td><?php echo $result['school_email'] ?></td>
-				<td><?php echo $result['school_website'] ?></td>
-				<td><?php echo $result['Nearest_MRT'] ?></td>
-				<td><?php echo $result['Bus_number'] ?></td>
-				<th><?php echo $result['PSLE_score'] ?></th>
-					<td style="text-align:center">
+	<table class="table table-striped table-bordered secondaryTable">
+		<tr>
+			<th>Name</th>
+			<th>Location</th>
+			<th>Area</th>
+			<th>Telephone</th>
+			<th>Email</th>
+			<th>Website</th>
+			<th>Nearest MRT</th>
+			<th>Bus</th>
+			<th>PLSE Score</th>
+			<th>List</th>
+		</tr>
+		<?php foreach ($results as $result){ ?>
+		<tr>
+			<td>
+				<a href="IndividualSchool.php?school_name=<?php echo $result['school_name']?>" ><?php echo $result['school_name'] ?></a>
+			</td>
+			<td><?php echo $result['school_location'] ?></td>
+			<td><?php echo $result['school_area'] ?></td>
+			<td><?php echo $result['school_telephone'] ?></td>
+			<td><?php echo $result['school_email'] ?></td>
+			<td><?php echo $result['school_website'] ?></td>
+			<td><?php echo $result['Nearest_MRT'] ?></td>
+			<td><?php echo $result['Bus_number'] ?></td>
+			<th><?php echo $result['PSLE_score'] ?></th>
+			<td style="text-align:center">
+			<?php
+			if(isset($_COOKIE['signed_in_id'])){
+				$fav_list = get_fav_list($_COOKIE['signed_in_id']);//return an array
+			}
 
-          <?php
+			if(!in_array($result['school_name'], $_SESSION['clist'])){
+				echo '<form action="addToCompare.php" method="POST" style="display:inline">
+				<button name="compare" class="btn btn-primary" value="'.$result['school_name'].'">add to Comparison</button>
+				</form>';
+			}else if(in_array($result['school_name'],$_SESSION['clist'])){
+				echo '<form action="addToCompare.php" method="POST" style="display:inline">
+				<button name="remove" class="compare" value="'.$result['school_name'].'">remove from Comparison</button>
+				</form>';
+			}
 
-            if(isset($_COOKIE['signed_in_id'])){
-
-              $fav_list = get_fav_list($_COOKIE['signed_in_id']);//return an array
-
-              if (!$fav_list) {
-
-                die('Invalid query: ' . mysql_error());
-
-              }
-
-            }
-
-
-
-            if(!in_array($result['school_name'] ,$_SESSION['clist'])){
-
-
-
-              echo '<form action="addToCompare.php" method="POST" style="display:inline">
-
-                <button name="compare" class="btn btn-primary" value="'.$result['school_name'].'">add to Comparison</button>
-
-              </form>';
-
-            }else if(in_array($result['school_name'],$_SESSION['clist'])){
-
-              echo '<form action="addToCompare.php" method="POST" style="display:inline">
-
-                <button name="remove" class="compare" value="'.$result['school_name'].'">remove from Comparison</button>
-
-              </form>';
-            }
-
-            if(in_array($result['school_name'],$fav_list)){ //display unfavourite button if in favourite list
-              echo '<form method="POST" action="addToFav.php" ><button name="unfavorite" value="'.$result['school_name'].'" class="btn btn-success">Unfavorite</button></form>';
-            }else { //display add to favourite button if not in favourite list
-              echo '<form method="POST" action="addToFav.php" ><button name="favorite" value="'.$result['school_name'].'" class="btn btn-success">Favorite</button></form>';
-            }
-          ?>
-				</td>
-			</tr>
-			<?php } ?>
+			if(in_array($result['school_name'],$fav_list)){ //display unfavourite button if in favourite list
+				echo '<form method="POST" action="addToFav.php" ><button name="unfavorite" value="'.$result['school_name'].'" class="btn btn-success">Unfavorite</button></form>';
+			}else { //display add to favourite button if not in favourite list
+				echo '<form method="POST" action="addToFav.php" ><button name="favorite" value="'.$result['school_name'].'" class="btn btn-success">Favorite</button></form>';
+			}
+			?>
+			</td>
+		</tr>
+		<?php } ?>
 		</table>
-	<?php } ?>
-</div>
-
+		<?php } ?>
+	</div>
 <script>
-
 $(document).ready(function()
 {
 	var cca_name = [<?php echo $cca_typeahead['cca_options'];?>];

@@ -1,6 +1,9 @@
 <?php session_start();
 include_once('../backend/searchManager.php'); ?>
-
+<?php
+if(!isset($_SESSION["clist"])){$_SESSION["clist"] = array();}
+if(!isset($fav_list))  $fav_list= array();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +25,7 @@ include_once('../backend/searchManager.php'); ?>
 	<script src="../js/typeahead.js/bloodhound.min.js"></script>
 	<script src="../js/typeahead.js/typeahead.bundle.min.js"></script>
 	<script src="../js/typeahead.js/typeahead.jquery.min.js"></script>
-	<?php 
+	<?php
 		$conn = dbConnect();
 		$schools_typeahead = array(
         'school_name' => "'"
@@ -43,10 +46,10 @@ include_once('../backend/searchManager.php'); ?>
             else {
                 $schools_typeahead['school_name'] .= $row_item."', '";
             }
-            
+
             $i++;
         }
-        
+
     }
 	 ?>
 	<script>
@@ -89,7 +92,7 @@ include_once('../backend/searchManager.php'); ?>
 					<li><a href="comparisonlist.php">Comparison List</a></li>
 					<li><a href="forum.php">Forum</a></li>
 					<?php
-					
+
 					if (isset($_COOKIE['signed_in_id']))
 					{
 						echo '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">' . $_COOKIE['signed_in_id'] . '<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="favlist.php">Favourite List</a></li><li><a href="../backend/logoutManager.php">Logout</a></li></ul></li>';
