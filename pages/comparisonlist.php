@@ -119,7 +119,7 @@ function compare()
 				$num_rec_per_page=10;
 				if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
 				$start_from = ($page-1) * $num_rec_per_page;
-				
+
 			$array = $_SESSION['clist'];
 			foreach ($array as $item) {
 				//echo $item;
@@ -133,6 +133,10 @@ function compare()
 					echo '<td>'.$data['school_code'].'</td>';
 					echo '<td><a href="javascript:void(0);" class="detail" id="detail-'.$data['school_code'].'">Details</a></td>';
 					echo '<td>';
+
+					if(isset($_COOKIE['signed_in_id'])){
+						$fav_list = get_fav_list($_COOKIE['signed_in_id']);//return an array
+					}
 
 					if(in_array($data['school_name'],$fav_list)){ //display unfavourite button if in favourite list
 
@@ -154,21 +158,21 @@ function compare()
 </table>
 <!-- used for the page number -->
 <?php
-if (!empty($_SESSION['clist']))
-{
-	$total_records = count($_SESSION['clist']);  //count number of records
-	$total_pages = ceil($total_records / $num_rec_per_page);
-
-	echo "<a href='comparisonlist.php?page=1'>".'|<'."</a> "; // Goto 1st page
-
-for ($i=1; $i<=$total_pages; $i++) {
-            echo "<a href='comparisonlist.php?page=".$i."'>".$i."</a> ";
-}
-echo "<a href='comparisonlist.php?page=$total_pages'>".'>|'."</a> "; // Goto last page
-}
-else {
-	echo '<div class="text-center"><br><br>~~~ List is empty ~~~</div>';
-}
+// if (!empty($_SESSION['clist']))
+// {
+// 	$total_records = count($_SESSION['clist']);  //count number of records
+// 	$total_pages = ceil($total_records / $num_rec_per_page);
+//
+// 	echo "<a href='comparisonlist.php?page=1'>".'|<'."</a> "; // Goto 1st page
+//
+// for ($i=1; $i<=$total_pages; $i++) {
+//             echo "<a href='comparisonlist.php?page=".$i."'>".$i."</a> ";
+// }
+// echo "<a href='comparisonlist.php?page=$total_pages'>".'>|'."</a> "; // Goto last page
+// }
+// else {
+// 	echo '<div class="text-center"><br><br>~~~ List is empty ~~~</div>';
+// }
 ?>
 </div>
 </div></div>

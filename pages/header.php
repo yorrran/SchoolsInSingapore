@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once('../backend/searchManager.php');
-if(!isset($_SESSION["clist"])){$_SESSION["clist"] = "";}
+if(!isset($_SESSION["clist"]) || empty($_SESSION["clist"])){$_SESSION["clist"] = array();}
 if(!isset($fav_list))  $fav_list= array();
 ?>
 <!DOCTYPE html>

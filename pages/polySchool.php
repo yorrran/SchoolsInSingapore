@@ -83,6 +83,14 @@ function toggleTable(){
 		</table>
 	</form>
 	<?php
+	$area = " ";
+	$courseTitle = " ";
+	$course_cluster = " ";
+	$score = " ";
+	$code = " ";
+	$bus = " ";
+	$mrt = " ";
+
 	if( isset($_GET['area'])){
 		$area = $_GET['area'];
 	}
